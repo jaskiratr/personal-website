@@ -14,7 +14,8 @@ module.exports = {
       projectId: process.env.FIREBASE_PROJECT_ID,
       storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
-    }
+    },
+    NUXT_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID
   },
   router: {
     middleware: 'router-auth',
@@ -115,7 +116,7 @@ module.exports = {
      ** Google Analytics ID
      */
     'google-analytics': {
-      id: process.env.GOOGLE_ANALYTICS_ID
+      id: process.env.NUXT_ANALYTICS_ID
     },
     /*
     ** You can extend webpack config here
