@@ -1,0 +1,29 @@
+@media only screen and (min-width: 681px) {
+  nav > ul > li:hover .methods,
+  .active .methods {
+    display: block;
+  }
+
+  .methods {
+    display: none;
+  }
+
+  nav > ul > li {
+    padding: 1em 0;
+    transition: margin-bottom 0.2s ease-in-out;
+  }
+
+  nav > ul > li > a {
+    padding: 0;
+    transition: margin-bottom 0.2s ease-in-out;
+  }
+
+  nav > ul > li.active a {
+    margin-bottom: 0px;
+  }
+
+  nav > ul > li:hover > a,
+  nav > ul > li.active > a {
+    margin-bottom: 15px;
+  }
+}

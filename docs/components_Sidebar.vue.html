@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      components/Sidebar.vue - Documentation
+  </title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+  
+  <link type="text/css" rel="stylesheet" href="styles/collapse.css">
+  
+
+  
+
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <i class="fas fa-home"></i>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Portfolio Docs
+    </h3>
+
+    
+
+    <h3>Modules</h3><ul><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-closeSidebar-nav"><a href="module-SectionProjects.html#closeSidebar">closeSidebar</a></li><li data-type="method" id="SectionProjects-openSidebar-nav"><a href="module-SectionProjects.html#openSidebar">openSidebar</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li><li id="sections_SectionBio-nav"><a href="module-sections_SectionBio.html">sections/SectionBio</a></li></ul>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        components/Sidebar.vue
+      </h1>
+    
+
+    
+      
+
+<section>
+  <article>
+    <pre class="prettyprint source linenums"><code>&lt;template lang='pug'>
+.sidebar(style='position: fixed; top: 0; bottom: 0; height: 100vh;', :style="[setHorizontal, { 'min-width': minWidth, 'transform': translateWidth }]")
+  slot(v-if='visible')
+&lt;/template>
+
+&lt;script>
+// Props
+// Data
+// Methods
+// Watch
+/**
+ * @module components/Sidebar
+ * @desc	Reusable sidebar component to showcase content
+ * @vue-prop {Boolean} [value=false] - Value watched by `toggle`
+ * @vue-prop {Boolean} [hideOnEsc=true] - Hide sidebar on pressing keyboard Esc
+ * @vue-prop {Boolean} [hideOnClickOutside=true] - Hide sidebar on clicking outside the sidebar
+ * @vue-prop {string} [sidebarId=v-sidebar] - Unique HTML id for the sidebar.
+ * @vue-prop {String} [align=left] - Left or Right aligned
+ * @vue-prop {Number} [width=270] - Width of the sidebar
+ * @vue-prop {String} [units=px] - px or percent
+ * @vue-prop {Boolean} [push=false] - Push or overlay effect
+ * @vue-prop {Number} [duration=0.2] - Transition duration in seconds
+ * @vue-prop {String} [effect=linear] - Transition effect
+ * @vue-data {Boolean} [visible=false] - Show sidebar
+ * @vue-computed {String} setHorizontal - Computes sidebar alignment object
+ * @vue-computed {String} minWidth - Computes width of the sidebar along with units
+ * @vue-computed {String} translateWidth - Computes translate transformation for the sidebar
+ */
+export default {
+  props: {
+    value: { type: Boolean, default: false },
+    hideOnEsc: { type: Boolean, default: true },
+    hideOnClickOutside: { type: Boolean, default: true },
+    sidebarId: { type: String, default: 'v-sidebar' },
+    align: { type: String, default: 'left' },
+    width: { type: Number, default: 270 },
+    units: { type: String, default: 'px' },
+    push: { type: Boolean, default: false },
+    duration: { type: Number, default: 0.2 },
+    effect: { type: String, default: 'linear' }
+  },
+  data() {
+    return { visible: false }
+  },
+  computed: {
+    setHorizontal() {
+      return this.align === 'right' ? { right: 0 } : { left: 0 }
+    },
+    minWidth() {
+      var units = this.units === 'percent' ? '%' : 'px'
+      return this.width + units
+    },
+    translateWidth() {
+      if (this.units === 'px') {
+        return this.align === 'right'
+          ? 'translateX(' + this.width + 'px )'
+          : 'translateX(-' + this.width + 'px )'
+      } else if (this.units === 'percent') {
+        return this.align === 'right'
+          ? 'translateX(100' + '% )'
+          : 'translateX(-100' + '% )'
+      }
+    }
+  },
+  watch: {
+    /**
+     * Watcher: Value
+     * @event value
+     * @property val
+     */
+    value(val) {
+      setTimeout(() => this.toggle(val))
+    }
+  },
+  methods: {
+    /**
+     * - Adds timingFunction effect to DOM body
+     * - Sets up transition style for the `this.sidebarId`
+     */
+    setupBody() {
+      let timingFunction = ''
+      switch (this.effect) {
+        case 'bounce':
+          timingFunction = 'cubic-bezier(0, 1.1, 0.8, 1.1)'
+          break
+        default:
+          timingFunction = this.effect
+          break
+      }
+      document.getElementById(this.sidebarId).style.transition =
+        'transform ' + this.duration + 's ' + timingFunction
+      if (this.push) {
+        document.body.style.transition =
+          'transform ' + this.duration + 's ' + timingFunction
+      }
+    },
+    /**
+     * Describes the behavior of clicking outside the open sidebar
+     * @param {Object} e Event object
+     * @fires sidebarWasClosed
+     */
+    clickOutside(e) {
+      if (!this.$el.contains(e.target) &amp;&amp; this.visible) {
+        this.$emit('sidebarWasClosed', false)
+        this.toggle(false)
+      }
+    },
+    /**
+     * Describes the behavior of pressing esc key
+     * @param {Object} e Event object
+     * @fires sidebarWasClosed
+     */
+    esc(e) {
+      if (e.keyCode === 27) {
+        this.$emit('sidebarWasClosed', false)
+        return this.toggle(false)
+      }
+    },
+    /**
+     * Handles sidebar toggle animation
+     * @param {Boolean} show Show or hide the sidebar
+     */
+    toggle(show) {
+      var units = this.units === 'percent' ? '%' : 'px'
+      if (show) {
+        if (this.hideOnClickOutside) {
+          document.addEventListener('click', this.clickOutside)
+        }
+        if (this.hideOnEsc) {
+          document.addEventListener('keydown', this.esc)
+        }
+        if (this.push) {
+          document.body.style.transform =
+            this.align === 'right'
+              ? 'translateX(-' + this.width + units + ')'
+              : 'translateX(' + this.width + units + ')'
+
+          if (this.units === 'px') {
+            units = 'px'
+            // To Test
+            document.getElementById(this.sidebarId).style.transform =
+              this.align === 'right'
+                ? 'translateX(' + this.width + units + ')'
+                : 'translateX(-' + this.width + units + ')'
+          } else if (this.units === 'percent') {
+            units = '%'
+          }
+        } else
+          document.getElementById(this.sidebarId).style.transform =
+            this.align === 'right'
+              ? 'translateX(-' + 0 + units + ')'
+              : 'translateX(' + 0 + units + ')'
+        this.setupBody()
+        this.visible = true
+      } else {
+        if (this.push) {
+          document.body.style.transform = 'translateX(0)'
+        } else {
+          if (this.units === 'px') {
+            units = 'px'
+            document.getElementById(this.sidebarId).style.transform =
+              this.align === 'right'
+                ? 'translateX(' + this.width + units + ')'
+                : 'translateX(-' + this.width + units + ')'
+          } else if (this.units === 'percent') {
+            units = '%'
+            document.getElementById(this.sidebarId).style.transform =
+              this.align === 'right'
+                ? 'translateX(100' + units + ')'
+                : 'translateX(-100' + units + ')'
+          }
+        }
+
+        setTimeout(() => (this.visible = false), this.duration * 500)
+      }
+    }
+  }
+}
+&lt;/script>
+
+&lt;style lang='sass' scoped>
+.sidebar
+  overflow-y: scroll
+  background: #333
+&lt;/style>
+</code></pre>
+  </article>
+</section>
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+
+</body>
+</html>
