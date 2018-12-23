@@ -14,8 +14,7 @@ module.exports = {
       projectId: process.env.FIREBASE_PROJECT_ID,
       storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID
-    },
-    NUXT_ANALYTICS_ID: process.env.GOOGLE_ANALYTICS_ID
+    }
   },
   router: {
     middleware: 'router-auth',
@@ -104,20 +103,17 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: ['@nuxtjs/style-resources'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/google-analytics'],
   styleResources: {
     sass: ['./assets/sass/*.sass']
+  },
+  'google-analytics': {
+    id: process.env.GOOGLE_ANALYTICS_ID
   },
   /*
   ** Build configuration
   */
   build: {
-    /*
-     ** Google Analytics ID
-     */
-    'google-analytics': {
-      id: process.env.NUXT_ANALYTICS_ID
-    },
     /*
     ** You can extend webpack config here
     */
