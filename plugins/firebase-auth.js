@@ -1,4 +1,4 @@
-import { auth } from '@/services/firebase-init.js'
+import { auth } from '@/services/firebase-init'
 import Cookie from 'js-cookie'
 
 export default context => {
