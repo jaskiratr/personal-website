@@ -112,6 +112,12 @@ module.exports = {
   */
   build: {
     /*
+     ** Google Analytics ID
+     */
+    'google-analytics': {
+      id: process.env.GOOGLE_ANALYTICS_ID
+    },
+    /*
     ** You can extend webpack config here
     */
     extend(config, ctx) {
