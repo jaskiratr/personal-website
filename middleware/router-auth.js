@@ -23,15 +23,15 @@ export default function({ store, redirect, route, req }) {
   }
 
   if (owner !== null && route.name === 'login') {
-    redirect('/admin')
+    redirect('admin')
   }
   if (owner === null && isAdminRoute(route)) {
-    redirect('/login')
+    redirect('login')
   }
 }
 
 function isAdminRoute(route) {
-  if (route.matched.some(record => record.path === '/admin')) {
+  if (route.matched.some(record => record.path === 'admin')) {
     return true
   }
 }
