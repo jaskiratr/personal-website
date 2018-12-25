@@ -1,4 +1,5 @@
 <template lang='pug'>
+.container(:class='darkMode ? "dark" : "light" ')
   .theme-switcher(:class='darkMode ? "dark" : "light" ')
       el-switch.theme-switch(
         style='display: block',
@@ -48,11 +49,17 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-.theme-switcher
-  position: fixed
+.container
+  width: 100%
   z-index: 100
-  top: 2em
-  right: 2em
+  position: fixed
+  top: 0em
+  left: 0em
+
+.theme-switcher
+  position: relative
+  float: right
+  background: none
 
 .theme-switcher.light /deep/
   i
@@ -61,4 +68,34 @@ export default {
 .theme-switcher.dark /deep/
   i
     color: $color-text-dark
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px)
+  .container.light, .container.dark
+    opacity: 0.8
+  .container.light
+    background-color: $color-bg-2
+  .container.dark
+    background-color: $color-bg-dark-2
+  .theme-switcher
+    padding: 0.5em
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px)
+  .container.light, .container.dark
+    opacity: 0.8
+  .container.light
+    background-color: $color-bg-2
+  .container.dark
+    background-color: $color-bg-dark-2
+  .theme-switcher
+    padding: 0.5em
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px)
+  .container.light, .container.dark
+    opacity: 1
+    background: none
+  .theme-switcher
+    padding: 2em
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+// @media only screen and (min-width: 1200px)
 </style>

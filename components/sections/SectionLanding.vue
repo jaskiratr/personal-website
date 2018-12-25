@@ -100,8 +100,8 @@ export default {
   .row-content.dark
     background: none
 
-    .section-headline
-      font-size: 1.2em
+  .section-headline
+    font-size: 1.2em
 
   .title
     margin-left: 0px
