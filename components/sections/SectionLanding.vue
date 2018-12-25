@@ -1,6 +1,6 @@
 <template lang="pug">
-.container(v-if='content')
-  el-row.row-banner.center-flex
+.container(v-if='content', :class='{ dark: darkMode }')
+  el-row.row-banner.center-flex(:class='{ dark: darkMode }')
     el-col.title-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
       div.title(v-html='content.bannerTitle')
         //- el-col.animation(:span='12')
@@ -8,8 +8,8 @@
     no-ssr
       LandingAnimation
   //- Headline
-  el-row.row-content.center-flex
-    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
+  el-row.row-content.center-flex(:class='{ dark: darkMode }')
+    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:7, offset:5}')
       h5.section-title {{content.sectionTitle}}
       h1.section-headline {{content.headline}}
 </template>
@@ -20,6 +20,8 @@
  */
 import { db } from '~/services/firebase-init.js'
 import LandingAnimation from '~/components/LandingAnimation'
+import { mapGetters } from 'vuex'
+
 export default {
   components: { LandingAnimation },
   data() {
@@ -29,7 +31,8 @@ export default {
   },
   firestore: {
     content: db.collection('content').doc('sectionLanding')
-  }
+  },
+  computed: { ...mapGetters(['darkMode']) }
 }
 </script>
 
@@ -39,10 +42,20 @@ export default {
   padding: 0em
   overflow: hidden
 
+.container.dark
+  background: $color-bg-dark
+
 .row-banner
-  background-color: #ffffff
+  background-color: $color-bg-2
   height: 50vh
+
+.row-banner.dark
+  background: $color-bg-dark-2
+  .title
+    color: $color-highlight-dark
+
 .row-content
+  background: none
   height: 50vh
   z-index: 10
 
@@ -83,7 +96,10 @@ export default {
     padding: 20px
     background: $color-bg
     height: 40vh
-    
+
+  .row-content.dark
+    background: none
+
     .section-headline
       font-size: 1.2em
 

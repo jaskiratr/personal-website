@@ -1,6 +1,6 @@
 <template lang='pug'>
 el-dialog.project-modal-container(:visible.sync='showProject', @close='closeProject()', 
-  top='2vh', custom-class='project-modal')
+  top='2vh', custom-class='project-modal', :class='{ dark: darkMode }')
   .container(v-if='project')
     el-row
       el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
@@ -14,6 +14,7 @@ el-dialog.project-modal-container(:visible.sync='showProject', @close='closeProj
 
 <script>
 import { db } from '@/services/firebase-init.js'
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -22,6 +23,7 @@ export default {
       project: null
     }
   },
+  computed: { ...mapGetters(['darkMode']) },
   mounted() {
     // Open Modal
     this.$bus.$on('openProject', id => {
@@ -91,7 +93,6 @@ export default {
 
 <style lang='sass' scoped>
 .project-modal-container /deep/
-  
   .el-dialog
     background-color: $color-bg
     border-radius: 5px
@@ -116,21 +117,36 @@ export default {
     a
       color: $color-highlight
 
-/* Extra small devices (phones, 600px and down) */
+.project-modal-container.dark /deep/
+  background-color: $color-bg-dark-2
+
+  .el-dialog
+    background-color: $color-bg-dark
+  
+  .el-dialog__body
+    color: $color-text-dark
+  
+  a
+    color: $color-highlight-dark
+
+  /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) 
   .project-modal-container /deep/
     .project-modal
       width: 90%
+
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)
   .project-modal-container /deep/
     .project-modal
       width: 90%
+
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px)
   .project-modal-container /deep/
     .project-modal
       width: 80%
+
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px)
   .project-modal-container /deep/

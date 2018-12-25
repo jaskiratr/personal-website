@@ -4,13 +4,15 @@
   canvas#bgAnimation
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 var THREE = require('three')
 var TWEEN = require('@tweenjs/tween.js')
 var planes = []
 var spheres = []
-var D, aspect, camera, light, renderer, scene
-// var colors = ['#7505ff', '#ff6378', '#4331ea', '#8afcc9', '#ff635b']
+var D, aspect, camera, ambientLight, directLight, renderer, scene
 var colors = ['#ff6473', '#acdbdf', '#13334c', '#07617d', '#07617d']
+
 export default {
   data() {
     return {
@@ -18,10 +20,15 @@ export default {
       animationDuration: 40000 // Seconds
     }
   },
+  computed: { ...mapGetters(['darkMode']) },
   mounted() {
+    this.$bus.$on('toggleDarkMode', payload => {
+      this.updateTheme()
+    })
+
     var canvas = document.getElementById('bgAnimation')
     var container = document.getElementById('canvas-container')
-    var canvasWidth = 1000
+    var canvasWidth = 900
     var canvasHeight = 900
     aspect = canvasWidth / canvasHeight
 
@@ -54,16 +61,16 @@ export default {
       window.devicePixelRatio ? window.devicePixelRatio : 1
     )
     container.appendChild(renderer.domElement)
-    var ambient = new THREE.AmbientLight(0xcccccc, 1.5)
-    scene.add(ambient)
-    light = new THREE.DirectionalLight(0xffffff, 0.55)
-    light.position.set(lightPos.x, lightPos.y, lightPos.z)
+    ambientLight = new THREE.AmbientLight(0xcccccc, 1.5)
+    scene.add(ambientLight)
+    directLight = new THREE.DirectionalLight(0xffffff, 0.55)
+    directLight.position.set(lightPos.x, lightPos.y, lightPos.z)
 
-    light.castShadow = true
-    light.shadow.camera.left = -20
-    light.shadow.camera.right = 20
-    light.shadow.camera.top = 20
-    light.shadow.camera.bottom = -20
+    directLight.castShadow = true
+    directLight.shadow.camera.left = -20
+    directLight.shadow.camera.right = 20
+    directLight.shadow.camera.top = 20
+    directLight.shadow.camera.bottom = -20
 
     camera.position.set(20, 20, 20)
     camera.lookAt(scene.position)
@@ -75,15 +82,19 @@ export default {
       x = 10 * Math.random()
       y = 12 * Math.random() + 5
       z = 5 * Math.random() + 5
-      this.plane(w, h, x, y, z)
+
+      if (!this.darkMode) this.plane(w, h, x, y, z)
+      else this.planeDark(w, h, x, y, z)
 
       x = 10 * Math.random()
       y = 10 * Math.random() + 5
       z = 10 * Math.random() + 5
-      this.sphere(x, y, z)
+
+      if (!this.darkMode) this.sphere(x, y, z)
+      else this.sphereDark(x, y, z)
     }
 
-    scene.add(light)
+    scene.add(directLight)
     if (this.animating) this.render()
   },
   methods: {
@@ -169,6 +180,76 @@ export default {
       spheres.push(mesh)
       scene.add(mesh)
     },
+    planeDark(w, h, x, y, z) {
+      var boxGeometry = new THREE.BoxGeometry(w, 0.3, h)
+      var boxMaterial = new THREE.MeshPhongMaterial({
+        color: 0x101011,
+        polygonOffset: true,
+        polygonOffsetFactor: 1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
+      })
+      var boxMesh = new THREE.Mesh(boxGeometry, boxMaterial)
+      var edgesGeometry = new THREE.EdgesGeometry(boxMesh.geometry) // or WireframeGeometry
+      var edgesMaterial = new THREE.LineBasicMaterial({
+        color: 0x99ddd5,
+        linewidth: 1
+      })
+      var wireframe = new THREE.LineSegments(edgesGeometry, edgesMaterial)
+      boxMesh.add(wireframe)
+      boxMesh.position.x = x + Math.random() * 5
+      boxMesh.position.y = y
+      boxMesh.position.z = z + Math.random() * 5
+      boxMesh.castShadow = true // default is false
+      boxMesh.receiveShadow = true // default
+      planes.push(boxMesh)
+      if (Math.random() > 0.5) {
+        new TWEEN.Tween(boxMesh.position)
+          .to({ z: z }, Math.random() * (25000 - 5000) + 5000)
+          .easing(TWEEN.Easing.Sinusoidal.InOut)
+          .start()
+      } else {
+        new TWEEN.Tween(boxMesh.position)
+          .to({ x: x }, Math.random() * (50000 - 5000) + 5000)
+          .easing(TWEEN.Easing.Sinusoidal.InOut)
+          .start()
+      }
+      scene.add(boxMesh)
+    },
+    sphereDark(x, y, z) {
+      var sphereGeometry = new THREE.SphereGeometry(0.2, 2, 2)
+      var sphereMaterial = new THREE.MeshPhongMaterial({
+        color: 0x000000,
+        polygonOffset: true,
+        polygonOffsetFactor: 1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
+      })
+      var sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial)
+      var edgesGeometry = new THREE.EdgesGeometry(sphereMesh.geometry) // or WireframeGeometry
+      var edgesMaterial = new THREE.LineBasicMaterial({
+        color: 0xff7575,
+        linewidth: 1
+      })
+      var wireframe = new THREE.LineSegments(edgesGeometry, edgesMaterial)
+      sphereMesh.add(wireframe)
+      sphereMesh.position.x = x
+      sphereMesh.position.y = y + Math.random() * 5
+      sphereMesh.position.z = z
+      sphereMesh.castShadow = true // default is false
+      sphereMesh.receiveShadow = true // default
+      if (Math.random() > 0.5) {
+        new TWEEN.Tween(sphereMesh.position)
+          .to({ y: y }, Math.random() * (50000 - 5000) + 5000)
+          .easing(TWEEN.Easing.Back.InOut)
+          .start()
+      } else {
+        new TWEEN.Tween(sphereMesh.position)
+          .to({ y: y + 1 }, Math.random() * (50000 - 5000) + 5000)
+          .easing(TWEEN.Easing.Back.InOut)
+          .start()
+      }
+      spheres.push(sphereMesh)
+      scene.add(sphereMesh)
+    },
     render() {
       if (this.animating) requestAnimationFrame(this.render)
       setTimeout(() => {
@@ -179,6 +260,37 @@ export default {
         spheres[i].position.y += Math.sin(Date.now() / i / 1000) / 500
       }
       TWEEN.update()
+    },
+    clearScene() {
+      while (scene.children.length > 0) {
+        scene.remove(scene.children[0])
+      }
+      planes = []
+      spheres = []
+    },
+    updateTheme() {
+      this.clearScene()
+      for (var i = 0; i < 30; i++) {
+        var w, h, x, y, z
+        w = 10 * Math.random() + 0.5
+        h = 10 * Math.random() + 0.5
+        x = 10 * Math.random()
+        y = 12 * Math.random() + 5
+        z = 5 * Math.random() + 5
+
+        if (!this.darkMode) this.plane(w, h, x, y, z)
+        else this.planeDark(w, h, x, y, z)
+
+        x = 10 * Math.random()
+        y = 10 * Math.random() + 5
+        z = 10 * Math.random() + 5
+
+        if (!this.darkMode) this.sphere(x, y, z)
+        else this.sphereDark(x, y, z)
+      }
+      scene.add(ambientLight)
+      scene.add(directLight)
+      this.render()
     }
   }
 }

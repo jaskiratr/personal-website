@@ -1,8 +1,10 @@
 <template lang='pug'>
-.container
+.container(:class='darkMode ? "dark" : "light" ')
+  SwitchDarkMode
+
   .landing-container.full-height
     SectionLanding
-  el-main
+  el-main.el-main(:class='{ dark: darkMode }')
     .sections
       .section-container
         SectionBio
@@ -12,7 +14,7 @@
         SectionRecognition
       .section-container
         SectionProjects
-  .footer-container
+  .footer-container(:class='{ dark: darkMode }')
     SectionFooter
   //- el-footer
   //-   nav
@@ -33,6 +35,8 @@ import SectionExperience from '~/components/sections/SectionExperience'
 import SectionRecognition from '~/components/sections/SectionRecognition'
 import SectionProjects from '~/components/sections/SectionProjects'
 import SectionFooter from '~/components/sections/SectionFooter'
+import SwitchDarkMode from '~/components/SwitchDarkMode'
+import { mapGetters } from 'vuex'
 
 export default {
   /**
@@ -48,27 +52,37 @@ export default {
     SectionExperience,
     SectionRecognition,
     SectionProjects,
-    SectionFooter
+    SectionFooter,
+    SwitchDarkMode
   },
   data() {
     return {
       loading: false
     }
   },
-  // computed: { ...mapGetters(['content']) },
-  // created() {
-  //   this.$store.dispatch('getContent', db.collection('content')).then(() => {
-  //     console.log('loaded content', this.content)
-  //   })
-  // },
+  computed: { ...mapGetters(['darkMode']) },
   mounted() {
-    // console.log('mounted this.owner', this.owner[0])
+    // this.darkModeState = this.darkMode
+  },
+  methods: {
+    // toggleDarkMode(payload) {
+    //   this.$store.dispatch('toggleDarkMode', payload)
+    // }
   }
 }
 </script>
 
 <style lang='sass'>
 body
-  background-color: $color-bg
+  .light
+    transition: background-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 0s
+    background-color: $color-bg
+  .dark
+    transition: background-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 0s
+    color: $color-text-dark
+    background-color: $color-bg-dark
+
+.footer-container.dark
+  background-color: $color-bg-dark-2
 
 </style>

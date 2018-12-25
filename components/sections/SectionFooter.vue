@@ -15,6 +15,8 @@
  * @desc Section for website Footer page
  */
 import { db } from '~/services/firebase-init.js'
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -23,7 +25,8 @@ export default {
   },
   firestore: {
     content: db.collection('content').doc('sectionFooter')
-  }
+  },
+  computed: { ...mapGetters(['darkMode']) }
 }
 </script>
 

@@ -1,10 +1,17 @@
 
-$color-title: #333333
+$color-title: #0460F5
 $color-highlight: #0460F5
 $color-bg: #FFF9EF
-$color-bg-secondary: aliceblue
-$color-bg-admin: aliceblue
+$color-bg-2: #FFFFFF
 $color-text: #2B2B2B
+$color-bg-admin: aliceblue
+
+$color-title-dark: #FF7575
+$color-highlight-dark: #FF7575
+$color-bg-dark: #202226
+$color-bg-dark-2: #191A1C
+$color-text-dark: #99DDD5
+$color-bg-modal-dark: #FFFFFF
 
 body
   color: $color-text
@@ -34,7 +41,7 @@ ul li:before
   font-family: 'IBM Plex Mono', monospace
  
 .section-headline
-  font-size: 2.5em
+  font-size: 2.2em
   margin-bottom: 1em
 
 .section-title
@@ -58,7 +65,7 @@ ul li:before
 
 .footer-container
   padding: 10em 0em
-  background-color: #ffffff
+  background-color: $color-bg-2
 
 .full-height
   min-height: 100vh
@@ -93,7 +100,7 @@ ul li:before
 
 .v-modal
   opacity: .4
-  background: #ffffff
+  background: $color-bg-2
 
 .v-button
   position: relative
@@ -112,7 +119,25 @@ ul li:before
   -webkit-box-shadow: 8px 8px 15px 2px rgba(4, 95, 245, 0.1)
   -moz-box-shadow: 8px 8px 15px 2px rgba(4, 95, 245, 0.1)
   box-shadow: 8px 8px 15px 2px rgba(4, 95, 245, 0.1)
-  background-color: #ffffff
+  background-color: $color-bg-2
+
+.dark
+  a
+    color: $color-highlight-dark
+  
+  .section-title
+    color: $color-highlight-dark
+  
+  .section-subheading
+    border-bottom: 2px solid $color-highlight-dark
+
+  .v-button
+    background-color: $color-bg-dark
+    border: 1px solid $color-highlight-dark
+    color: $color-highlight-dark
+
+  .v-button:hover
+    background-color: $color-bg-dark-2
 
 @keyframes fade-up
     from
@@ -124,10 +149,11 @@ ul li:before
 
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) 
+@media only screen and (max-width: 600px)
   .section-container
     padding: 4em 0em
     border-bottom: 2px solid $color-highlight
+  
   .footer-container
     padding: 6em 0em
   
@@ -137,6 +163,13 @@ ul li:before
   .section-subheading
     padding-bottom: 1em
     border-bottom: none
+  
+  .dark
+    .section-subheading
+      border-bottom: none
+  
+    .section-container
+      border-bottom: 2px solid $color-highlight-dark
   
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)

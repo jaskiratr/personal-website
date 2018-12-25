@@ -7,19 +7,29 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       owner: null,
+      darkMode: true,
       content: {}
     },
     getters: {
       owner: state => state.owner,
+      darkMode: state => state.darkMode,
       content: state => state.content
     },
     mutations: {
       ...firebaseMutations,
       setOwner(state, owner) {
         state.owner = owner
+      },
+      setDarkMode(state, payload) {
+        state.darkMode = payload
       }
     },
     actions: {
+      setDarkMode: (store, payload) => {
+        if (typeof payload === 'boolean') {
+          store.commit('setDarkMode', payload)
+        }
+      },
       getContent: firebaseAction(({ bindFirebaseRef }, ref) => {
         return new Promise((resolve, reject) => {
           bindFirebaseRef('content', ref).then(() => {
