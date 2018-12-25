@@ -7,7 +7,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       owner: null,
-      darkMode: true,
+      darkMode: false,
       content: {}
     },
     getters: {
