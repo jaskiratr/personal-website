@@ -3,7 +3,7 @@
   SwitchDarkMode
   .landing-container.full-height
     SectionLanding(:content='content.sectionLanding')
-  el-main.el-main(:class='{ dark: darkMode }')
+  div.el-main(:class='{ dark: darkMode }')
     .sections
       .section-container
         SectionBio(:content='content.sectionBio')
@@ -53,11 +53,7 @@ export default {
     SectionFooter,
     SwitchDarkMode
   },
-  data() {
-    return {
-      loading: false
-    }
-  },
+
   computed: {
     ...mapGetters(['darkMode', 'content', 'projects'])
   },
@@ -65,7 +61,8 @@ export default {
     // Workaroud for re-binding
     this.$store.dispatch('setContent')
     this.$store.dispatch('setProjects')
-  }
+  },
+  mounted() {}
 }
 </script>
 
