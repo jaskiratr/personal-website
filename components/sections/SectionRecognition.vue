@@ -17,16 +17,15 @@
  * @module SectionRecognition
  * @desc Section for author's reognitions
  */
-import { db } from '@/services/firebase-init.js'
 
 export default {
-  data() {
-    return {
-      content: null
+  props: {
+    content: {
+      type: Object,
+      default: function() {
+        return null
+      }
     }
-  },
-  firestore: {
-    content: db.collection('content').doc('sectionRecognition')
   }
 }
 </script>

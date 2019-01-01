@@ -29,7 +29,6 @@
  *
  * @vue-data {Boolean} [showSidebar=false] - Current visibility of the sidebar
  */
-import { db } from '@/services/firebase-init.js'
 import Sidebar from '~/components/Sidebar'
 import ProjectDetails from '~/components/ProjectDetails'
 import { mapGetters } from 'vuex'
@@ -39,21 +38,29 @@ export default {
    * - Sidebar
    */
   components: { Sidebar, ProjectDetails },
+  props: {
+    content: {
+      type: Object,
+      default: function() {
+        return null
+      }
+    },
+    projects: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    }
+  },
   data() {
     return {
       showSidebar: false,
       sidebarContent: '',
-      projects: null,
-      activeProject: null,
-      content: null
+      // projects: null,
+      activeProject: null
     }
   },
-  firestore: {
-    projects: db.collection('projects').orderBy('order'),
-    content: db.collection('content').doc('sectionProjects')
-  },
   computed: { ...mapGetters(['darkMode']) },
-  mounted() {},
   methods: {
     padInt(num) {
       return num.toString().padStart(2, '0')

@@ -1,27 +1,20 @@
 <template lang='pug'>
 .container(:class='darkMode ? "dark" : "light" ')
   SwitchDarkMode
-
   .landing-container.full-height
-    SectionLanding
+    SectionLanding(:content='content.sectionLanding')
   el-main.el-main(:class='{ dark: darkMode }')
     .sections
       .section-container
-        SectionBio
+        SectionBio(:content='content.sectionBio')
       .section-container
-        SectionExperience
+        SectionExperience(:content='content.sectionExperience')
       .section-container
-        SectionRecognition
+        SectionRecognition(:content='content.sectionRecognition')
       .section-container
-        SectionProjects
+        SectionProjects(:content='content.sectionProjects', :projects='projects')
   .footer-container(:class='{ dark: darkMode }')
-    SectionFooter
-  //- el-footer
-  //-   nav
-  //-     ul.nav-list
-  //-       li.nav-item Github
-  //-       li.nav-item Linkedin
-  //-       li.nav-item Email
+    SectionFooter(:content='content.sectionFooter')
 </template>
 
 <script>
@@ -39,6 +32,11 @@ import SwitchDarkMode from '~/components/SwitchDarkMode'
 import { mapGetters } from 'vuex'
 
 export default {
+  async fetch({ store, params }) {
+    await store.dispatch('setContent').then(() => {
+      return store.dispatch('setProjects')
+    })
+  },
   /**
    * - SectionLanding
    * - SectionBio
@@ -60,14 +58,13 @@ export default {
       loading: false
     }
   },
-  computed: { ...mapGetters(['darkMode']) },
-  mounted() {
-    // this.darkModeState = this.darkMode
+  computed: {
+    ...mapGetters(['darkMode', 'content', 'projects'])
   },
-  methods: {
-    // toggleDarkMode(payload) {
-    //   this.$store.dispatch('toggleDarkMode', payload)
-    // }
+  created() {
+    // Workaroud for re-binding
+    this.$store.dispatch('setContent')
+    this.$store.dispatch('setProjects')
   }
 }
 </script>
