@@ -19,7 +19,7 @@ module.exports = {
   router: {
     middleware: 'router-auth',
     base: process.env.BASE_URL || '/',
-    scrollBehavior: function(to, from, savedPosition) {
+    scrollBehavior: (to, from, savedPosition) => {
       // if the returned position is falsy or an empty object, will retain current scroll position.
       let position = false
 

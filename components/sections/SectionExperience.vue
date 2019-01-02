@@ -20,16 +20,16 @@
  * @module SectionExperience
  * @desc Section for author's experience
  */
-import { db } from '@/services/firebase-init.js'
+// import { db } from '@/services/firebase-init.js'
 
 export default {
-  data() {
-    return {
-      content: null
+  props: {
+    content: {
+      type: Object,
+      default: function() {
+        return null
+      }
     }
-  },
-  firestore: {
-    content: db.collection('content').doc('sectionExperience')
   }
 }
 </script>

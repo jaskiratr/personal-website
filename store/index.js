@@ -8,12 +8,14 @@ const createStore = () => {
     state: {
       owner: null,
       darkMode: false,
-      content: {}
+      content: {},
+      projects: {}
     },
     getters: {
       owner: state => state.owner,
       darkMode: state => state.darkMode,
-      content: state => state.content
+      content: state => state.content,
+      projects: state => state.projects
     },
     mutations: {
       ...firebaseMutations,
@@ -30,11 +32,37 @@ const createStore = () => {
           store.commit('setDarkMode', payload)
         }
       },
-      getContent: firebaseAction(({ bindFirebaseRef }, ref) => {
+      setProjects: firebaseAction(({ bindFirebaseRef }) => {
         return new Promise((resolve, reject) => {
-          bindFirebaseRef('content', ref).then(() => {
+          bindFirebaseRef(
+            'projects',
+            db.collection('projects').orderBy('order')
+          ).then(() => {
             resolve()
           })
+        })
+      }),
+      setContent: firebaseAction(({ bindFirebaseRef }) => {
+        let sections = [
+          'sectionLanding',
+          'sectionBio',
+          'sectionExperience',
+          'sectionProjects',
+          'sectionRecognition',
+          'sectionFooter'
+        ]
+        return new Promise((resolve, reject) => {
+          async function bindContent() {
+            await Promise.all(
+              sections.map(async section => {
+                let key = 'content.' + section
+                let ref = db.collection('content').doc(section)
+                await bindFirebaseRef(key, ref)
+              })
+            )
+            resolve()
+          }
+          bindContent()
         })
       }),
       signIn: (store, { email, password }) => {

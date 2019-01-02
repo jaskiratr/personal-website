@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang='pug'>
 .container(v-if='content', :class='{ dark: darkMode }')
   el-row.row-banner.center-flex(:class='{ dark: darkMode }')
     el-col.title-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
@@ -18,25 +18,24 @@
  * @module SectionLanding
  * @desc Section for website landing page
  */
-import { db } from '~/services/firebase-init.js'
 import LandingAnimation from '~/components/LandingAnimation'
 import { mapGetters } from 'vuex'
 
 export default {
   components: { LandingAnimation },
-  data() {
-    return {
-      content: null
+  props: {
+    content: {
+      type: Object,
+      default: function() {
+        return null
+      }
     }
-  },
-  firestore: {
-    content: db.collection('content').doc('sectionLanding')
   },
   computed: { ...mapGetters(['darkMode']) }
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang='sass' scoped>
 .container
   position: relative
   padding: 0em
