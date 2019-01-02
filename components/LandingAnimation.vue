@@ -299,6 +299,11 @@ export default {
 <style lang="sass" scoped>
 .container
   position: relative
+  -webkit-animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
+  -moz-animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
+  -ms-animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
+  -o-animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
+  animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
 #canvas-container
   width: 100%
   z-index: 1
