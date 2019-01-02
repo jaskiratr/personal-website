@@ -1,7 +1,7 @@
 <template lang="pug">
 .container(v-if='content')
   el-row
-    el-col(:span='14' :offset='5')
+    el-col(:xs='{span:22, offset:1}', :sm='{span:16, offset:4}', :md='{span:14, offset:5}')
       el-row
         el-col.message(:span='12')
           h1 {{content.sectionTitle}}

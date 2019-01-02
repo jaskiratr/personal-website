@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang='pug'>
 .container(v-if='content')
   el-row
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
@@ -14,7 +14,9 @@
           el-row.project-row(:gutter='60' v-for='row in Math.ceil(projects.length / 3)' :key='row')
             el-col.project(:xs='24', :sm='24', :lg='8' v-for='(project, col) in projects.slice((row - 1) * 3, row * 3)' :key='col' )
               p.project-index.mono-font(@click='openProject(project.id)', :class='{ dark: darkMode }') {{padInt(project.order)}}
+                i.el-icon-arrow-right
               p.project-name(@click='openProject(project.id)', :class='{ dark: darkMode }') {{project.name}}
+              
               p.project-summary {{project.summary}}
   
   //- Project Detail Modal
@@ -84,7 +86,7 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang='sass' scoped>
 .project-index, .project-name
   font-weight: 700
   margin-bottom: 0.5em
@@ -94,14 +96,8 @@ export default {
 .project-index.dark, .project-name.dark
   color: $color-highlight-dark
 
-.sidebar
-  background: aliceblue
-  -webkit-box-shadow: 0px 0px 75px 5px rgba(0, 0, 0, 0.05)
-  -moz-box-shadow: 0px 0px 75px 5px rgba(0, 0, 0, 0.05)
-  box-shadow: 0px 0px 75px 5px rgba(0, 0, 0, 0.05)
-
-.sidebar-container
-  padding: 2em
+.el-icon-arrow-right
+  padding-left: 0.5em
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px)

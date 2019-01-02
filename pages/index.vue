@@ -61,13 +61,6 @@ export default {
     // Workaroud for re-binding
     this.$store.dispatch('setContent')
     this.$store.dispatch('setProjects')
-  },
-  mounted() {
-    // window.onhashchange = onBackKeyDown()
-    window.addEventListener('backbutton', onBackKeyDown, false)
-    function onBackKeyDown() {
-      console.log('BACK')
-    }
   }
 }
 </script>
