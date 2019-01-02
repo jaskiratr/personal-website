@@ -13,7 +13,7 @@
         el-col(:span='24')
           el-row.project-row(:gutter='60' v-for='row in Math.ceil(projects.length / 3)' :key='row')
             el-col.project(:xs='24', :sm='24', :lg='8' v-for='(project, col) in projects.slice((row - 1) * 3, row * 3)' :key='col' )
-              p.project-index.mono-font(:class='{ dark: darkMode }') {{padInt(project.order)}}
+              p.project-index.mono-font(@click='openProject(project.id)', :class='{ dark: darkMode }') {{padInt(project.order)}}
               p.project-name(@click='openProject(project.id)', :class='{ dark: darkMode }') {{project.name}}
               p.project-summary {{project.summary}}
   
@@ -89,6 +89,7 @@ export default {
   font-weight: 700
   margin-bottom: 0.5em
   color: $color-highlight
+  cursor: pointer
 
 .project-index.dark, .project-name.dark
   color: $color-highlight-dark

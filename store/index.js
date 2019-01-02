@@ -34,7 +34,10 @@ const createStore = () => {
       },
       setProjects: firebaseAction(({ bindFirebaseRef }) => {
         return new Promise((resolve, reject) => {
-          bindFirebaseRef('projects', db.collection('projects')).then(() => {
+          bindFirebaseRef(
+            'projects',
+            db.collection('projects').orderBy('order')
+          ).then(() => {
             resolve()
           })
         })

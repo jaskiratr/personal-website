@@ -2,6 +2,8 @@
 el-dialog.project-modal-container(:visible.sync='showProject', @close='closeProject()', 
   top='2vh', custom-class='project-modal', :class='{ dark: darkMode }')
   .container(v-if='project')
+    el-row.close-bar
+      p(@click='closeProject()'): i.el-icon-close
     el-row
       el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
         h5.section-title {{date(project.timestamp)}}
@@ -70,22 +72,26 @@ export default {
           .then(project => {
             this.project = project
             this.showProject = true
+            return project
           })
-          .then(() => {
+          .then(project => {
             this.addContainerForVideos()
+            this.$router.push('./#' + project.name)
+            // history.pushState('forward', null, './#' + project.name)
           })
           .catch(error => {
             console.error(error)
           })
       } catch (error) {
-        // Forcing suppression
+        // Forcing suppression. TypeError caused during live-reloading
         // console.error(error)
       }
     },
     closeProject() {
-      this.$unbind('project')
+      // this.$unbind('project')
       this.project = null
       this.showProject = false
+      this.$router.push('./')
     }
   }
 }
@@ -93,6 +99,19 @@ export default {
 
 <style lang='sass' scoped>
 .project-modal-container /deep/
+  .close-bar
+    display: none
+    position: fixed
+    width: 100%
+    top: 0
+    left: 0
+    padding: 0.5em
+    text-align: center
+    background-color: $color-bg-2
+    color: $color-highlight
+    border-bottom: 1px solid $color-highlight
+    z-index: 10
+
   .el-dialog
     background-color: $color-bg
     border-radius: 5px
@@ -120,6 +139,11 @@ export default {
 .project-modal-container.dark /deep/
   background-color: $color-bg-dark-2
 
+  .close-bar
+    background-color: $color-bg-dark-2
+    color: $color-highlight-dark
+    border-bottom: 1px solid $color-highlight-dark
+
   .el-dialog
     background-color: $color-bg-dark
   
@@ -132,24 +156,35 @@ export default {
   /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) 
   .project-modal-container /deep/
+    .close-bar
+      display: block
+    
     .project-modal
       width: 90%
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)
   .project-modal-container /deep/
+    .close-bar
+      display: block
+    
     .project-modal
       width: 90%
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px)
   .project-modal-container /deep/
+    .close-bar
+      display: block
+    
     .project-modal
       width: 80%
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px)
   .project-modal-container /deep/
+    .close-bar
+      display: none
     .project-modal
       width: 60%
 </style>

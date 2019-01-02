@@ -62,7 +62,13 @@ export default {
     this.$store.dispatch('setContent')
     this.$store.dispatch('setProjects')
   },
-  mounted() {}
+  mounted() {
+    // window.onhashchange = onBackKeyDown()
+    window.addEventListener('backbutton', onBackKeyDown, false)
+    function onBackKeyDown() {
+      console.log('BACK')
+    }
+  }
 }
 </script>
 
