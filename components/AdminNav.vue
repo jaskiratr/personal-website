@@ -10,11 +10,22 @@
         p.user-email(v-if='owner') {{owner.email}}
         el-button.sign-out-button(type='danger', v-on:click='signOut($event)', size='mini', plain) Sign Out
 </template>
+
 <script>
+/**
+ * @module AdminNav
+ * @desc Navigation component for admin page
+ * @vue-computed {Object} owner - Signed-in user information from Firebase Auth
+ */
 import { mapGetters } from 'vuex'
 export default {
   computed: { ...mapGetters(['owner']) },
   methods: {
+    /**
+     * Signs out currently logged in user
+     * - Dispatches `signOut` Vuex function
+     * - Then redirects user to root of the website
+     */
     signOut() {
       this.$store.dispatch('signOut').then(() => {
         this.$router.push('/')

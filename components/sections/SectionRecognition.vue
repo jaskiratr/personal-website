@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang='pug'>
 .container(v-if='content')
   el-row
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
@@ -16,8 +16,8 @@
 /**
  * @module SectionRecognition
  * @desc Section for author's reognitions
+ * @vue-prop {Object} [content=null] - Section Content
  */
-
 export default {
   props: {
     content: {
@@ -29,7 +29,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-
-</style>

@@ -15,8 +15,7 @@
             el-col.project(:xs='24', :sm='24', :lg='8' v-for='(project, col) in projects.slice((row - 1) * 3, row * 3)' :key='col' )
               p.project-index.mono-font(@click='openProject(project.id)', :class='{ dark: darkMode }') {{padInt(project.order)}}
                 i.el-icon-arrow-right
-              p.project-name(@click='openProject(project.id)', :class='{ dark: darkMode }') {{project.name}}
-              
+              p.project-name(@click='openProject(project.id)', :class='{ dark: darkMode }') {{project.name}}     
               p.project-summary {{project.summary}}
   
   //- Project Detail Modal
@@ -28,18 +27,19 @@
 /**
  * @module SectionProjects
  * @desc Section for project showcase
- *
- * @vue-data {Boolean} [showSidebar=false] - Current visibility of the sidebar
+ * @vue-prop {Object} [content=null] - Section Content
+ * @vue-prop {Array} [projects=[]] - Projects
+ * @vue-data {Object} [activeProject=null] - Active project loaded in modal dialog.
+ * @vue-computed {Boolean} darkMode - Dark mode state in store
  */
-import Sidebar from '~/components/Sidebar'
 import ProjectDetails from '~/components/ProjectDetails'
 import { mapGetters } from 'vuex'
 
 export default {
   /**
-   * - Sidebar
+   * - ProjectDetails
    */
-  components: { Sidebar, ProjectDetails },
+  components: { ProjectDetails },
   props: {
     content: {
       type: Object,
@@ -56,31 +56,24 @@ export default {
   },
   data() {
     return {
-      showSidebar: false,
-      sidebarContent: '',
-      // projects: null,
       activeProject: null
     }
   },
   computed: { ...mapGetters(['darkMode']) },
   methods: {
+    /**
+     * Adds numeric padding up to 2 digits
+     * @param {int} num Number to add padding to
+     */
     padInt(num) {
       return num.toString().padStart(2, '0')
     },
+    /**
+     * Emits `openProject` event
+     * @param {string} id Firestore ID of the project
+     */
     openProject(id) {
       this.$bus.$emit('openProject', id)
-    },
-    /**
-     * Opens the sidebar
-     */
-    openSidebar() {
-      this.showSidebar = true
-    },
-    /**
-     * Closes the sidebar
-     */
-    closeSidebar() {
-      this.showSidebar = false
     }
   }
 }

@@ -3,11 +3,11 @@
   el-row.row-banner.center-flex(:class='{ dark: darkMode }')
     el-col.title-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
       div.title(v-html='content.bannerTitle')
-        //- el-col.animation(:span='12')
+  
   .animation
     no-ssr
       LandingAnimation
-  //- Headline
+  
   el-row.row-content.center-flex(:class='{ dark: darkMode }')
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:7, offset:5}')
       h5.section-title {{content.sectionTitle}}
@@ -16,12 +16,17 @@
 <script>
 /**
  * @module SectionLanding
- * @desc Section for website landing page
+ * @desc Section for home page landing
+ * @vue-prop {Object} [content=null] - Section Content
+ * @vue-computed {Boolean} darkMode - Dark mode state
  */
 import LandingAnimation from '~/components/LandingAnimation'
 import { mapGetters } from 'vuex'
 
 export default {
+  /**
+   * - LandingAnimation
+   */
   components: { LandingAnimation },
   props: {
     content: {

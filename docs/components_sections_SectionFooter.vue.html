@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>
-      components/sections/SectionRecognition.vue - Documentation
+      components/sections/SectionFooter.vue - Documentation
   </title>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -67,13 +67,13 @@
 
     
 
-    <h3>Modules</h3><ul><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionFooter-nav"><a href="module-SectionFooter.html">SectionFooter</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-openProject-nav"><a href="module-SectionProjects.html#openProject">openProject</a></li><li data-type="method" id="SectionProjects-padInt-nav"><a href="module-SectionProjects.html#padInt">padInt</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li><li id="sections_SectionBio-nav"><a href="module-sections_SectionBio.html">sections/SectionBio</a></li></ul>
+    <h3>Modules</h3><ul><li id="AdminNav-nav"><a href="module-AdminNav.html">AdminNav</a><ul class='methods'><li data-type="method" id="AdminNav-signOut-nav"><a href="module-AdminNav.html#signOut">signOut</a></li></ul></li><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="LoginForm-nav"><a href="module-LoginForm.html">LoginForm</a><ul class='methods'><li data-type="method" id="LoginForm-signOut-nav"><a href="module-LoginForm.html#signOut">signOut</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="SectionBio-nav"><a href="module-SectionBio.html">SectionBio</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionFooter-nav"><a href="module-SectionFooter.html">SectionFooter</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-openProject-nav"><a href="module-SectionProjects.html#openProject">openProject</a></li><li data-type="method" id="SectionProjects-padInt-nav"><a href="module-SectionProjects.html#padInt">padInt</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li></ul>
   </nav>
 
   <div id="main">
     
       <h1 class="page-title">
-        components/sections/SectionRecognition.vue
+        components/sections/SectionFooter.vue
       </h1>
     
 
@@ -85,22 +85,21 @@
     <pre class="prettyprint source linenums"><code>&lt;template lang="pug">
 .container(v-if='content')
   el-row
-    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
+    el-col(:xs='{span:22, offset:1}', :sm='{span:16, offset:4}', :md='{span:14, offset:5}')
       el-row
-        el-col(:xs='24', :sm='12', :lg='6')
-          h5.section-title {{content.sectionTitle}}
-          h1.section-headline {{content.headline}}
-          p.section-subheading {{content.subheading}}
-      el-row.section-content   
-        el-col(:span='24')
+        el-col.message(:span='12')
+          h1 {{content.sectionTitle}}
+        el-col(:span='12')
           div(v-html='content.description')
 &lt;/template>
 
 &lt;script>
 /**
- * @module SectionRecognition
- * @desc Section for author's reognitions
+ * @module SectionFooter
+ * @desc Home page section for home page footer
+ * @vue-prop {Object} [content=null] - Section Content
  */
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -110,12 +109,17 @@ export default {
         return null
       }
     }
-  }
+  },
+  /**
+   * Getter: darkMode
+   */
+  computed: { ...mapGetters(['darkMode']) }
 }
 &lt;/script>
 
 &lt;style lang="sass" scoped>
-
+.email
+  color: $color-highlight
 &lt;/style>
 </code></pre>
   </article>

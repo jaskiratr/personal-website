@@ -304,14 +304,8 @@ export default {
   -ms-animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
   -o-animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
   animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
+
 #canvas-container
   width: 100%
   z-index: 1
-// #bgAnimation
-  // z-index: 1
-  // position: absolute
-  // right: 0
-  // top: 0px
-  // width: 200px
-  // height: 200px
 </style>

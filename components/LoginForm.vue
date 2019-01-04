@@ -5,12 +5,12 @@
       el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:6, offset:9}')
         el-card.card(shadow="always")
           div(v-if='owner && !submitting')
-            //- Sign Out
+            //- Sign Out Form
             p Do you wish to sign out?
             el-button(type='danger' v-on:click='signOut($event)') Sign Out
             el-button(v-on:click='closeLogin($event)') Cancel
           div(v-else-if='!owner')
-            //- Sign In
+            //- Sign In Form
             h1.title Sign In
             el-form(:model='signInForm', status-icon='', :rules='formRules', @keyup.enter.native='signIn', ref='signInForm')
                 el-form-item(label='Email', prop='email')
@@ -24,10 +24,20 @@
 </template>
 
 <script>
+/**
+ * @module LoginForm
+ * @desc Login form component
+ * @vue-computed {Object} owner - Signed-in user information from Firebase Auth
+ * @vue-data {Boolean} [submitting=false] - True if the form submission is being processed
+ * @vue-data {Object} [signInForm.email=''] - Email address provided in the form
+ * @vue-data {Object} [signInForm.pass=''] - Password provided in the form
+ * @vue-data {Object} [signInForm.checkPass=''] - Password validation flag
+ * @vue-data {Object} [formRules.email=''] - Element-UI Form rules for email
+ * @vue-data {Object} [formRules.pass=''] - Element-UI  Form rules for password
+ */
 import { mapGetters } from 'vuex'
-
 export default {
-  data: function() {
+  data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please input the password'))
@@ -64,6 +74,12 @@ export default {
   },
   computed: { ...mapGetters(['owner']) },
   methods: {
+    /**
+     * Signs out currently logged in user
+     * - Sets `this.submitting` to `true`
+     * - Dispatches 'signIn' Vuex function
+     * - Then redirects user to admin page of the website
+     */
     signIn() {
       this.submitting = true
       this.$store
@@ -81,6 +97,11 @@ export default {
           console.log(error.message)
         })
     },
+    /**
+     * Signs out currently logged in user
+     * - Dispatches 'signOut' Vuex function
+     * - Then sets `this.submitting` to `false`
+     */
     signOut() {
       this.$store.dispatch('signOut').then(() => {
         this.submitting = false

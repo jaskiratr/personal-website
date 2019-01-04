@@ -65,7 +65,7 @@
 
     
 
-    <h3>Modules</h3><ul><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-closeSidebar-nav"><a href="module-SectionProjects.html#closeSidebar">closeSidebar</a></li><li data-type="method" id="SectionProjects-openSidebar-nav"><a href="module-SectionProjects.html#openSidebar">openSidebar</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li><li id="sections_SectionBio-nav"><a href="module-sections_SectionBio.html">sections/SectionBio</a></li></ul>
+    <h3>Modules</h3><ul><li id="AdminNav-nav"><a href="module-AdminNav.html">AdminNav</a><ul class='methods'><li data-type="method" id="AdminNav-signOut-nav"><a href="module-AdminNav.html#signOut">signOut</a></li></ul></li><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="LoginForm-nav"><a href="module-LoginForm.html">LoginForm</a><ul class='methods'><li data-type="method" id="LoginForm-signIn-nav"><a href="module-LoginForm.html#signIn">signIn</a></li><li data-type="method" id="LoginForm-signOut-nav"><a href="module-LoginForm.html#signOut">signOut</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="ProjectDetails-nav"><a href="module-ProjectDetails.html">ProjectDetails</a><ul class='methods'><li data-type="method" id="ProjectDetails-addContainerForVideos-nav"><a href="module-ProjectDetails.html#addContainerForVideos">addContainerForVideos</a></li><li data-type="method" id="ProjectDetails-closeProject-nav"><a href="module-ProjectDetails.html#closeProject">closeProject</a></li><li data-type="method" id="ProjectDetails-date-nav"><a href="module-ProjectDetails.html#date">date</a></li><li data-type="method" id="ProjectDetails-openProject-nav"><a href="module-ProjectDetails.html#openProject">openProject</a></li></ul></li><li id="SectionBio-nav"><a href="module-SectionBio.html">SectionBio</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionFooter-nav"><a href="module-SectionFooter.html">SectionFooter</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-openProject-nav"><a href="module-SectionProjects.html#openProject">openProject</a></li><li data-type="method" id="SectionProjects-padInt-nav"><a href="module-SectionProjects.html#padInt">padInt</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li><li id="SwitchDarkMode-nav"><a href="module-SwitchDarkMode.html">SwitchDarkMode</a><ul class='methods'><li data-type="method" id="SwitchDarkMode-toggleDarkMode-nav"><a href="module-SwitchDarkMode.html#toggleDarkMode">toggleDarkMode</a></li></ul></li></ul>
   </nav>
 
   <div id="main">
@@ -90,6 +90,40 @@
         
           <div class="description">
             <p>Section for project showcase</p></div></div> </p>
+<p><h3 class="subsection-title" style="margin-top: 1em" data-jsdoc-vuejs="section-props">Props</h3></p>
+<table data-jsdoc-vuejs="table-props">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Default value</th>
+        <th>Required?</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <td><code>content</code></td>
+        <td>Object</td>
+        <td><code>null</code></td>
+        <td>No</td>
+        <td>Section Content</td>
+    </tr>
+
+    <tr>
+        <td><code>projects</code></td>
+        <td>Array</td>
+        <td><code>[]</code></td>
+        <td>No</td>
+        <td>Projects</td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+
 <p><h3 class="subsection-title" style="margin-top: 1em" data-jsdoc-vuejs="section-data">Data</h3></p>
 <table data-jsdoc-vuejs="table-data">
     <thead>
@@ -103,16 +137,36 @@
     <tbody>
 
     <tr>
-        <td><code>showSidebar</code></td>
-        <td>Boolean</td>
-        <td><code>false</code></td>
-        <td>Current visibility of the sidebar</td>
+        <td><code>activeProject</code></td>
+        <td>Object</td>
+        <td><code>null</code></td>
+        <td>Active project loaded in modal dialog.</td>
     </tr>
 
     </tbody>
 </table>
 
 
+
+<p><h3 class="subsection-title" style="margin-top: 1em" data-jsdoc-vuejs="section-computed">Computed</h3></p>
+<table data-jsdoc-vuejs="table-computed">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr>
+        <td><code>darkMode</code></td>
+        <td>Boolean</td>
+        <td>Dark mode state in store</td>
+    </tr>
+
+    </tbody>
+</table>
 
 
 <p><div class="container-overview"><div><p> </p>
@@ -211,7 +265,7 @@
 
   <div class="description">
     <ul>
-<li>Sidebar</li>
+<li>ProjectDetails</li>
 </ul>
   </div>
 
@@ -249,7 +303,7 @@
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="components_sections_SectionProjects.vue.html">components/sections/SectionProjects.vue</a>, <a href="components_sections_SectionProjects.vue.html#line14">line 14</a>
+          <a href="components_sections_SectionProjects.vue.html">components/sections/SectionProjects.vue</a>, <a href="components_sections_SectionProjects.vue.html#line17">line 17</a>
         </li>
       </ul>
     </dd>
@@ -282,13 +336,13 @@
   
 
   <span class='name-container'>
-    <a class="link-icon" href="#closeSidebar">
+    <a class="link-icon" href="#openProject">
       <svg height="20" width="20" style="fill: black;">
         <use xlink:href="#linkIcon"></use>
       </svg>
     </a>
-    <h4 class="name" id="closeSidebar">
-      <span class="type-signature"></span>closeSidebar<span class="signature">()</span><span class="type-signature"></span>
+    <h4 class="name" id="openProject">
+      <span class="type-signature"></span>openProject<span class="signature">(id)</span><span class="type-signature"></span>
     </h4>
   </span>
 
@@ -297,13 +351,68 @@
 
 
   <div class="description">
-    <p>Closes the sidebar</p>
+    <p>Emits <code>openProject</code> event</p>
   </div>
 
 
 
 
 
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>id</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      string
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>Firestore ID of the project</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
 
 
 
@@ -340,7 +449,7 @@
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="components_sections_SectionProjects.vue.html">components/sections/SectionProjects.vue</a>, <a href="components_sections_SectionProjects.vue.html#line53">line 53</a>
+          <a href="components_sections_SectionProjects.vue.html">components/sections/SectionProjects.vue</a>, <a href="components_sections_SectionProjects.vue.html#line75">line 75</a>
         </li>
       </ul>
     </dd>
@@ -373,13 +482,13 @@
   
 
   <span class='name-container'>
-    <a class="link-icon" href="#openSidebar">
+    <a class="link-icon" href="#padInt">
       <svg height="20" width="20" style="fill: black;">
         <use xlink:href="#linkIcon"></use>
       </svg>
     </a>
-    <h4 class="name" id="openSidebar">
-      <span class="type-signature"></span>openSidebar<span class="signature">()</span><span class="type-signature"></span>
+    <h4 class="name" id="padInt">
+      <span class="type-signature"></span>padInt<span class="signature">(num)</span><span class="type-signature"></span>
     </h4>
   </span>
 
@@ -388,13 +497,68 @@
 
 
   <div class="description">
-    <p>Opens the sidebar</p>
+    <p>Adds numeric padding up to 2 digits</p>
   </div>
 
 
 
 
 
+
+
+  <h5>Parameters:</h5>
+  
+
+<table class="params">
+  <thead>
+    <tr>
+      
+        <th>Name</th>
+      
+
+      <th>Type</th>
+
+      
+
+      
+
+      <th class="last">Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr>
+        
+          <td class="name"><code>num</code></td>
+        
+
+        <td class="type">
+          
+            
+    <span class="param-type">
+      int
+    </span>
+
+    
+
+
+          
+        </td>
+
+        
+
+        
+
+        <td class="description last">
+          <p>Number to add padding to</p>
+          
+        </td>
+      </tr>
+
+    
+  </tbody>
+</table>
 
 
 
@@ -431,7 +595,7 @@
     <dd class="tag-source">
       <ul class="dummy">
         <li>
-          <a href="components_sections_SectionProjects.vue.html">components/sections/SectionProjects.vue</a>, <a href="components_sections_SectionProjects.vue.html#line47">line 47</a>
+          <a href="components_sections_SectionProjects.vue.html">components/sections/SectionProjects.vue</a>, <a href="components_sections_SectionProjects.vue.html#line68">line 68</a>
         </li>
       </ul>
     </dd>

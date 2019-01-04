@@ -16,8 +16,9 @@
 
 <script>
 /**
- * @module sections/SectionBio
- * @desc Section for author's bio
+ * @module SectionBio
+ * @desc Home page section for author's bio
+ * @vue-prop {Object} [content=null] - Section Content
  */
 
 export default {

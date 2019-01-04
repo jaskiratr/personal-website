@@ -12,19 +12,20 @@
 <script>
 /**
  * @module SectionFooter
- * @desc Section for website Footer page
+ * @desc Home page section for home page footer
+ * @vue-prop {Object} [content=null] - Section Content
+ * @vue-computed {Boolean} darkMode - Dark mode state
  */
-import { db } from '~/services/firebase-init.js'
 import { mapGetters } from 'vuex'
 
 export default {
-  data() {
-    return {
-      content: null
+  props: {
+    content: {
+      type: Object,
+      default: function() {
+        return null
+      }
     }
-  },
-  firestore: {
-    content: db.collection('content').doc('sectionFooter')
   },
   computed: { ...mapGetters(['darkMode']) }
 }

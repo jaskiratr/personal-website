@@ -67,7 +67,7 @@
 
     
 
-    <h3>Modules</h3><ul><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-closeSidebar-nav"><a href="module-SectionProjects.html#closeSidebar">closeSidebar</a></li><li data-type="method" id="SectionProjects-openSidebar-nav"><a href="module-SectionProjects.html#openSidebar">openSidebar</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li><li id="sections_SectionBio-nav"><a href="module-sections_SectionBio.html">sections/SectionBio</a></li></ul>
+    <h3>Modules</h3><ul><li id="AdminNav-nav"><a href="module-AdminNav.html">AdminNav</a><ul class='methods'><li data-type="method" id="AdminNav-signOut-nav"><a href="module-AdminNav.html#signOut">signOut</a></li></ul></li><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="LoginForm-nav"><a href="module-LoginForm.html">LoginForm</a><ul class='methods'><li data-type="method" id="LoginForm-signIn-nav"><a href="module-LoginForm.html#signIn">signIn</a></li><li data-type="method" id="LoginForm-signOut-nav"><a href="module-LoginForm.html#signOut">signOut</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="ProjectDetails-nav"><a href="module-ProjectDetails.html">ProjectDetails</a><ul class='methods'><li data-type="method" id="ProjectDetails-addContainerForVideos-nav"><a href="module-ProjectDetails.html#addContainerForVideos">addContainerForVideos</a></li><li data-type="method" id="ProjectDetails-closeProject-nav"><a href="module-ProjectDetails.html#closeProject">closeProject</a></li><li data-type="method" id="ProjectDetails-date-nav"><a href="module-ProjectDetails.html#date">date</a></li><li data-type="method" id="ProjectDetails-openProject-nav"><a href="module-ProjectDetails.html#openProject">openProject</a></li></ul></li><li id="SectionBio-nav"><a href="module-SectionBio.html">SectionBio</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionFooter-nav"><a href="module-SectionFooter.html">SectionFooter</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-openProject-nav"><a href="module-SectionProjects.html#openProject">openProject</a></li><li data-type="method" id="SectionProjects-padInt-nav"><a href="module-SectionProjects.html#padInt">padInt</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li><li id="SwitchDarkMode-nav"><a href="module-SwitchDarkMode.html">SwitchDarkMode</a><ul class='methods'><li data-type="method" id="SwitchDarkMode-toggleDarkMode-nav"><a href="module-SwitchDarkMode.html#toggleDarkMode">toggleDarkMode</a></li></ul></li></ul>
   </nav>
 
   <div id="main">
@@ -82,72 +82,118 @@
 
 <section>
   <article>
-    <pre class="prettyprint source linenums"><code>&lt;template lang="pug">
-.container
-  h1 Selected Projects
-  p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.
+    <pre class="prettyprint source linenums"><code>&lt;template lang='pug'>
+.container(v-if='content')
+  el-row
+    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
+      
+      el-row
+        el-col(:xs='24', :sm='14', :lg='7')
+          h5.section-title {{content.sectionTitle}}
+          h1.section-headline {{content.headline}}
+          p.section-subheading {{content.subheading}}
+      
+      el-row.section-content
+        el-col(:span='24')
+          el-row.project-row(:gutter='60' v-for='row in Math.ceil(projects.length / 3)' :key='row')
+            el-col.project(:xs='24', :sm='24', :lg='8' v-for='(project, col) in projects.slice((row - 1) * 3, row * 3)' :key='col' )
+              p.project-index.mono-font(@click='openProject(project.id)', :class='{ dark: darkMode }') {{padInt(project.order)}}
+                i.el-icon-arrow-right
+              p.project-name(@click='openProject(project.id)', :class='{ dark: darkMode }') {{project.name}}     
+              p.project-summary {{project.summary}}
   
-  ul 
-    li Conversational Interfaces
-    li Terra
-    li Programmable Carbon Fiber
-    li Ontogenesis
-    li GLSL Shaders
-    li Ketai Library
-    li Post from the Past
-    li Technkisi
-    li Machine Learning
-    li Jamming Bodies
-  
-  el-button(type='primary' v-on:click='openSidebar($event)') Open Sidebar
-  Sidebar.sidebar-container#sidebarRight.flexbox-parent(v-model='showSidebar', sidebarId='sidebarRight', :align='"right"', :width='50', 
-  :units='"percent"', :duration='0.7', effect='ease-in-out', @sidebarWasClosed='closeSidebar()' :hideOnClickOutside='false' :push='false')
-    el-button.right.close-button(type='primary' v-on:click="closeSidebar()" icon= 'el-icon-close' size='mini' plain)
+  //- Project Detail Modal
+  ProjectDetails
+
 &lt;/template>
 
 &lt;script>
 /**
  * @module SectionProjects
  * @desc Section for project showcase
- *
- * @vue-data {Boolean} [showSidebar=false] - Current visibility of the sidebar
+ * @vue-prop {Object} [content=null] - Section Content
+ * @vue-prop {Array} [projects=[]] - Projects
+ * @vue-data {Object} [activeProject=null] - Active project loaded in modal dialog.
+ * @vue-computed {Boolean} darkMode - Dark mode state in store
  */
-import Sidebar from '~/components/Sidebar'
+import ProjectDetails from '~/components/ProjectDetails'
+import { mapGetters } from 'vuex'
 
 export default {
   /**
-   * - Sidebar
+   * - ProjectDetails
    */
-  components: { Sidebar },
-  data() {
-    return {
-      showSidebar: false
+  components: { ProjectDetails },
+  props: {
+    content: {
+      type: Object,
+      default: function() {
+        return null
+      }
+    },
+    projects: {
+      type: Array,
+      default: function() {
+        return []
+      }
     }
   },
+  data() {
+    return {
+      activeProject: null
+    }
+  },
+  computed: { ...mapGetters(['darkMode']) },
   methods: {
     /**
-     * Opens the sidebar
+     * Adds numeric padding up to 2 digits
+     * @param {int} num Number to add padding to
      */
-    openSidebar() {
-      this.showSidebar = true
+    padInt(num) {
+      return num.toString().padStart(2, '0')
     },
     /**
-     * Closes the sidebar
+     * Emits `openProject` event
+     * @param {string} id Firestore ID of the project
      */
-    closeSidebar() {
-      this.showSidebar = false
+    openProject(id) {
+      this.$bus.$emit('openProject', id)
     }
   }
 }
 &lt;/script>
 
-&lt;style lang="sass" scoped>
-.container
-  min-height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
+&lt;style lang='sass' scoped>
+.project-index, .project-name
+  font-weight: 700
+  margin-bottom: 0.5em
+  color: $color-highlight
+  cursor: pointer
+
+.project-index.dark, .project-name.dark
+  color: $color-highlight-dark
+
+.el-icon-arrow-right
+  padding-left: 0.5em
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px)
+  .project-row
+    margin-bottom: 0
+  .project
+    padding: 1em 0em
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px)
+  .project-row
+    margin-bottom: 0
+  .project
+    padding: 1em 0em
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px)
+  .project-row
+    margin-bottom: 5em
 &lt;/style>
 </code></pre>
   </article>

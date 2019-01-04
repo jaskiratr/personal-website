@@ -12,6 +12,12 @@
 </template>
 
 <script>
+/**
+ * @module SwitchDarkMode
+ * @desc Switch component for toggling dark theme. Loads the state from cookie.
+ * @vue-data {Boolean} darkmode=false] - Component's internal instance of dark mode state
+ * @vue-computed {Boolean} darkMode - Dark mode state in store
+ */
 import { mapGetters } from 'vuex'
 import Cookie from 'js-cookie'
 
@@ -39,6 +45,12 @@ export default {
     }
   },
   methods: {
+    /**
+     * - **Dispatches** `setDarkmode(payload)`
+     * - **Emits** `toggleDarkMode(payload)` event on bus to toggle stored dark mode state
+     * - **Sets Cookie** `darkMode(payload)` for dark mode state
+     * @param {Boolean} payload Dark mode state
+     */
     toggleDarkMode(payload) {
       this.$store.dispatch('setDarkMode', payload)
       this.$bus.$emit('toggleDarkMode', payload)

@@ -67,7 +67,7 @@
 
     
 
-    <h3>Modules</h3><ul><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-closeSidebar-nav"><a href="module-SectionProjects.html#closeSidebar">closeSidebar</a></li><li data-type="method" id="SectionProjects-openSidebar-nav"><a href="module-SectionProjects.html#openSidebar">openSidebar</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li><li id="sections_SectionBio-nav"><a href="module-sections_SectionBio.html">sections/SectionBio</a></li></ul>
+    <h3>Modules</h3><ul><li id="components_Sidebar-nav"><a href="module-components_Sidebar.html">components/Sidebar</a><ul class='methods'><li data-type="method" id="components_Sidebar-clickOutside-nav"><a href="module-components_Sidebar.html#clickOutside">clickOutside</a></li><li data-type="method" id="components_Sidebar-esc-nav"><a href="module-components_Sidebar.html#esc">esc</a></li><li data-type="method" id="components_Sidebar-setupBody-nav"><a href="module-components_Sidebar.html#setupBody">setupBody</a></li><li data-type="method" id="components_Sidebar-toggle-nav"><a href="module-components_Sidebar.html#toggle">toggle</a></li></ul></li><li id="pages_index-nav"><a href="module-pages_index.html">pages/index</a></li><li id="SectionExperience-nav"><a href="module-SectionExperience.html">SectionExperience</a></li><li id="SectionFooter-nav"><a href="module-SectionFooter.html">SectionFooter</a></li><li id="SectionLanding-nav"><a href="module-SectionLanding.html">SectionLanding</a></li><li id="SectionProjects-nav"><a href="module-SectionProjects.html">SectionProjects</a><ul class='methods'><li data-type="method" id="SectionProjects-closeSidebar-nav"><a href="module-SectionProjects.html#closeSidebar">closeSidebar</a></li><li data-type="method" id="SectionProjects-openSidebar-nav"><a href="module-SectionProjects.html#openSidebar">openSidebar</a></li></ul></li><li id="SectionRecognition-nav"><a href="module-SectionRecognition.html">SectionRecognition</a></li><li id="sections_SectionBio-nav"><a href="module-sections_SectionBio.html">sections/SectionBio</a></li></ul>
   </nav>
 
   <div id="main">
@@ -82,29 +82,21 @@
 
 <section>
   <article>
-    <pre class="prettyprint source linenums"><code>&lt;template lang="pug">
-.container
-  h1 Work Experience
-  p Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.
-  el-button Resume
-
-  ul 
-    li Management and Communication Skills
-    li Strategic planning and implementation
-    li Agile product development on Jira and Confluence
-    li Product analytics and performance reporting
-    li Pitching new products and stakeholder alignment
-    li Cross-team engagement, planning, and collaboration
-    li Fluent in English and Hindi
-  ul
-    li Technical Skills
-    li Full-Stack Development: Node.js, Vue.js, Mongodb and Firebase
-    li Technical prototyping, and proof-of-concepts
-    li Application Containerization using Docker
-    li AWS Cloud computing
-    li GIS data processing and visualizations
-    li Hands-on machine learning applications
-    li Project code collaboration with Git
+    <pre class="prettyprint source linenums"><code>&lt;template lang='pug'>
+.container(v-if='content')
+  el-row
+    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
+      el-row(:gutter='40')
+        el-col#col-1(:xs='24', :sm='12' :md='12' :lg='6')
+          h5.section-title {{content.sectionTitle}}
+          h1.section-headline {{content.headline}}
+          p.section-subheading {{content.subheading}}
+          a(v-if='content.resumeLink', :href='content.resumeLink', target='_blank')
+            el-button.v-button Résumé
+        el-col#col-2(:xs='24', :sm='12' :md='12' :lg='9').section-content
+          div(v-html='content.descriptionLeft')
+        el-col#col-3(:xs='24', :sm='12' :md='12' :lg='9').section-content
+          div(v-html='content.descriptionRight')
 &lt;/template>
 
 &lt;script>
@@ -112,16 +104,36 @@
  * @module SectionExperience
  * @desc Section for author's experience
  */
-export default {}
+// import { db } from '@/services/firebase-init.js'
+
+export default {
+  props: {
+    content: {
+      type: Object,
+      default: function() {
+        return null
+      }
+    }
+  }
+}
 &lt;/script>
 
-&lt;style lang="sass" scoped>
-.container
-  min-height: 100vh
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
+&lt;style lang='sass' scoped>
+.section-subheading
+  margin-bottom: 3em
+
+.section-content
+  margin-top: 0em
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) 
+  .section-subheading
+    margin-bottom: 1em
+  #col-1
+    margin-bottom: 4em
+  #col-2, #col-3
+    margin-bottom: 2em
+
 &lt;/style>
 </code></pre>
   </article>

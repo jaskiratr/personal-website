@@ -18,9 +18,9 @@
 <script>
 /**
  * @module SectionExperience
- * @desc Section for author's experience
+ * @desc Home page section for author's experience
+ * @vue-prop {Object} [content=null] - Section Content
  */
-// import { db } from '@/services/firebase-init.js'
 
 export default {
   props: {

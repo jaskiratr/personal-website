@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>
-      components/sections/SectionLanding.vue - Documentation
+      components/AdminNav.vue - Documentation
   </title>
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -73,7 +73,7 @@
   <div id="main">
     
       <h1 class="page-title">
-        components/sections/SectionLanding.vue
+        components/AdminNav.vue
       </h1>
     
 
@@ -83,143 +83,60 @@
 <section>
   <article>
     <pre class="prettyprint source linenums"><code>&lt;template lang='pug'>
-.container(v-if='content', :class='{ dark: darkMode }')
-  el-row.row-banner.center-flex(:class='{ dark: darkMode }')
-    el-col.title-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
-      div.title(v-html='content.bannerTitle')
-  
-  .animation
-    no-ssr
-      LandingAnimation
-  
-  el-row.row-content.center-flex(:class='{ dark: darkMode }')
-    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:7, offset:5}')
-      h5.section-title {{content.sectionTitle}}
-      h1.section-headline {{content.headline}}
+.nav
+  no-ssr
+    el-row
+      el-col.links(:span='16')
+        router-link(to='/'): el-button.nav-link(type='text', plain) Home
+        router-link(to='/admin'): el-button.nav-link(type='text', plain) Admin
+        router-link(to='/admin/projects'): el-button.nav-link(type='text', plain) Projects
+      el-col.user(:span='8')
+        p.user-email(v-if='owner') {{owner.email}}
+        el-button.sign-out-button(type='danger', v-on:click='signOut($event)', size='mini', plain) Sign Out
 &lt;/template>
+
 &lt;script>
 /**
- * @module SectionLanding
- * @desc Section for home page landing
- * @vue-prop {Object} [content=null] - Section Content
- * @vue-computed {Boolean} darkMode - Dark mode state
+ * @module AdminNav
+ * @desc Navigation component for admin page
+ * @vue-computed {Object} owner - Signed-in user information from Firebase Auth
  */
-import LandingAnimation from '~/components/LandingAnimation'
 import { mapGetters } from 'vuex'
-
 export default {
-  /**
-   * - LandingAnimation
-   */
-  components: { LandingAnimation },
-  props: {
-    content: {
-      type: Object,
-      default: function() {
-        return null
-      }
+  computed: { ...mapGetters(['owner']) },
+  methods: {
+    /**
+     * Signs out currently logged in user
+     * - Dispatches `signOut` Vuex function
+     * - Then redirects user to root of the website
+     */
+    signOut() {
+      this.$store.dispatch('signOut').then(() => {
+        this.$router.push('/')
+      })
     }
-  },
-  computed: { ...mapGetters(['darkMode']) }
+  }
 }
 &lt;/script>
 
 &lt;style lang='sass' scoped>
-.container
-  position: relative
-  padding: 0em
-  overflow: hidden
+.nav
+  margin: 2em 0em
 
-.container.dark
-  background: $color-bg-dark
+.links
+  margin-top: 2em
 
-.row-banner
-  background-color: $color-bg-2
-  height: 50vh
+.nav-link
+  // margin-right: 2em
+  padding: 1em 2em
 
-.row-banner.dark
-  background: $color-bg-dark-2
-  .title
-    color: $color-highlight-dark
+.user-email
+  color: $color-highlight
+  text-align: right
 
-.row-content
-  background: none
-  height: 50vh
-  z-index: 10
-
-.center-flex
-  min-height: 400px
-  display: flex
-  justify-content: center
-  flex-direction: column
-
-.title-container
-  z-index: 10
-
-.title
-  font-family: 'IBM Plex Serif', serif
-  color: $color-title
-  font-size: 5em
-  font-weight: 100
-  line-height: 0.9em
-  margin-left: -10px
-  -webkit-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-  -moz-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-  -ms-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-  -o-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-  animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-
-.animation
-  position: absolute
-  top: 0
-  z-index: 1
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) 
-  .row-banner
-    padding: 20px
-    height: 60vh
-  
-  .row-content
-    padding: 20px
-    background: $color-bg
-    height: 40vh
-
-  .row-content.dark
-    background: none
-
-  .section-headline
-    font-size: 1.2em
-
-  .title
-    margin-left: 0px
-    font-size: 3em
-  
-  .center-flex
-    min-height: inherit
-  
-  .animation
-    right: -120%
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px)
-  .animation
-    right: -75%
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px)
-  .animation
-    right: -50%
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px)
-  .animation
-    right: -25%
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px)
-  .animation
-    right: 5%
-
+.sign-out-button
+  float: right
+  margin-top: 1em
 &lt;/style>
 </code></pre>
   </article>
