@@ -17,7 +17,7 @@ module.exports = {
     excludePattern: '(node_modules/|docs)'
   },
   opts: {
-    destination: './dist/docs/',
+    destination: './static/docs/',
     encoding: 'utf8',
     template: 'jsdocs/braintree-template'
   },

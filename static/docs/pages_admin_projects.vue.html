@@ -1,0 +1,438 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      pages/admin/projects.vue - Documentation
+  </title>
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+  
+  <link type="text/css" rel="stylesheet" href="styles/collapse.css">
+  
+
+  
+
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <i class="fas fa-home"></i>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Portfolio Docs
+    </h3>
+
+    
+
+    <h3>Modules</h3><ul><li id="Page-index-nav"><a href="module-Page-index.html">Page-index</a></li><li id="Page-login-nav"><a href="module-Page-login.html">Page-login</a></li><li id="Page-admin-nav"><a href="module-Page-admin.html">Page-admin</a><ul class='methods'><li data-type="method" id="Page-admin-saveContent-nav"><a href="module-Page-admin.html#saveContent">saveContent</a></li></ul></li><li id="Page-projects-nav"><a href="module-Page-projects.html">Page-projects</a><ul class='methods'><li data-type="method" id="Page-projects-handleProjectSort-nav"><a href="module-Page-projects.html#handleProjectSort">handleProjectSort</a></li><li data-type="method" id="Page-projects-editProject-nav"><a href="module-Page-projects.html#editProject">editProject</a></li><li data-type="method" id="Page-projects-handleDelete-nav"><a href="module-Page-projects.html#handleDelete">handleDelete</a></li><li data-type="method" id="Page-projects-deleteProject-nav"><a href="module-Page-projects.html#deleteProject">deleteProject</a></li><li data-type="method" id="Page-projects-updateProjectOrder-nav"><a href="module-Page-projects.html#updateProjectOrder">updateProjectOrder</a></li><li data-type="method" id="Page-projects-saveProject-nav"><a href="module-Page-projects.html#saveProject">saveProject</a></li><li data-type="method" id="Page-projects-setLastProjectActive-nav"><a href="module-Page-projects.html#setLastProjectActive">setLastProjectActive</a></li><li data-type="method" id="Page-projects-newProject-nav"><a href="module-Page-projects.html#newProject">newProject</a></li></ul></li><li id="Component-AdminNav-nav"><a href="module-Component-AdminNav.html">Component-AdminNav</a><ul class='methods'><li data-type="method" id="Component-AdminNav-signOut-nav"><a href="module-Component-AdminNav.html#signOut">signOut</a></li></ul></li><li id="Component-LoginForm-nav"><a href="module-Component-LoginForm.html">Component-LoginForm</a><ul class='methods'><li data-type="method" id="Component-LoginForm-signIn-nav"><a href="module-Component-LoginForm.html#signIn">signIn</a></li><li data-type="method" id="Component-LoginForm-signOut-nav"><a href="module-Component-LoginForm.html#signOut">signOut</a></li></ul></li><li id="Component-ProjectDetails-nav"><a href="module-Component-ProjectDetails.html">Component-ProjectDetails</a><ul class='methods'><li data-type="method" id="Component-ProjectDetails-date-nav"><a href="module-Component-ProjectDetails.html#date">date</a></li><li data-type="method" id="Component-ProjectDetails-addContainerForVideos-nav"><a href="module-Component-ProjectDetails.html#addContainerForVideos">addContainerForVideos</a></li><li data-type="method" id="Component-ProjectDetails-openProject-nav"><a href="module-Component-ProjectDetails.html#openProject">openProject</a></li><li data-type="method" id="Component-ProjectDetails-closeProject-nav"><a href="module-Component-ProjectDetails.html#closeProject">closeProject</a></li></ul></li><li id="Component-SwitchDarkMode-nav"><a href="module-Component-SwitchDarkMode.html">Component-SwitchDarkMode</a><ul class='methods'><li data-type="method" id="Component-SwitchDarkMode-toggleDarkMode-nav"><a href="module-Component-SwitchDarkMode.html#toggleDarkMode">toggleDarkMode</a></li></ul></li><li id="Component-SectionBio-nav"><a href="module-Component-SectionBio.html">Component-SectionBio</a></li><li id="Component-SectionExperience-nav"><a href="module-Component-SectionExperience.html">Component-SectionExperience</a></li><li id="Component-SectionFooter-nav"><a href="module-Component-SectionFooter.html">Component-SectionFooter</a></li><li id="Component-SectionLanding-nav"><a href="module-Component-SectionLanding.html">Component-SectionLanding</a></li><li id="Component-SectionProjects-nav"><a href="module-Component-SectionProjects.html">Component-SectionProjects</a><ul class='methods'><li data-type="method" id="Component-SectionProjects-padInt-nav"><a href="module-Component-SectionProjects.html#padInt">padInt</a></li><li data-type="method" id="Component-SectionProjects-openProject-nav"><a href="module-Component-SectionProjects.html#openProject">openProject</a></li></ul></li><li id="Component-SectionRecognition-nav"><a href="module-Component-SectionRecognition.html">Component-SectionRecognition</a></li><li id="Mixin-image-upload-nav"><a href="module-Mixin-image-upload.html">Mixin-image-upload</a><ul class='methods'><li data-type="method" id="Mixin-image-upload-uploadImage-nav"><a href="module-Mixin-image-upload.html#~uploadImage">uploadImage</a></li><li data-type="method" id="Mixin-image-upload-mixinRandomId-nav"><a href="module-Mixin-image-upload.html#~mixinRandomId">mixinRandomId</a></li></ul></li><li id="Middleware-router-auth-nav"><a href="module-Middleware-router-auth.html">Middleware-router-auth</a><ul class='methods'><li data-type="method" id="Middleware-router-auth-isAdminRoute-nav"><a href="module-Middleware-router-auth.html#~isAdminRoute">isAdminRoute</a></li></ul></li><li id="Store-nav"><a href="module-Store.html">Store</a><ul class='methods'><li data-type="method" id="Store-state-nav"><a href="module-Store.html#~state">state</a></li><li data-type="method" id="Store-Getters-nav"><a href="module-Store.html#~Getters">Getters</a></li><li data-type="method" id="Store-Mutations-firebaseMutations-nav"><a href="module-Store.html#~Mutations-firebaseMutations">Mutations-firebaseMutations</a></li><li data-type="method" id="Store-Mutations-setOwner-nav"><a href="module-Store.html#~Mutations-setOwner">Mutations-setOwner</a></li><li data-type="method" id="Store-Mutations-setDarkMode-nav"><a href="module-Store.html#~Mutations-setDarkMode">Mutations-setDarkMode</a></li><li data-type="method" id="Store-Actions-setDarkMode-nav"><a href="module-Store.html#~Actions-setDarkMode">Actions-setDarkMode</a></li><li data-type="method" id="Store-Actions-setProjects-nav"><a href="module-Store.html#~Actions-setProjects">Actions-setProjects</a></li><li data-type="method" id="Store-Actions-setContent-nav"><a href="module-Store.html#~Actions-setContent">Actions-setContent</a></li><li data-type="method" id="Store-Actions-signIn-nav"><a href="module-Store.html#~Actions-signIn">Actions-signIn</a></li><li data-type="method" id="Store-Actions-signOut-nav"><a href="module-Store.html#~Actions-signOut">Actions-signOut</a></li><li data-type="method" id="Store-Actions-uploadContentImage-nav"><a href="module-Store.html#~Actions-uploadContentImage">Actions-uploadContentImage</a></li></ul></li></ul>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        pages/admin/projects.vue
+      </h1>
+    
+
+    
+      
+
+<section>
+  <article>
+    <pre class="prettyprint source linenums"><code>&lt;template lang='pug'>
+div
+  el-row.nav-container
+    AdminNav
+  el-row
+    .container
+      no-ssr
+        el-row
+          h2 Projects
+          p.page-info Drag the tiles below to rearrange the order.
+        el-row(:gutter='20')          
+          el-col.project-list(:span='8')
+            el-form.section-form(label-width='120px')
+              draggable(element='el-collapse', :list='projects', @sort='handleProjectSort', :options="{animation:150}" accordion)
+                el-card.project-list-item(v-for='(project, index) in projects', :key='index', shadow='hover')
+                  el-tag.project-order-tag(size='mini', type='warning') {{project.order}}
+                  span.project-list-name {{project.name}}  
+                  el-button-group.project-action-buttons
+                    el-button(type='primary', @click='editProject(project)', icon='el-icon-edit', size='mini', round, plain)
+                    el-button(type='danger', @click='handleDelete(project)', icon='el-icon-delete', size='mini', round, plain)
+              el-button.save-button(type='primary', @click='updateProjectOrder', plain) Update Order
+              el-button.new-project-button(type='success', @click='newProject', plain) New Project
+          
+          el-col.view-project(:span='16')
+            el-row
+              el-col(:span='24')
+                .null-project(v-if='!activeProject')
+                  i.el-icon-document
+                  p Pick a project to edit
+                .active-project(v-else)
+                  el-card.project-card
+                    el-form
+                      
+                      el-row.project-form-item-row(:gutter='60')
+                        el-col(:span='8')
+                          el-form-item(label='Name')
+                            el-input(placeholder='Please input' v-model='activeProject.name')
+                        el-col(:span='4')
+                          el-form-item(label='Date')
+                            el-date-picker(v-model='activeProject.timestamp', type='date', value-format='timestamp', placeholder='Pick a day')
+                      
+                      el-row.project-form-item-row(:gutter='60')
+                        el-col(:span='8')
+                          el-form-item(label='Link Name')
+                            el-input(placeholder='Please input' v-model='activeProject.link')
+                        el-col(:span='8')
+                          el-form-item(label='Link URL')
+                            el-input(placeholder='Please input' v-model='activeProject.linkUrl')
+                      
+                      el-form-item(label='Summary')
+                        el-input(placeholder='Please input' v-model='activeProject.summary')
+                      
+                      .project-description(v-if='activeProject')
+                        .quill-editor(v-model='activeProject.description', v-quill='defaultEditorOption')
+                      
+                      el-button.save-button(type='primary', @click='saveProject(activeProject)', plain) Save Project
+  
+  //- Dialog: Confirm Delete
+  el-dialog(title='Confirm Deletion', :visible.sync='confirmDelete.visible', width='30%')
+    h3 {{confirmDelete.name}}
+    br
+    p Are you sure you want to permanently delete this project?
+    span.dialog-footer(slot='footer')
+      el-button(@click='confirmDelete = null') Cancel
+      el-button(type='danger', @click='deleteProject(confirmDelete.project)') Confirm
+
+&lt;/template>
+
+&lt;script>
+/**
+ * @module Page-projects
+ * @desc Admin page for editing projects content
+ * @vue-data {Array} [projects=[]] - Array of project objects
+ * @vue-data {Object} [activeProject=null] - Project selected by client
+ * @vue-data {Boolean} [confirmDelete.visible=false] - Show confirmation dialog for deleting active project.
+ * @vue-data {Object} [confirmDelete.project=null] - Stores the project to be deleted
+ * @vue-data {Object} [defaultEditorOption=See code]
+ * Default options for Vue-Quill Editor toolbar
+ * Supports `imageDrop`, `imageResize`, and custom `imageUpload` module.
+ */
+import AdminNav from '~/components/AdminNav'
+import { db } from '@/services/firebase-init.js'
+import MixinImageUpload from '@/mixins/image-upload'
+import draggable from 'vuedraggable'
+
+let defaultToolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],
+  ['blockquote', 'code-block'],
+  [{ list: 'ordered' }, { list: 'bullet' }],
+  [{ script: 'sub' }, { script: 'super' }],
+  [{ indent: '-1' }, { indent: '+1' }],
+  [{ color: [] }, { background: [] }],
+  [{ align: [] }],
+  ['link', 'image', 'video'],
+  ['clean']
+]
+
+export default {
+  scrollToTop: true,
+  components: { AdminNav, draggable },
+  mixins: [MixinImageUpload],
+  data() {
+    return {
+      projects: [],
+      activeProject: null,
+      confirmDelete: { visible: false, project: null },
+      defaultEditorOption: {
+        modules: {
+          toolbar: defaultToolbarOptions,
+          imageDrop: true,
+          imageResize: {
+            displayStyles: {
+              backgroundColor: 'black',
+              border: 'none',
+              color: 'white'
+            },
+            modules: ['Resize', 'DisplaySize', 'Toolbar']
+          },
+          imageUpload: {
+            customUploader: (file, next) => {
+              this.uploadImage(file)
+                .then(url => {
+                  next(url)
+                })
+                .catch(error => {
+                  console.error(error)
+                })
+            }
+          }
+        }
+      }
+    }
+  },
+  /**
+   * Firestore bindings for projects
+   *
+   * `projects`: Binds to collection `projects`, ordered by document `order`.
+   */
+  firestore: {
+    projects: db.collection('projects').orderBy('order')
+  },
+  methods: {
+    /**
+     * Handles re-ordering of projects upon dragging.
+     * Updates the order of the projects locally, which can be saved to Firestore later.
+     */
+    handleProjectSort() {
+      for (const key in this.projects) {
+        if (this.projects.hasOwnProperty(key)) {
+          this.projects[key].order = parseInt(key) + 1
+        }
+      }
+    },
+    /**
+     * Assigns the project to be edited to `activeProject`
+     * @param {Object} project Project to be edited
+     */
+    editProject(project) {
+      this.activeProject = project
+    },
+    /**
+     * Handles delete request for a project.
+     * - Show delete confirmation dialog
+     * - Set `confirmDelete.project = project`
+     * @param {Object} project Project to be edited
+     */
+    handleDelete(project) {
+      this.confirmDelete = { visible: true, project: project }
+    },
+    /**
+     * Deletes request for a project.
+     * - Hides delete confirmation dialog
+     * - Sets `confirmDelete.project = null`
+     * - Then deletes the project from Firestore `projects` collection.
+     * - If the deleted project was last in `projects` array, it sets last project in the resultant array as active project.
+     * @param {Object} project Project to be edited
+     */
+    deleteProject(project) {
+      this.confirmDelete = { visible: false, project: null }
+      db.collection('projects')
+        .doc(project.id)
+        .delete()
+        .then(() => {
+          this.$notify({ message: 'Deleted', type: 'success' })
+          if (this.activeProject &amp;&amp; project.id === this.activeProject.id) {
+            this.setLastProjectActive()
+          }
+        })
+        .catch(error => {
+          this.$notify.error({ message: error })
+        })
+    },
+    /**
+     * Updates the project order in Firestore `projects` collection.
+     */
+    updateProjectOrder() {
+      let saveError = false
+      for (const key in this.projects) {
+        let id = this.projects[key].id
+        db.collection('projects')
+          .doc(id)
+          .set(this.projects[key])
+          .catch(error => {
+            error = true
+            this.$notify.error({ message: error })
+          })
+      }
+      if (!saveError) this.$notify({ message: 'Saved', type: 'success' })
+    },
+    /**
+     * Saves a project in Firestore `projects` collection.
+     * - If the `project` has `id` property, it updates the existing `project` document in the collection.
+     * - Else it saves `project` as a new document
+     * @param {Object} project Project to be saved as document
+     */
+    saveProject(project) {
+      // Save existing project
+      if (project.id) {
+        db.collection('projects')
+          .doc(project.id)
+          .set(project)
+          .then(() => {
+            this.$notify({ message: 'Saved', type: 'success' })
+            // console.log(this.projects)
+          })
+          .catch(error => {
+            this.$notify.error({ message: error })
+          })
+      }
+      // Save new project
+      else {
+        db.collection('projects')
+          .add(project)
+          .then(() => {
+            this.$notify({ message: 'Saved', type: 'success' })
+            this.setLastProjectActive()
+          })
+          .catch(error => {
+            this.$notify.error({ message: error })
+          })
+      }
+    },
+    /**
+     * Sets last project in the `projects` array as active project
+     */
+    setLastProjectActive() {
+      this.activeProject = this.projects[this.projects.length - 1]
+    },
+    /**
+     * Creates a new instance of a project document. Sets it as `activeProject`
+     */
+    newProject() {
+      let newProjectOrder = this.projects.length + 1
+      let newProject = {
+        name: 'My New Project',
+        order: newProjectOrder,
+        description: 'Some data'
+      }
+      this.activeProject = newProject
+    }
+  }
+}
+&lt;/script>
+
+&lt;style lang='sass' scoped>
+.nav-container
+  width: 70%
+  margin: auto
+
+.container
+  width: 70%
+  margin: auto
+  padding: 2em 1em
+  background-color: $color-bg-admin
+
+.page-info
+  margin-top: 1em
+
+.project-order-tag
+  margin-right: 1em 
+
+.project-action-buttons
+  float: right
+
+.section-form
+  padding: 2em 0em
+  h3
+    margin-bottom: 2em
+
+.quillWrapper
+  line-height: normal
+
+.project-list-item /deep/
+  .el-card__body
+    padding: 15px
+
+.project-list-item:hover
+  cursor: move
+  background: $color-bg
+
+.project-list-item .sortable-chosen
+  cursor: -webkit-grabbing
+
+.project-list-name
+  font-size: 14px
+
+.null-project
+  margin-top: 10em
+  text-align: center
+  i
+    padding: 1em 0em
+    opacity: 0.5
+    font-size: 1.5em
+  
+.project-card
+  margin: 2em 0em
+  overflow: visible
+
+.project-form-item-row
+  margin-top: 1em
+
+.project-description
+  margin-top: 3em
+
+.save-button
+  margin-top: 2em
+
+.new-project-button
+  margin-top: 2em
+  float: right
+
+&lt;/style>
+</code></pre>
+  </article>
+</section>
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+
+</body>
+</html>
