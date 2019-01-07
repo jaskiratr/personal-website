@@ -17,7 +17,7 @@
 
 <script>
 /**
- * @module SectionExperience
+ * @module Component-SectionExperience
  * @desc Home page section for author's experience
  * @vue-prop {Object} [content=null] - Section Content
  */

@@ -8,14 +8,14 @@ import { mapGetters } from 'vuex'
 
 var THREE = require('three')
 var TWEEN = require('@tweenjs/tween.js')
-var planes = []
-var spheres = []
 var D, aspect, camera, ambientLight, directLight, renderer, scene
 var colors = ['#ff6473', '#acdbdf', '#13334c', '#07617d', '#07617d']
 
 export default {
   data() {
     return {
+      planes: [],
+      spheres: [],
       animating: true,
       animationDuration: 40000 // Seconds
     }
@@ -137,7 +137,7 @@ export default {
       mesh.position.z = z + Math.random() * 5
       mesh.castShadow = true // default is false
       mesh.receiveShadow = true // default
-      planes.push(mesh)
+      this.planes.push(mesh)
       if (Math.random() > 0.5) {
         new TWEEN.Tween(mesh.position)
           .to({ z: z }, Math.random() * (25000 - 5000) + 5000)
@@ -177,7 +177,7 @@ export default {
           .easing(TWEEN.Easing.Back.InOut)
           .start()
       }
-      spheres.push(mesh)
+      this.spheres.push(mesh)
       scene.add(mesh)
     },
     planeDark(w, h, x, y, z) {
@@ -201,7 +201,7 @@ export default {
       boxMesh.position.z = z + Math.random() * 5
       boxMesh.castShadow = true // default is false
       boxMesh.receiveShadow = true // default
-      planes.push(boxMesh)
+      this.planes.push(boxMesh)
       if (Math.random() > 0.5) {
         new TWEEN.Tween(boxMesh.position)
           .to({ z: z }, Math.random() * (25000 - 5000) + 5000)
@@ -247,7 +247,7 @@ export default {
           .easing(TWEEN.Easing.Back.InOut)
           .start()
       }
-      spheres.push(sphereMesh)
+      this.spheres.push(sphereMesh)
       scene.add(sphereMesh)
     },
     render() {
@@ -256,8 +256,8 @@ export default {
         this.animating = false
       }, this.animationDuration)
       renderer.render(scene, camera)
-      for (let i = 0; i < spheres.length; i++) {
-        spheres[i].position.y += Math.sin(Date.now() / i / 1000) / 500
+      for (let i = 0; i < this.spheres.length; i++) {
+        this.spheres[i].position.y += Math.sin(Date.now() / i / 1000) / 500
       }
       TWEEN.update()
     },
@@ -265,8 +265,8 @@ export default {
       while (scene.children.length > 0) {
         scene.remove(scene.children[0])
       }
-      planes = []
-      spheres = []
+      this.planes = []
+      this.spheres = []
     },
     updateTheme() {
       this.clearScene()

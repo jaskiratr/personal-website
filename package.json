@@ -1,8 +1,8 @@
 {
-  "name": "jaskirat",
+  "name": "portfolio",
   "version": "1.0.0",
   "description": "Personal website for Jaskirat Randhawa",
-  "author": "Jaskirat",
+  "author": "Jaskirat Randhawa",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -12,7 +12,7 @@
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "docs": "jsdoc -d docs -c .jsdoc.js"
+    "docs": "jsdoc -c .jsdoc.js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",

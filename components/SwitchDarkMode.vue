@@ -13,7 +13,7 @@
 
 <script>
 /**
- * @module SwitchDarkMode
+ * @module Component-SwitchDarkMode
  * @desc Switch component for toggling dark theme. Loads the state from cookie.
  * @vue-data {Boolean} darkmode=false] - Component's internal instance of dark mode state
  * @vue-computed {Boolean} darkMode - Dark mode state in store

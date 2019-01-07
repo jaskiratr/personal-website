@@ -7,13 +7,6 @@ import { ImageUpload } from 'quill-image-upload'
 
 Quill.register('modules/imageDrop', ImageDrop)
 Quill.register('modules/imageUpload', ImageUpload)
-// if (process.browser) {
-//   if (window.Quill) {
-//     console.log('object')
-//     Quill = window.Quill
-//   }
-//   Quill.register('modules/imageResize', ImageResize)
-// }
 Quill.register('modules/imageResize', ImageResize)
 
 Vue.use(VueQuillEditor)

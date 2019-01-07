@@ -13,7 +13,7 @@
 
 <script>
 /**
- * @module AdminNav
+ * @module Component-AdminNav
  * @desc Navigation component for admin page
  * @vue-computed {Object} owner - Signed-in user information from Firebase Auth
  */

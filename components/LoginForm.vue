@@ -25,7 +25,7 @@
 
 <script>
 /**
- * @module LoginForm
+ * @module Component-LoginForm
  * @desc Login form component
  * @vue-computed {Object} owner - Signed-in user information from Firebase Auth
  * @vue-data {Boolean} [submitting=false] - True if the form submission is being processed

@@ -11,7 +11,7 @@
 
 <script>
 /**
- * @module SectionFooter
+ * @module Component-SectionFooter
  * @desc Home page section for home page footer
  * @vue-prop {Object} [content=null] - Section Content
  * @vue-computed {Boolean} darkMode - Dark mode state

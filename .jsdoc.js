@@ -1,18 +1,30 @@
 module.exports = {
   plugins: ['node_modules/jsdoc-vuejs', 'plugins/markdown'],
   source: {
-    include: ['pages/', 'components/', 'components/sections', 'README.md'],
-    includePattern: '\\.(vue|js)$',
+    include: [
+      'pages/',
+      'pages/admin',
+      'components/',
+      'components/sections',
+      'mixins/',
+      'plugins/',
+      'services/',
+      'middleware/',
+      'store/',
+      'README.md'
+    ],
+    includePattern: '.+\\.(vue|js)$',
     excludePattern: '(node_modules/|docs)'
   },
   opts: {
+    destination: './dist/docs/',
     encoding: 'utf8',
-    template: 'jsdocs/braintree-template',
-    destination: './docs/'
+    template: 'jsdocs/braintree-template'
   },
   templates: {
     collapse: true,
-    referenceTitle: 'Portfolio Docs'
+    referenceTitle: 'Portfolio Docs',
+    disableSort: true
     // default: {
     //   staticFiles: {
     //     include: ['jsdocs/']
@@ -24,30 +36,3 @@ module.exports = {
     dictionaries: ['jsdoc']
   }
 }
-
-// module.exports = {
-//   plugins: ['node_modules/jsdoc-vuejs', 'plugins/markdown'],
-//   source: {
-//     include: ['pages/', 'components/', 'components/sections/', 'README.md'],
-//     includePattern: '\\.(vue|js)$'
-//   },
-//   opts: {
-//     encoding: 'utf8',
-//     template: 'node_modules/tui-jsdoc-template'
-//   },
-//   templates: {
-//     default: {
-//       staticFiles: {
-//         include: ['jsdocs/']
-//       }
-//     },
-//     css: ['styles/custom.css'],
-//     name: 'Portfolio Docs',
-//     footerText: 'Made with love',
-//     logo: {
-//       url: 'profile.png',
-//       width: '30px',
-//       height: '30px'
-//     }
-//   }
-// }

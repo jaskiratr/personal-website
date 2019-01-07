@@ -1,3 +1,7 @@
+/**
+ * @module Store
+ * @desc Vuex Store
+ */
 import Vuex from 'vuex'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
 import { auth, db, storage } from '@/services/firebase-init.js'
@@ -5,12 +9,28 @@ import { auth, db, storage } from '@/services/firebase-init.js'
 db.settings({ timestampsInSnapshots: true })
 const createStore = () => {
   return new Vuex.Store({
+    /**
+     * @method state
+     * @desc
+     * - `owner` - Stores authenticated user details
+     * - `darkMode` - Stores boolean for dark mode theme
+     * - `content` - Stores all website content, except projects
+     * - `projects` - Stores content for all projects
+     */
     state: {
       owner: null,
       darkMode: false,
       content: {},
       projects: {}
     },
+    /**
+     * @method Getters
+     * @desc
+     * - `owner` - returns `state.owner`
+     * - `darkMode` - returns `state.darkMode`
+     * - `content` - returns `state.content`
+     * - `projects` - returns `state.projects`
+     */
     getters: {
       owner: state => state.owner,
       darkMode: state => state.darkMode,
@@ -18,20 +38,47 @@ const createStore = () => {
       projects: state => state.projects
     },
     mutations: {
+      /**
+       * @method Mutations-firebaseMutations
+       * @desc Binding for Firestore
+       */
       ...firebaseMutations,
+      /**
+       * @method Mutations-setOwner
+       * @desc Stores authenticated user or owner's details in `state.owner`
+       * @param {Object} state Vuex store state
+       * @param {Boolean} owner Owner's details
+       */
       setOwner(state, owner) {
         state.owner = owner
       },
+      /**
+       * @method Mutations-setDarkMode
+       * @desc Sets boolean for dark mode
+       * @param {Object} state Vuex store state
+       * @param {Boolean} payload Dark mode theme state
+       */
       setDarkMode(state, payload) {
         state.darkMode = payload
       }
     },
     actions: {
+      /**
+       * @method Actions-setDarkMode
+       * @desc Commits `setDarkMode` with a boolean value
+       * @param {Object} store Vuex store
+       * @param {Boolean} payload Dark mode theme state
+       */
       setDarkMode: (store, payload) => {
         if (typeof payload === 'boolean') {
           store.commit('setDarkMode', payload)
         }
       },
+      /**
+       * @method Actions-setProjects
+       * @desc Firebase Action to bind `projects` ordered by `order` to `state.projects`
+       * @returns {Promise}
+       */
       setProjects: firebaseAction(({ bindFirebaseRef }) => {
         return new Promise((resolve, reject) => {
           bindFirebaseRef(
@@ -42,6 +89,11 @@ const createStore = () => {
           })
         })
       }),
+      /**
+       * @method Actions-setContent
+       * @desc Firebase Action to bind content with respective sections
+       * @returns {Promise}
+       */
       setContent: firebaseAction(({ bindFirebaseRef }) => {
         let sections = [
           'sectionLanding',
@@ -65,6 +117,12 @@ const createStore = () => {
           bindContent()
         })
       }),
+      /**
+       * @method Actions-signIn
+       * @desc Signs in user with email and password
+       * @param {Object} {email,password} Email and password of the user
+       * @returns {Promise}
+       */
       signIn: (store, { email, password }) => {
         return new Promise((resolve, reject) => {
           auth
@@ -77,6 +135,11 @@ const createStore = () => {
             })
         })
       },
+      /**
+       * @method Actions-signOut
+       * @desc Signs out authenticated user. Then commits `setOwner` to `null`
+       * @param {Object} {commit} Vuex commit
+       */
       signOut({ commit }) {
         auth
           .signOut()
@@ -85,6 +148,13 @@ const createStore = () => {
           })
           .catch(error => console.log(error))
       },
+      /**
+       * @method Actions-uploadContentImage
+       * @desc Uploads the image to Firebase Storage
+       * @param {Object} store Vuex store
+       * @param {Object} { file, fileName } File contents and file name
+       * @returns {Promise}
+       */
       uploadContentImage: (store, { file, fileName }) => {
         return new Promise((resolve, reject) => {
           var metadata = { contentType: 'image/jpeg' }

@@ -15,7 +15,7 @@
 </template>
 <script>
 /**
- * @module SectionLanding
+ * @module Component-SectionLanding
  * @desc Section for home page landing
  * @vue-prop {Object} [content=null] - Section Content
  * @vue-computed {Boolean} darkMode - Dark mode state

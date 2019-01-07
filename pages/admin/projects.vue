@@ -67,6 +67,17 @@ div
 </template>
 
 <script>
+/**
+ * @module Page-projects
+ * @desc Admin page for editing projects content
+ * @vue-data {Array} [projects=[]] - Array of project objects
+ * @vue-data {Object} [activeProject=null] - Project selected by client
+ * @vue-data {Boolean} [confirmDelete.visible=false] - Show confirmation dialog for deleting active project.
+ * @vue-data {Object} [confirmDelete.project=null] - Stores the project to be deleted
+ * @vue-data {Object} [defaultEditorOption=See code]
+ * Default options for Vue-Quill Editor toolbar
+ * Supports `imageDrop`, `imageResize`, and custom `imageUpload` module.
+ */
 import AdminNav from '~/components/AdminNav'
 import { db } from '@/services/firebase-init.js'
 import MixinImageUpload from '@/mixins/image-upload'
@@ -92,7 +103,7 @@ export default {
     return {
       projects: [],
       activeProject: null,
-      confirmDelete: false,
+      confirmDelete: { visible: false, project: null },
       defaultEditorOption: {
         modules: {
           toolbar: defaultToolbarOptions,
@@ -120,10 +131,19 @@ export default {
       }
     }
   },
+  /**
+   * Firestore bindings for projects
+   *
+   * `projects`: Binds to collection `projects`, ordered by document `order`.
+   */
   firestore: {
     projects: db.collection('projects').orderBy('order')
   },
   methods: {
+    /**
+     * Handles re-ordering of projects upon dragging.
+     * Updates the order of the projects locally, which can be saved to Firestore later.
+     */
     handleProjectSort() {
       for (const key in this.projects) {
         if (this.projects.hasOwnProperty(key)) {
@@ -131,12 +151,30 @@ export default {
         }
       }
     },
+    /**
+     * Assigns the project to be edited to `activeProject`
+     * @param {Object} project Project to be edited
+     */
     editProject(project) {
       this.activeProject = project
     },
+    /**
+     * Handles delete request for a project.
+     * - Show delete confirmation dialog
+     * - Set `confirmDelete.project = project`
+     * @param {Object} project Project to be edited
+     */
     handleDelete(project) {
       this.confirmDelete = { visible: true, project: project }
     },
+    /**
+     * Deletes request for a project.
+     * - Hides delete confirmation dialog
+     * - Sets `confirmDelete.project = null`
+     * - Then deletes the project from Firestore `projects` collection.
+     * - If the deleted project was last in `projects` array, it sets last project in the resultant array as active project.
+     * @param {Object} project Project to be edited
+     */
     deleteProject(project) {
       this.confirmDelete = { visible: false, project: null }
       db.collection('projects')
@@ -152,6 +190,9 @@ export default {
           this.$notify.error({ message: error })
         })
     },
+    /**
+     * Updates the project order in Firestore `projects` collection.
+     */
     updateProjectOrder() {
       let saveError = false
       for (const key in this.projects) {
@@ -166,6 +207,12 @@ export default {
       }
       if (!saveError) this.$notify({ message: 'Saved', type: 'success' })
     },
+    /**
+     * Saves a project in Firestore `projects` collection.
+     * - If the `project` has `id` property, it updates the existing `project` document in the collection.
+     * - Else it saves `project` as a new document
+     * @param {Object} project Project to be saved as document
+     */
     saveProject(project) {
       // Save existing project
       if (project.id) {
@@ -193,9 +240,15 @@ export default {
           })
       }
     },
+    /**
+     * Sets last project in the `projects` array as active project
+     */
     setLastProjectActive() {
       this.activeProject = this.projects[this.projects.length - 1]
     },
+    /**
+     * Creates a new instance of a project document. Sets it as `activeProject`
+     */
     newProject() {
       let newProjectOrder = this.projects.length + 1
       let newProject = {

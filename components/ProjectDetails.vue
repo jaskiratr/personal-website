@@ -16,7 +16,7 @@ el-dialog.project-modal-container(:visible.sync='showProject', @close='closeProj
 
 <script>
 /**
- * @module ProjectDetails
+ * @module Component-ProjectDetails
  * @desc Modal for viewing project details
  * @vue-computed {Boolean} darkMode - Dark mode state
  * @vue-data {Boolean} [showProject=false] - True if the modal is visible when the project content is loaded

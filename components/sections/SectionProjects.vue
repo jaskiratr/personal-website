@@ -25,7 +25,7 @@
 
 <script>
 /**
- * @module SectionProjects
+ * @module Component-SectionProjects
  * @desc Section for project showcase
  * @vue-prop {Object} [content=null] - Section Content
  * @vue-prop {Array} [projects=[]] - Projects

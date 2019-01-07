@@ -89,6 +89,20 @@ div
 </template>
 
 <script>
+/**
+ * @module Page-admin
+ * @desc Admin page for editing website sections content.
+ * @vue-data {Object} [contentLanding={}] - Content for Landing Section
+ * @vue-data {Object} [contentBio={}] - Content for Bio Section
+ * @vue-data {Object} [contentExperience={}] - Content for Experience Section
+ * @vue-data {Object} [contentRecognition={}] - Content for Recognition Section
+ * @vue-data {Object} [contentProjects={}] - Content for Projects Section
+ * @vue-data {Object} [contentFooter={}] - Content for Footer Section
+ * @vue-data {Object} [defaultEditorOption=See code]
+ * Default options for Vue-Quill Editor toolbar
+ * Supports `imageDrop`, `imageResize`, and custom `imageUpload` module.
+ * @vue-data {Object} [titleEditoOption=See code] Vue-Quill Editor toolbar options for Title
+ */
 import AdminNav from '~/components/AdminNav'
 import { db } from '@/services/firebase-init.js'
 import MixinImageUpload from '@/mixins/image-upload'
@@ -106,7 +120,13 @@ let defaultToolbarOptions = [
 ]
 
 export default {
+  /**
+   * - AdminNav
+   */
   components: { AdminNav },
+  /**
+   * - MixinImageUpload
+   */
   mixins: [MixinImageUpload],
   data() {
     return {
@@ -146,6 +166,19 @@ export default {
       }
     }
   },
+  /**
+   * Firestore bindings for content.
+   *
+   * **Collection: ** `content`
+   *
+   * **Documents: **
+   * - `contentLanding`: Binds to `sectionLanding`
+   * - `contentBio`: Binds to `sectionBio`
+   * - `contentExperience` : Binds to `sectionExperience`
+   * - `contentRecognition` : Binds to `sectionRecognition`
+   * - `contentProjects` : Binds to `sectionProjects`
+   * - `contentFooter` : Binds to `sectionFooter`
+   */
   firestore: {
     contentLanding: db.collection('content').doc('sectionLanding'),
     contentBio: db.collection('content').doc('sectionBio'),
@@ -155,6 +188,12 @@ export default {
     contentFooter: db.collection('content').doc('sectionFooter')
   },
   methods: {
+    /**
+     * Saves content document to Firestore
+     * - Then notifies the user with success/error message
+     * @param {Object} document Firestore reference of the document to be saved
+     * @param {Object} payload Content to be saved for the referenced document
+     */
     saveContent(document, payload) {
       db.collection('content')
         .doc(document)

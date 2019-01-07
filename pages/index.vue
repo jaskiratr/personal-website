@@ -19,8 +19,16 @@
 
 <script>
 /**
- * @module pages/index
- * @desc Home page
+ * @module Page-index
+ * @desc Home page of website
+ *
+ * **Note**: Before loading the page, uses `fetch` to:
+ * - Dispatch `setContent` and then `setProjects`
+ * - That populates the vuex store with website content.
+ * - On `created()` it again dispatches `setContent` and `setProjects` for re-binding the data in Vuex store with Firestore
+ * @vue-computed {Object} contents - All website content, except projects
+ * @vue-computed {Object} projects - All projects
+ * @vue-computed {Boolean} darkMode - Dark mode state
  */
 import SectionLanding from '~/components/sections/SectionLanding'
 import SectionBio from '~/components/sections/SectionBio'

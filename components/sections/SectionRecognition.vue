@@ -14,7 +14,7 @@
 
 <script>
 /**
- * @module SectionRecognition
+ * @module Component-SectionRecognition
  * @desc Section for author's reognitions
  * @vue-prop {Object} [content=null] - Section Content
  */
