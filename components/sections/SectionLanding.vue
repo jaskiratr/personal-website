@@ -1,17 +1,18 @@
-<template lang='pug'>
-.container(v-if='content', :class='{ dark: darkMode }')
+<template lang="pug">
+.container(:class='{ dark: darkMode }')
   el-row.row-banner.center-flex(:class='{ dark: darkMode }')
-    el-col.title-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
-      div.title(v-html='content.bannerTitle')
+    el-col.heading-container(:sm='{span:22, offset:1}', :md='{span:12, offset:6}')
+      div.heading(v-html='heading')
   
   .animation
-    no-ssr
+    client-only
       LandingAnimation
   
   el-row.row-content.center-flex(:class='{ dark: darkMode }')
-    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:7, offset:5}')
-      h5.section-title {{content.sectionTitle}}
-      h1.section-headline {{content.headline}}
+    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:8, offset:6}')
+      h5.section-name {{name}}
+      h1.section-heading
+        Content
 </template>
 <script>
 /**
@@ -20,27 +21,29 @@
  * @vue-prop {Object} [content=null] - Section Content
  * @vue-computed {Boolean} darkMode - Dark mode state
  */
-import LandingAnimation from '~/components/LandingAnimation'
 import { mapGetters } from 'vuex'
+import fm from '~/content/SectionLanding.md'
+import LandingAnimation from '~/components/LandingAnimation'
 
 export default {
-  /**
-   * - LandingAnimation
-   */
-  components: { LandingAnimation },
-  props: {
-    content: {
-      type: Object,
-      default: function() {
-        return null
-      }
+  components: {
+    LandingAnimation,
+    Content: {
+      extends: fm.vue.component
+    }
+  },
+  data() {
+    return {
+      name: fm.attributes.name,
+      heading: fm.attributes.heading,
+      caption: fm.attributes.caption
     }
   },
   computed: { ...mapGetters(['darkMode']) }
 }
 </script>
 
-<style lang='sass' scoped>
+<style lang="sass" scoped>
 .container
   position: relative
   padding: 0em
@@ -55,7 +58,7 @@ export default {
 
 .row-banner.dark
   background: $color-bg-dark-2
-  .title
+  .heading
     color: $color-highlight-dark
 
 .row-content
@@ -69,10 +72,10 @@ export default {
   justify-content: center
   flex-direction: column
 
-.title-container
+.heading-container
   z-index: 10
 
-.title
+.heading
   font-family: 'IBM Plex Serif', serif
   color: $color-title
   font-size: 5em
@@ -90,12 +93,11 @@ export default {
   top: 0
   z-index: 1
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) 
+@media only screen and (max-width: 600px)
   .row-banner
     padding: 20px
     height: 60vh
-  
+
   .row-content
     padding: 20px
     background: $color-bg
@@ -107,33 +109,28 @@ export default {
   .section-headline
     font-size: 1.2em
 
-  .title
+  .heading
     margin-left: 0px
     font-size: 3em
-  
+
   .center-flex
     min-height: inherit
-  
+
   .animation
     right: -120%
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)
   .animation
     right: -75%
 
-/* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px)
   .animation
     right: -50%
 
-/* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px)
   .animation
     right: -25%
-/* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px)
   .animation
     right: 5%
-
 </style>

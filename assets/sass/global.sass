@@ -5,200 +5,74 @@ $color-bg-2: #FFFFFF
 $color-text: #2B2B2B
 $color-bg-admin: aliceblue
 
-$color-title-dark: #FF7575
-$color-highlight-dark: #FF7575
+$color-title-dark: #4ce3ce
+$color-highlight-dark: #4ce3ce
 $color-bg-dark: #202226
 $color-bg-dark-2: #191A1C
-$color-text-dark: #99DDD5
+$color-text-dark: #f0f0f0
 $color-bg-modal-dark: #FFFFFF
 
-body
-  color: $color-text
-  font-family: 'IBM Plex Sans', sans-serif
-  font-weight: normal
+.page-enter-active, .page-leave-active
+  transition: all .4s
+.page-enter,.page-leave-to
+  opacity: 0
+  transform: translateX(50px)
 
-h1, h2, h3,h4, h5, h6
-  font-family: 'IBM Plex Serif', serif
-  font-weight: normal
+.fade-in
+  opacity: 0
+  -webkit-animation: fadeIn ease 1
+  -moz-animation: fadeIn ease 1
+  animation: fadeIn ease 1
 
-ul
-  list-style-type: none
-  padding-left: 1.2em
-  margin-top: 0.5em
+  -webkit-animation-fill-mode: forwards
+  -moz-animation-fill-mode: forwards
+  animation-fill-mode: forwards
 
-li
-  padding-bottom: 5px
-  
-ul li:before
-  content: '•'
-  position: absolute
-  margin-left: -1.2em
-  margin-top: 0.2em
-  font-size: small
+  -webkit-animation-duration: 0.4s
+  -moz-animation-duration: 0.4s
+  animation-duration: 0.4s
 
-.mono-font
-  font-family: 'IBM Plex Mono', monospace
- 
-.section-headline
-  font-size: 2.2em
-  margin-bottom: 1em
+@keyframes fadeIn
+  from
+    opacity: 0
+    transform: translateX(20px)
+  to
+    opacity: 1
+    transform: translateX(0px)
 
-.section-title
-  font-family: 'IBM Plex Sans', sans-serif
-  text-transform: uppercase
-  margin-bottom: 1em
-  color: $color-highlight
-  transition: color 0.5s ease 0s
+.fade-up
+  opacity: 0
+  -webkit-animation: fadeUp ease 1
+  -moz-animation: fadeUp ease 1
+  animation: fadeUp ease 1
 
-.section-subheading
-  padding-bottom: 3em
-  border-bottom: 2px solid $color-highlight
-  transition: color 0.5s ease 0s
-  
-.section-content
-  margin-top: 3em
+  -webkit-animation-fill-mode: forwards
+  -moz-animation-fill-mode: forwards
+  animation-fill-mode: forwards
 
-.section-container
-  padding: 10em 0em
-  display: flex
-  justify-content: center
-  flex-direction: column
+  -webkit-animation-duration: 0.4s
+  -moz-animation-duration: 0.4s
+  animation-duration: 0.4s
 
-.footer-container
-  padding: 10em 0em
-  background-color: $color-bg-2
-  transition: background-color 0.5s ease 0s
+.fade-in.one, .fade-up.one
+  -webkit-animation-delay: 0.2s
+  -moz-animation-delay: 0.2s
+  animation-delay: 0.2s
 
+.fade-in.two, .fade-up.two
+  -webkit-animation-delay: 0.4s
+  -moz-animation-delay: 0.4s
+  animation-delay: 0.4s
 
-.full-height
-  min-height: 100vh
+.fade-in.three, .fade-up.three
+  -webkit-animation-delay: .6s
+  -moz-animation-delay: .6s
+  animation-delay: .6s
 
-.embed-container 
-  position: relative
-  padding-bottom: 56.25%
-  margin: 2em 0em
-  border-radius: 5px
-  height: 0
-  overflow: hidden
-  max-width: 100%
-  -webkit-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-  -moz-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-  -ms-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-  -o-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-  animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-
-.embed-container iframe, .embed-container object, .embed-container embed
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-
-.ql-align-center
-  text-align: center
-
-.ql-toolbar.ql-snow
-  line-height: normal 
-  padding-bottom: 0px
-
-.v-modal
-  opacity: .4
-  background: $color-bg-2
-
-.v-button
-  position: relative
-  font-weight: 700
-  letter-spacing: 0.5px
-  color: $color-highlight
-  border: none  
-  -webkit-box-shadow: 3px 3px 10px 2px rgba(4, 95, 245, 0.1)
-  -moz-box-shadow: 3px 3px 10px 2px rgba(4, 95, 245, 0.1)
-  box-shadow: 3px 3px 10px 2px rgba(4, 95, 245, 0.1)
-  transition: all 0.5s ease 0s
-
-.v-button:hover
-  top: -1px
-  left: -1px
-  -webkit-box-shadow: 8px 8px 15px 2px rgba(4, 95, 245, 0.1)
-  -moz-box-shadow: 8px 8px 15px 2px rgba(4, 95, 245, 0.1)
-  box-shadow: 8px 8px 15px 2px rgba(4, 95, 245, 0.1)
-  background-color: $color-bg-2
-
-.dark
-  a
-    color: $color-highlight-dark
-  
-  .section-title
-    color: $color-highlight-dark
-  
-  .section-subheading
-    border-bottom: 2px solid $color-highlight-dark
-
-  .v-button
-    background-color: $color-bg-dark
-    border: 1px solid $color-highlight-dark
-    color: $color-highlight-dark
-
-  .v-button:hover
-    background-color: $color-bg-dark-2
-
-@keyframes fade-up
-    from
-      opacity: 0
-      transform: translate(0, 30px)
-    to
-      opacity: 1
-      transform: translate(0, 0)
-
-@keyframes fade-in
-    from
-      opacity: 0
-    to
-      opacity: 1
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px)
-  .section-container
-    padding: 4em 0em
-    border-bottom: 2px solid $color-highlight
-  
-  .footer-container
-    padding: 6em 0em
-  
-  .section-headline
-    font-size: 1.5em
-
-  .section-subheading
-    padding-bottom: 1em
-    border-bottom: none
-  
-  .dark
-    .section-subheading
-      border-bottom: none
-  
-    .section-container
-      border-bottom: 2px solid $color-highlight-dark
-  
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px)
-  .section-container
-    padding: 6em 0em
-  
-  .footer-container
-    padding: 6em 0em
-  
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px)
-  .section-container
-    padding: 9em 0em
-  
-  .footer-container
-    padding: 8em 0em
-  
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px)
-  .section-container
-    padding: 10em 0em
-  
-  .footer-container
-    padding: 8em 0em
+@keyframes fadeUp
+  from
+    opacity: 0
+    transform: translateY(20px)
+  to
+    opacity: 1
+    transform: translateY(0px)

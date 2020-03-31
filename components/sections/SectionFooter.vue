@@ -1,12 +1,12 @@
 <template lang="pug">
-.container(v-if='content')
+.container
   el-row
-    el-col(:xs='{span:22, offset:1}', :sm='{span:16, offset:4}', :md='{span:14, offset:5}')
+    el-col(:xs='{span:22, offset:1}', :sm='{span:16, offset:4}', :md='{span:12, offset:6}')
       el-row
         el-col.message(:span='12')
-          h1 {{content.sectionTitle}}
+          h1 {{heading}}
         el-col(:span='12')
-          div(v-html='content.description')
+          Content
 </template>
 
 <script>
@@ -17,14 +17,17 @@
  * @vue-computed {Boolean} darkMode - Dark mode state
  */
 import { mapGetters } from 'vuex'
+import fm from '~/content/SectionFooter.md'
 
 export default {
-  props: {
-    content: {
-      type: Object,
-      default: function() {
-        return null
-      }
+  components: {
+    Content: {
+      extends: fm.vue.component
+    }
+  },
+  data() {
+    return {
+      heading: fm.attributes.heading
     }
   },
   computed: { ...mapGetters(['darkMode']) }

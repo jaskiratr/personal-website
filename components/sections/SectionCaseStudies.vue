@@ -23,11 +23,11 @@
                 el-button.v-button Read More
             el-col.project-image(:span='16' v-if='id%2 == 0')
               .image-container
-                image-responsive(:imageURL='project.data.attributes.hero' :height="'400'" alt='performance')
+                image-responsive(:imageURL='project.data.attributes.hero' :height="'400'" :alt='project.data.attributes.title')
           
             el-col.project-image(:span='16' v-if='id%2 == 1')
               .image-container
-                image-responsive(:imageURL='project.data.attributes.hero' :height="'400'" alt='performance')
+                image-responsive(:imageURL='project.data.attributes.hero' :height="'400'" :alt='project.data.attributes.title')
             el-col.project-content(:span='8' v-if='id%2 == 1')
               //- h1.mono {{padInt(id+1)}}
               h1.project-name(:class='{ dark: darkMode }') 
@@ -58,7 +58,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import fm from '~/content/SectionProjects.md'
+import fm from '~/content/SectionCaseStudies.md'
 // import ProjectDetails from '~/components/ProjectDetails'
 
 export default {
@@ -78,7 +78,7 @@ export default {
   },
   computed: { ...mapGetters(['darkMode']) },
   mounted() {
-    this.importAll(require.context('../../content/projects/', true, /\.md$/))
+    this.importAll(require.context('../../content/case-studies/', true, /\.md$/))
   },
   methods: {
     importAll(r) {
@@ -102,8 +102,8 @@ export default {
 .image-container
   height: 100%
   width: 100%
-  filter: grayscale(90%)
-  box-shadow: 0px 20px 25px 0 rgba(0,0,0,.2), 0px 7px 15px 0 rgba(155, 149, 139, 0.08)
+  box-shadow: 0px 10px 25px 0 rgba(0,0,0,.2), 0px 7px 15px 0 rgba(155, 149, 139, 0.08)
+  // filter: grayscale(90%)
   // box-shadow: -6px -6px 26px 0 rgba(255,255,255,0.8), 6px 6px 26px 0 rgba(100,100,100,0.4)
 .project-row.dark
   border-bottom: 1px solid $color-highlight-dark

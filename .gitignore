@@ -77,11 +77,15 @@ dist
 # Serverless directories
 .serverless
 
-# IDE
+# IDE / Editor
 .idea
 
-# ngrok
-ngrok.exe
+# Service worker
+sw.*
 
-# VSCode
-workspace.code-workspace
+# Mac OSX
+.DS_Store
+
+# Vim swap files
+*.swp
+*.code-workspace
