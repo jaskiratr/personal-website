@@ -1,10 +1,15 @@
-<template>
-  <div>
-    <nuxt />
-  </div>
+<template lang="pug">
+#nuxt-wrapper
+  nuxt
 </template>
 
 <style lang="sass">
+#nuxt-wrapper
+  width: 100%
+  height: 100%
+  margin: 0px
+  padding: 0px
+  overflow-x: hidden
 html, body
   color: $color-text
   font-family: 'IBM Plex Sans', sans-serif
@@ -14,7 +19,6 @@ html, body
   height: 100%
   padding: 0px
   background-color: $color-bg
-  overflow-x: hidden
 
 body.dark, html.dark
   background-color: $color-bg-dark
@@ -235,7 +239,27 @@ ul li:before
   color: $color-highlight
   background-color: $color-bg-2
 
+body::-webkit-scrollbar-track
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.25)
+  background-color: $color-bg-2
+body::-webkit-scrollbar
+  width: 7px
+  background-color: $color-bg-2
+body::-webkit-scrollbar-thumb
+  background-color: $color-highlight
+  border-radius: 3px
+
 .dark
+  body::-webkit-scrollbar-track
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.25)
+    background-color: $color-bg-dark-2
+  body::-webkit-scrollbar
+    width: 7px
+    background-color: $color-bg-dark-2
+  body::-webkit-scrollbar-thumb
+    background-color: $color-highlight-dark
+    border-radius: 3px
+
   a
     color: $color-highlight-dark
 

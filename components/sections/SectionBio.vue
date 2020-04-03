@@ -3,7 +3,7 @@
   el-row
     el-col(:sm='{span:22, offset:1}', :md='{span:12, offset:6}')
       el-row
-        el-col(:span='7')
+        el-col(:span='7' style='padding-bottom: 1em')
           h5.section-name {{name}}
           h1.section-heading {{heading}}
           p.section-caption {{caption}}

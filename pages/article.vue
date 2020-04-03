@@ -6,7 +6,7 @@
       el-col.hero-content(:span='10' :offset='7')
         el-button.back-btn(type='text' @click='navigateBack' :class='{ dark: darkMode }') 
           span.mono(style='font-size: 1.33em') ⟵ 
-          span Return
+          span.mono Return
         h5.project-role.fade-in.one {{ attributes.role }}
         h1.project-name.fade-in.one(:class='{ dark: darkMode }') {{ attributes.title }}
         p.project-excerpt.fade-in.two {{ attributes.excerpt }}
@@ -51,17 +51,10 @@ export default {
     process.nextTick(() => {
       this.showPage = true
     })
-    // console.log('markdown', markdown)
-    // Use Async Components for the benefit of code splitting
-    // https://vuejs.org/v2/guide/components-dynamic-async.html#Async-Components
-    // this.selectedArticle = () => import(`~/articles/${this.$route.query.name}.md`).then(({ vue }) => vue.component)
   },
   methods: {
     navigateBack() {
-      // this.$router.back()
-      this.$router.push({
-        path: '/'
-      })
+      this.$router.push({ path: '/' })
     }
   }
 }
@@ -81,9 +74,6 @@ export default {
   height: 100%
   width: 100%
   filter: grayscale(50%)
-// .excerpt
-//   animation: fadeinmove .5s ease
-//   animation-delay: .5s
 .project-name
   font-size: 3em
 .content-row

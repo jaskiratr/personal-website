@@ -49,7 +49,10 @@ export default {
   computed: {
     ...mapGetters(['darkMode'])
   },
-  created() {}
+  mounted() {}
 }
 </script>
-<style></style>
+<style lang="sass" scoped>
+.container
+  overflow-x: hidden
+</style>

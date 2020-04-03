@@ -1,6 +1,4 @@
 import FMMode from 'frontmatter-markdown-loader/mode'
-// import { getMatchedComponents } from './utils'
-
 const md = require('markdown-it')({
   html: true,
   linkify: true,
@@ -20,11 +18,10 @@ md.use(require('markdown-it-emoji'))
   .use(require('markdown-it-abbr'))
   .use(require('markdown-it-prism'))
 
-// const base = 'gh-pages' === process.env.NODE_ENV ? '/vue-examples/' : '/';
 export default {
   mode: 'universal',
   router: {
-    // base: '/',
+    base: process.env.BASE_URL || '/'
   },
   vue: {
     config: {
@@ -33,12 +30,9 @@ export default {
     }
   },
   server: {
-    port: 3000, // default: 3000
-    host: '0.0.0.0' // default: localhost
+    port: 3000,
+    host: '0.0.0.0'
   },
-  /*
-   ** Headers of the page
-   */
   head: {
     title: process.env.npm_package_author || '',
     meta: [
@@ -65,44 +59,17 @@ export default {
       }
     ]
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
+  // Global CSS
   css: ['element-ui/lib/theme-chalk/index.css', '@/assets/css/prism-atom-dark.css'],
-  /*
-   ** Plugins to load before mounting the App
-   */
-  plugins: ['@/plugins/element-ui', '@/plugins/event-bus', '@/plugins/lazyload', '@/plugins/image-responsive'],
-  /*
-   ** Nuxt.js dev-modules
-   */
-  buildModules: ['@nuxtjs/eslint-module'],
-  /*
-   ** Nuxt.js modules
-   */
+  styleResources: { sass: ['./assets/sass/*.sass'] },
+  loading: { color: '#fff' }, // Progress bar color
   modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', 'nuxt-purgecss'],
-  styleResources: {
-    sass: ['./assets/sass/*.sass']
-  },
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
-  /*
-   ** Build configuration
-   */
+  plugins: ['@/plugins/element-ui', '@/plugins/event-bus', '@/plugins/lazyload', '@/plugins/image-responsive'],
+  buildModules: ['@nuxtjs/eslint-module'],
   build: {
     transpile: [/^element-ui/],
-    /*
-     ** You can extend webpack config here
-     */
     extend(config, ctx) {
-      // ... other code ...// Run ESLint on save
+      // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -123,12 +90,6 @@ export default {
       })
     }
   },
-  generate: {
-    // routes: dynamicMarkdownRoutes()
-  },
-  /*
-   ** To support hot reloading for docker
-   */
   watchers: {
     webpack: {
       aggregateTimeout: 300,
@@ -136,13 +97,3 @@ export default {
     }
   }
 }
-
-// function dynamicMarkdownRoutes() {
-//   return [].concat(
-//     ...markdownPaths.map(mdPath => {
-//       return glob
-//         .sync(`${mdPath}/*.md`, { cwd: 'articles' })
-//         .map(filepath => `/${mdPath}/${path.basename(filepath, '.md')}`)
-//     })
-//   )
-// }
