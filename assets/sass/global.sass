@@ -35,6 +35,26 @@ $color-bg-modal-dark: #FFFFFF
 @keyframes fadeIn
   from
     opacity: 0
+  to
+    opacity: 1
+
+.fade-in-left
+  opacity: 0
+  -webkit-animation: fadeInLeft ease 1
+  -moz-animation: fadeInLeft ease 1
+  animation: fadeInLeft ease 1
+
+  -webkit-animation-fill-mode: forwards
+  -moz-animation-fill-mode: forwards
+  animation-fill-mode: forwards
+
+  -webkit-animation-duration: 0.4s
+  -moz-animation-duration: 0.4s
+  animation-duration: 0.4s
+
+@keyframes fadeInLeft
+  from
+    opacity: 0
     transform: translateX(20px)
   to
     opacity: 1

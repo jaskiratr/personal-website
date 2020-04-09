@@ -2,7 +2,13 @@
 #nuxt-wrapper
   nuxt
 </template>
-
+<script>
+export default {
+  mounted() {
+    if (window) window.history.scrollRestoration = 'auto'
+  }
+}
+</script>
 <style lang="sass">
 #nuxt-wrapper
   width: 100%
@@ -33,10 +39,10 @@ body
 .footer-container.dark
   background-color: $color-bg-dark-2
 h1, h2, h3, h4, h5, h6
-  font-family: 'IBM Plex Serif', serif
+  // font-family: 'IBM Plex Serif', serif
   margin: 20px 0px
 h1
-  font-weight: 300
+  font-weight: 600
 h2, h3, h4
   font-weight: 300
 h5, h6
@@ -94,15 +100,21 @@ ul li:before
   margin-left: -1.2em
   margin-top: 0.2em
   font-size: small
+a, a:visited, a:hover, a:active
+  color: inherit
+
 .el-main
   padding: 0px
 .mono
   font-family: 'IBM Plex Mono', monospace
 
 .project-index, .project-name
-  // font-weight: 700
+  color: $color-text
+  font-weight: 600
   margin-bottom: 0.5em
-  // color: $color-highlight
+  a, span
+    color: $color-highlight
+    text-decoration: none
 
 .project-role
   font-family: 'IBM Plex Sans', sans-serif
@@ -111,14 +123,16 @@ ul li:before
   color: $color-highlight
   transition: color 0.5s ease 0s
 .dark
+  .project-index, .project-name
+    a, span
+      color: $color-highlight-dark
   .project-role
     color: $color-highlight-dark
 
 .project-excerpt
-  padding: 3em 0em
-
-// .project-index.dark, .project-name.dark
-//   color: $color-highlight-dark
+  padding: 2em 0em
+.project-date
+  margin-top: -0.25em
 .pad-v
   padding: 2em 0em
 
@@ -145,8 +159,9 @@ ul li:before
 
 .section-heading
   font-size: 3em
-  line-height: 1.3em
+  line-height: 1.1em
   margin-bottom: 1em
+  letter-spacing: -0.02em
 
 .section-name
   font-family: 'IBM Plex Sans', sans-serif

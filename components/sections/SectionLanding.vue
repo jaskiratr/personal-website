@@ -12,7 +12,10 @@
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:8, offset:6}')
       h5.section-name {{name}}
       h1.section-heading
-        Content
+        Content      
+      a(v-if='resumeLink', :href='resumeLink', target='_blank')
+        el-button.cta-link.v-button Résumé
+      
 </template>
 <script>
 /**
@@ -36,7 +39,8 @@ export default {
     return {
       name: fm.attributes.name,
       heading: fm.attributes.heading,
-      caption: fm.attributes.caption
+      caption: fm.attributes.caption,
+      resumeLink: fm.attributes.resumeLink
     }
   },
   computed: { ...mapGetters(['darkMode']) }
@@ -67,7 +71,7 @@ export default {
   z-index: 10
 
 .center-flex
-  min-height: 400px
+  min-height: 500px
   display: flex
   justify-content: center
   flex-direction: column
@@ -76,10 +80,10 @@ export default {
   z-index: 10
 
 .heading
-  font-family: 'IBM Plex Serif', serif
+  font-family: 'IBM Plex Sans', serif
   color: $color-title
-  font-size: 5em
-  font-weight: 100
+  font-size: 4em
+  font-weight: 500
   line-height: 0.9em
   margin-left: -10px
   -webkit-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
@@ -93,6 +97,8 @@ export default {
   top: 0
   z-index: 1
 
+.cta-link
+  margin-top: 2em
 @media only screen and (max-width: 600px)
   .row-banner
     padding: 20px

@@ -34,7 +34,7 @@ export default {
     host: '0.0.0.0'
   },
   head: {
-    title: process.env.npm_package_author || '',
+    titleTemplate: '%s - Jaskirat',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -49,7 +49,7 @@ export default {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,600|IBM+Plex+Sans:400,700|IBM+Plex+Serif:200,300,400,500'
+          'https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,600|IBM+Plex+Sans:400,500,600,700|IBM+Plex+Serif:200,300,400,500'
       },
       {
         rel: 'stylesheet',
@@ -63,8 +63,14 @@ export default {
   css: ['element-ui/lib/theme-chalk/index.css', '@/assets/css/prism-atom-dark.css'],
   styleResources: { sass: ['./assets/sass/*.sass'] },
   loading: { color: '#fff' }, // Progress bar color
-  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', 'nuxt-purgecss'],
-  plugins: ['@/plugins/element-ui', '@/plugins/event-bus', '@/plugins/lazyload', '@/plugins/image-responsive'],
+  modules: ['@nuxtjs/style-resources', '@nuxtjs/axios', ['@nuxtjs/pwa', { icon: false }]],
+  plugins: [
+    '@/plugins/element-ui',
+    '@/plugins/event-bus',
+    '@/plugins/lazyload',
+    '@/plugins/image-responsive',
+    { src: '@/plugins/video-responsive', mode: 'client' }
+  ],
   buildModules: ['@nuxtjs/eslint-module'],
   build: {
     transpile: [/^element-ui/],
@@ -89,6 +95,27 @@ export default {
         }
       })
     }
+  },
+  workbox: {
+    cacheAssets: true,
+    offlineAnalytics: true,
+    runtimeCaching: [
+      {
+        urlPattern: new RegExp('/article'),
+        handler: 'staleWhileRevalidate'
+      },
+      {
+        urlPattern: 'https://fonts.(?:googleapis|gstatic).com/(.*)',
+        handler: 'staleWhileRevalidate',
+        strategyOptions: {
+          cacheName: 'google-fonts',
+          cacheExpiration: {
+            maxEntries: 30,
+            maxAgeSeconds: 300
+          }
+        }
+      }
+    ]
   },
   watchers: {
     webpack: {

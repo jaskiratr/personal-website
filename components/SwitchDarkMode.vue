@@ -4,7 +4,7 @@
       el-switch.theme-switch(
         style='display: block',
         v-model='darkModeState',
-        active-color='#FF7575',
+        active-color='#666666',
         active-icon-class='far fa-moon',
         inactive-icon-class='far fa-sun',
         inactive-color='#0460F5',

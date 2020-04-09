@@ -9,10 +9,10 @@
         SectionBio
       .section-container
         SectionCaseStudies
-      //- .section-container
-      //-   SectionProjects
       .section-container
         SectionExperience
+      .section-container
+        SectionProjects
       .section-container
         SectionRecognition
   .footer-container(:class='{ dark: darkMode }')
@@ -31,6 +31,7 @@ import SwitchDarkMode from '~/components/SwitchDarkMode'
 export default {
   head() {
     return {
+      title: 'Portfolio',
       bodyAttrs: { class: this.darkMode ? 'dark' : 'light' },
       htmlAttrs: { class: this.darkMode ? 'dark' : 'light' }
     }

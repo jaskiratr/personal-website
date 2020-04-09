@@ -1,7 +1,7 @@
 {
   "name": "personal-website",
   "version": "1.0.0",
-  "description": "Personal website for Jaskirat R.",
+  "description": "Make Break Create",
   "author": "Jaskirat Randhawa",
   "private": true,
   "scripts": {
@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.9.5",
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
     "@tweenjs/tween.js": "^18.5.0",
     "cookieparser": "^0.1.0",
     "element-ui": "^2.13.0",
+    "firebase": "^7.13.2",
     "frontmatter-markdown-loader": "^3.2.1",
     "glob": "^7.1.6",
     "js-cookie": "^2.2.1",

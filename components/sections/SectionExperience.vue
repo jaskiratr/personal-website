@@ -11,10 +11,6 @@
             el-button.v-button Résumé
         el-col#col-2(:xs='24', :sm='12' :md='12' :lg='12').section-content
           Content
-        //- el-col#col-3(:xs='24', :sm='12' :md='12' :lg='9').section-content
-        //-   el-image(src="./images/01.png")
-        //-   div(v-html='content.descriptionLeft')
-        //-   div(v-html='content.descriptionRight')
 </template>
 
 <script>
@@ -37,19 +33,4 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-.section-subheading
-  margin-bottom: 3em
-
-.section-content
-  margin-top: 0em
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px)
-  .section-subheading
-    margin-bottom: 1em
-  #col-1
-    margin-bottom: 4em
-  #col-2, #col-3
-    margin-bottom: 2em
-</style>
+<style lang="sass" scoped></style>

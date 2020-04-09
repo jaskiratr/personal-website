@@ -11,12 +11,6 @@
             el-button.v-button Résumé
         el-col.col-description(:span='15' :offset='2')
           Content
-      //- el-row(:gutter='40')
-          //- div(v-html='content.descriptionLeft')
-        //- el-col.col-description(:xs='24', :sm='12') 
-        //-   el-image(src="./images/04.png")
-          //- div(v-html='content.descriptionRight')
-
 </template>
 
 <script>
