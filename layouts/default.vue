@@ -112,9 +112,9 @@ a, a:visited, a:hover, a:active
   color: $color-text
   font-weight: 600
   margin-bottom: 0.5em
-  a, span
-    color: $color-highlight
-    text-decoration: none
+  // a, span
+    // text-decoration: none
+    // color: $color-text
 
 .project-role
   font-family: 'IBM Plex Sans', sans-serif
@@ -122,12 +122,12 @@ a, a:visited, a:hover, a:active
   margin-bottom: 1em
   color: $color-highlight
   transition: color 0.5s ease 0s
-.dark
-  .project-index, .project-name
-    a, span
-      color: $color-highlight-dark
-  .project-role
-    color: $color-highlight-dark
+// .dark
+//   .project-index, .project-name
+//     a, span
+//       color: $color-text-dark
+//   .project-role
+//     color: $color-text-dark
 
 .project-excerpt
   padding: 2em 0em

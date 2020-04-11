@@ -17,6 +17,7 @@ md.use(require('markdown-it-emoji'))
   .use(require('markdown-it-deflist'))
   .use(require('markdown-it-abbr'))
   .use(require('markdown-it-prism'))
+  .use(require('markdown-it-attrs'))
 
 export default {
   mode: 'universal',

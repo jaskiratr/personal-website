@@ -1,15 +1,15 @@
 <template lang="pug">
 .container(:class='{ dark: darkMode }')
   el-row.row-banner.center-flex(:class='{ dark: darkMode }')
-    el-col.heading-container(:sm='{span:22, offset:1}', :md='{span:12, offset:6}')
+    el-col.heading-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
       div.heading(v-html='heading')
-  
+
   .animation
     client-only
       LandingAnimation
   
   el-row.row-content.center-flex(:class='{ dark: darkMode }')
-    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:8, offset:6}')
+    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
       h5.section-name {{name}}
       h1.section-heading
         Content      
@@ -66,9 +66,9 @@ export default {
     color: $color-highlight-dark
 
 .row-content
-  background: none
   height: 50vh
   z-index: 10
+  // background: none
 
 .center-flex
   min-height: 500px
@@ -81,7 +81,7 @@ export default {
 
 .heading
   font-family: 'IBM Plex Sans', serif
-  color: $color-title
+  color: $color-highlight
   font-size: 4em
   font-weight: 500
   line-height: 0.9em
@@ -93,6 +93,8 @@ export default {
   animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
 
 .animation
+  width: 100%
+  height: 100%
   position: absolute
   top: 0
   z-index: 1
@@ -106,8 +108,8 @@ export default {
 
   .row-content
     padding: 20px
-    background: $color-bg
     height: 40vh
+    // background: $color-bg
 
   .row-content.dark
     background: none
@@ -122,21 +124,21 @@ export default {
   .center-flex
     min-height: inherit
 
-  .animation
-    right: -120%
+  // .animation
+  //   right: -120%
 
-@media only screen and (min-width: 600px)
-  .animation
-    right: -75%
+// @media only screen and (min-width: 600px)
+//   .animation
+//     right: -75%
 
-@media only screen and (min-width: 768px)
-  .animation
-    right: -50%
+// @media only screen and (min-width: 768px)
+//   .animation
+//     right: -50%
 
-@media only screen and (min-width: 992px)
-  .animation
-    right: -25%
-@media only screen and (min-width: 1200px)
-  .animation
-    right: 5%
+// @media only screen and (min-width: 992px)
+//   .animation
+//     right: -25%
+// @media only screen and (min-width: 1200px)
+//   .animation
+//     right: 0%
 </style>

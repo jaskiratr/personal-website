@@ -3,7 +3,7 @@
   SwitchDarkMode
   div.el-main(:class='{ dark: darkMode }')
     el-row.hero-row(type='flex' align='middle')
-      el-col.hero-content(:span='10' :offset='7')
+      el-col.hero-content(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
         el-button.back-btn(type='text' @click='navigateBack' :class='{ dark: darkMode }') 
           span.mono(style='font-size: 1.33em') ⟵ 
           span.mono Return
@@ -14,7 +14,7 @@
       el-col(:span='6').hero-image
         image-responsive(:imageURL='attributes.hero' :height="'100%'" alt='performance')
     el-row(type='flex' align='middle').content-row
-      el-col(:span='10' :offset='7')
+      el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
         component(v-if='selectedArticle' :is='selectedArticle').fade-in.three
 </template>
 
@@ -70,6 +70,8 @@ export default {
 </script>
 <style lang="sass" scoped>
 .hero-row
+  display: flex
+  flex-direction: row
   height: 50vh
   min-height: 550px
   max-height: 1000px
@@ -82,6 +84,7 @@ export default {
   filter: grayscale(30%)
 .project-name
   font-size: 3em
+.project-name, .project-role
   color: $color-highlight
 .content-row
   margin-top: 5em
@@ -97,6 +100,20 @@ export default {
 .dark
   .hero-row
     background: $color-bg-dark-2
-  .project-name
+  .project-name, .project-role
     color: $color-highlight-dark
+@media only screen and (max-width: 600px)
+  .hero-row
+    flex-direction: column
+    height: inherit
+  .hero-content
+    padding: 2em 1em 0em 1em
+  .back-btn
+    display: none
+  .content-row
+    margin-top: 2em
+// @media only screen and (min-width: 600px)
+// @media only screen and (min-width: 768px)
+// @media only screen and (min-width: 992px)
+// @media only screen and (min-width: 1200px)
 </style>
