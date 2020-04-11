@@ -13,6 +13,7 @@ const THREE = require('three')
 export default {
   data() {
     return {
+      minHeight: 1000,
       planes: [],
       spheres: [],
       animating: true,
@@ -34,12 +35,14 @@ export default {
     })
     const canvas = document.getElementById('bgAnimation')
     const container = document.getElementById('canvas-container')
-    const canvasWidth = 1100
-    const canvasHeight = 900
+    const canvasWidth = container.offsetWidth
+    let canvasHeight = container.offsetHeight
+    if (canvasHeight < this.minHeight) canvasHeight = this.minHeight
+
     this.aspect = canvasWidth / canvasHeight
 
     const lightPos = { x: 220, y: 230, z: 220 }
-    this.D = 15
+    this.D = 12
     this.scene = new THREE.Scene()
     this.camera = new THREE.OrthographicCamera(-this.D * this.aspect, this.D * this.aspect, this.D, -this.D, 1, 1000)
     this.renderer = new THREE.WebGLRenderer({
@@ -76,15 +79,15 @@ export default {
       const w = 10 * Math.random() + 0.5
       const h = 10 * Math.random() + 0.5
       let x = 10 * Math.random()
-      let y = 12 * Math.random() + 5
-      let z = 5 * Math.random() + 5
+      let y = 12 * Math.random()
+      let z = 5 * Math.random()
 
       if (!this.darkMode) this.plane(w, h, x, y, z)
       else this.planeDark(w, h, x, y, z)
 
       x = 10 * Math.random()
-      y = 10 * Math.random() + 5
-      z = 10 * Math.random() + 5
+      y = 10 * Math.random()
+      z = 10 * Math.random()
 
       if (!this.darkMode) this.sphere(x, y, z)
       else this.sphereDark(x, y, z)
@@ -92,8 +95,29 @@ export default {
 
     this.scene.add(this.directLight)
     if (this.animating) this.render()
+    window.addEventListener('resize', this.onWindowResize, false)
   },
   methods: {
+    onWindowResize() {
+      // const canvas = document.getElementById('bgAnimation')
+      const container = document.getElementById('canvas-container')
+      const canvasWidth = container.offsetWidth
+      let canvasHeight = container.offsetHeight
+      // const canvasHeight = container.offsetHeight
+      if (canvasHeight < this.minHeight) canvasHeight = this.minHeight
+      this.aspect = canvasWidth / canvasHeight
+
+      // var aspect = window.innerWidth / window.innerHeight
+
+      this.camera.left = -this.D * this.aspect
+      this.camera.right = this.D * this.aspect
+      this.camera.top = this.D
+      this.camera.bottom = -this.D
+      // -this.D * this.aspect, this.D * this.aspect, this.D, -this.D, 1, 1000)
+      this.camera.updateProjectionMatrix()
+      console.log(canvasWidth, canvasHeight)
+      this.renderer.setSize(canvasWidth, canvasHeight)
+    },
     generateTexture() {
       const size = 128
       // create canvas
@@ -112,63 +136,129 @@ export default {
       return canvas
     },
     plane(w, h, x, y, z) {
-      const geometry = new THREE.BoxGeometry(w, 0.15, h)
-      // material texture
-      const texture = new THREE.Texture(this.generateTexture())
-      texture.needsUpdate = true // important!
-      // material
-      const material = new THREE.MeshPhongMaterial({
-        map: texture,
-        transparent: true
+      const boxGeometry = new THREE.BoxGeometry(w, 0.3, h)
+      const boxMaterial = new THREE.MeshPhongMaterial({
+        color: 0xaaaaff,
+        polygonOffset: true,
+        polygonOffsetFactor: 1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
       })
-      const mesh = new THREE.Mesh(geometry, material)
-      mesh.position.x = x + Math.random() * 5
-      mesh.position.y = y
-      mesh.position.z = z + Math.random() * 5
-      mesh.castShadow = true // default is false
-      mesh.receiveShadow = true // default
-      this.planes.push(mesh)
+      const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial)
+      const edgesGeometry = new THREE.EdgesGeometry(boxMesh.geometry) // or WireframeGeometry
+      const edgesMaterial = new THREE.LineBasicMaterial({
+        color: 0x0460f5,
+        linewidth: 1
+      })
+      const wireframe = new THREE.LineSegments(edgesGeometry, edgesMaterial)
+      boxMesh.add(wireframe)
+      boxMesh.position.x = x + Math.random() * 5
+      boxMesh.position.y = y
+      boxMesh.position.z = z + Math.random() * 5
+      boxMesh.castShadow = true // default is false
+      boxMesh.receiveShadow = true // default
+      this.planes.push(boxMesh)
       if (Math.random() > 0.5) {
-        new TWEEN.Tween(mesh.position)
+        new TWEEN.Tween(boxMesh.position)
           .to({ z: z }, Math.random() * (25000 - 5000) + 5000)
           .easing(TWEEN.Easing.Sinusoidal.InOut)
           .start()
       } else {
-        new TWEEN.Tween(mesh.position)
+        new TWEEN.Tween(boxMesh.position)
           .to({ x: x }, Math.random() * (50000 - 5000) + 5000)
           .easing(TWEEN.Easing.Sinusoidal.InOut)
           .start()
       }
-      this.scene.add(mesh)
+      this.scene.add(boxMesh)
+      // const geometry = new THREE.BoxGeometry(w, 0.15, h)
+      // // material texture
+      // const texture = new THREE.Texture(this.generateTexture())
+      // texture.needsUpdate = true // important!
+      // // material
+      // const material = new THREE.MeshPhongMaterial({
+      //   map: texture,
+      //   transparent: true
+      // })
+      // const mesh = new THREE.Mesh(geometry, material)
+      // mesh.position.x = x + Math.random() * 5
+      // mesh.position.y = y
+      // mesh.position.z = z + Math.random() * 5
+      // mesh.castShadow = true // default is false
+      // mesh.receiveShadow = true // default
+      // this.planes.push(mesh)
+      // if (Math.random() > 0.5) {
+      //   new TWEEN.Tween(mesh.position)
+      //     .to({ z: z }, Math.random() * (25000 - 5000) + 5000)
+      //     .easing(TWEEN.Easing.Sinusoidal.InOut)
+      //     .start()
+      // } else {
+      //   new TWEEN.Tween(mesh.position)
+      //     .to({ x: x }, Math.random() * (50000 - 5000) + 5000)
+      //     .easing(TWEEN.Easing.Sinusoidal.InOut)
+      //     .start()
+      // }
+      // this.scene.add(mesh)
     },
     sphere(x, y, z) {
-      const geometry = new THREE.SphereGeometry(0.1, 8, 8)
-      const texture = new THREE.Texture(this.generateTexture())
-      texture.needsUpdate = true // important!
-      const material = new THREE.MeshPhongMaterial({
-        map: texture,
-        transparent: true
+      const sphereGeometry = new THREE.SphereGeometry(0.15, 2, 2)
+      const sphereMaterial = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        polygonOffset: true,
+        polygonOffsetFactor: 1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
       })
-      const mesh = new THREE.Mesh(geometry, material)
-      mesh.position.x = x
-      mesh.position.y = y + Math.random() * 3
-      mesh.position.z = z
-      mesh.castShadow = true // default is false
-      mesh.receiveShadow = true // default
-      // new TWEEN.Tween(mesh.position).to({ y: y }, Math.random() * (50000 - 20000) + 20000).easing(TWEEN.Easing.Bounce.InOut).start()
+      const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial)
+      const edgesGeometry = new THREE.EdgesGeometry(sphereMesh.geometry) // or WireframeGeometry
+      const edgesMaterial = new THREE.LineBasicMaterial({
+        color: 0x0460f5,
+        linewidth: 1
+      })
+      const wireframe = new THREE.LineSegments(edgesGeometry, edgesMaterial)
+      sphereMesh.add(wireframe)
+      sphereMesh.position.x = x
+      sphereMesh.position.y = y + Math.random() * 5
+      sphereMesh.position.z = z
+      sphereMesh.castShadow = true // default is false
+      sphereMesh.receiveShadow = true // default
       if (Math.random() > 0.5) {
-        new TWEEN.Tween(mesh.position)
+        new TWEEN.Tween(sphereMesh.position)
           .to({ y: y }, Math.random() * (50000 - 5000) + 5000)
           .easing(TWEEN.Easing.Back.InOut)
           .start()
       } else {
-        new TWEEN.Tween(mesh.position)
-          .to({ y: y + 2 }, Math.random() * (50000 - 5000) + 5000)
+        new TWEEN.Tween(sphereMesh.position)
+          .to({ y: y + 1 }, Math.random() * (50000 - 5000) + 5000)
           .easing(TWEEN.Easing.Back.InOut)
           .start()
       }
-      this.spheres.push(mesh)
-      this.scene.add(mesh)
+      this.spheres.push(sphereMesh)
+      this.scene.add(sphereMesh)
+      // const geometry = new THREE.SphereGeometry(0.1, 8, 8)
+      // const texture = new THREE.Texture(this.generateTexture())
+      // texture.needsUpdate = true // important!
+      // const material = new THREE.MeshPhongMaterial({
+      //   map: texture,
+      //   transparent: true
+      // })
+      // const mesh = new THREE.Mesh(geometry, material)
+      // mesh.position.x = x
+      // mesh.position.y = y + Math.random() * 3
+      // mesh.position.z = z
+      // mesh.castShadow = true // default is false
+      // mesh.receiveShadow = true // default
+      // // new TWEEN.Tween(mesh.position).to({ y: y }, Math.random() * (50000 - 20000) + 20000).easing(TWEEN.Easing.Bounce.InOut).start()
+      // if (Math.random() > 0.5) {
+      //   new TWEEN.Tween(mesh.position)
+      //     .to({ y: y }, Math.random() * (50000 - 5000) + 5000)
+      //     .easing(TWEEN.Easing.Back.InOut)
+      //     .start()
+      // } else {
+      //   new TWEEN.Tween(mesh.position)
+      //     .to({ y: y + 2 }, Math.random() * (50000 - 5000) + 5000)
+      //     .easing(TWEEN.Easing.Back.InOut)
+      //     .start()
+      // }
+      // this.spheres.push(mesh)
+      // this.scene.add(mesh)
     },
     planeDark(w, h, x, y, z) {
       const boxGeometry = new THREE.BoxGeometry(w, 0.3, h)
@@ -206,7 +296,7 @@ export default {
       this.scene.add(boxMesh)
     },
     sphereDark(x, y, z) {
-      const sphereGeometry = new THREE.SphereGeometry(0.2, 2, 2)
+      const sphereGeometry = new THREE.SphereGeometry(0.15, 2, 2)
       const sphereMaterial = new THREE.MeshPhongMaterial({
         color: 0x000000,
         polygonOffset: true,
@@ -264,15 +354,15 @@ export default {
         const w = 10 * Math.random() + 0.5
         const h = 10 * Math.random() + 0.5
         let x = 10 * Math.random()
-        let y = 12 * Math.random() + 5
-        let z = 5 * Math.random() + 5
+        let y = 12 * Math.random()
+        let z = 5 * Math.random()
 
         if (!this.darkMode) this.plane(w, h, x, y, z)
         else this.planeDark(w, h, x, y, z)
 
         x = 10 * Math.random()
-        y = 10 * Math.random() + 5
-        z = 10 * Math.random() + 5
+        y = 10 * Math.random()
+        z = 10 * Math.random()
 
         if (!this.darkMode) this.sphere(x, y, z)
         else this.sphereDark(x, y, z)
@@ -287,6 +377,8 @@ export default {
 
 <style lang="sass" scoped>
 .container
+  width: 100%
+  height: 100%
   position: relative
   -webkit-animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
   -moz-animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
@@ -295,6 +387,16 @@ export default {
   animation: fade-in 2s cubic-bezier(0.22, 0.61, 0.36, 1)
 
 #canvas-container
+  display: flex
   width: 100%
+  height: 100%
   z-index: 1
+  display: flex
+  align-items: center
+  justify-content: center
+#bgAnimation
+  width: 100%
+  height: 100%
+  margin: auto
+  // width: 100%
 </style>
