@@ -12,16 +12,14 @@
         el-col(:span='24')
           el-row.project-row(:gutter='60' v-for='row in Math.ceil(projects.length / 3)' :key='row')
             el-col.project(:xs='24', :sm='24', :lg='8' v-for='(project, col) in projects.slice((row - 1) * 3, row * 3)' :key='col' )
-                
-                
-                  nuxt-link.wrapper.project-link(:to='"/article?name=projects/" + project.data.attributes.name' :class='{ dark: darkMode }')
-                    h2.project-num.mono {{padInt(col - 2 + row * 3)}}|
-                      //- nuxt-link(:to='"/article?name=projects/" + project.data.attributes.name')
-                      //- span {{project.data.attributes.title}}
-                    h5.project-role {{project.data.attributes.role}}
-                    h5.project-date {{project.data.attributes.date}}
-                    h2.project-name {{project.data.attributes.title}}
-                    p: i.project-summary {{project.data.attributes.excerpt}}
+              nuxt-link.wrapper.project-link(:to='"/article?name=projects/" + project.data.attributes.name' :class='{ dark: darkMode }')
+                h2.project-num.mono {{padInt(col - 2 + row * 3)}}|
+                  //- nuxt-link(:to='"/article?name=projects/" + project.data.attributes.name')
+                  //- span {{project.data.attributes.title}}
+                h5.project-role {{project.data.attributes.role}}
+                h5.project-date {{project.data.attributes.date}}
+                h2.project-name {{project.data.attributes.title}}
+                p.project-summary {{project.data.attributes.excerpt}}
 
 </template>
 
@@ -72,13 +70,16 @@ export default {
 .project-card-head
   border-radius: 0px 0px 5px 5px
 .project-row
-  // padding: 1em 0em
   display: flex
+.project-summary
+  margin-bottom: 1em
 .project
   flex: 1
   display: flex
   .wrapper
-    padding: 0.5em 2em
+    // box-shadow: 5px 5px 5px 0px rgba(0,0,0,.01), 0px 7px 5px 0 rgba(0,0,0, 0.02)
+    width: 100%
+    padding: 0.5em 2em 1.5em
     border-radius: 5px
     background: $color-bg-2
     .project-name, .project-role
@@ -104,16 +105,19 @@ a
 @media only screen and (max-width: 600px)
   .project-row
     margin-bottom: 0
+    display: block
   .project
     padding: 1em 0em
 
 @media only screen and (min-width: 768px)
   .project-row
     margin-bottom: 0
+    display: block
   .project
     padding: 1em 0em
 
 @media only screen and (min-width: 1200px)
   .project-row
     margin-bottom: 2em
+    display: flex
 </style>

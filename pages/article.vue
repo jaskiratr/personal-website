@@ -14,8 +14,9 @@
       el-col(:span='6').hero-image
         image-responsive(:imageURL='attributes.hero' :height="'100%'" alt='performance')
     el-row(type='flex' align='middle').content-row
-      el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
-        component(v-if='selectedArticle' :is='selectedArticle').fade-in.three
+      el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:12, offset:6}', :xl='{span:12, offset:6}')
+        .article-content
+          component(v-if='selectedArticle' :is='selectedArticle').fade-in.three
 </template>
 
 <script>
@@ -87,8 +88,11 @@ export default {
 .project-name, .project-role
   color: $color-highlight
 .content-row
-  margin-top: 5em
+  margin: 5em 0em
   padding: 20px
+.article-content /deep/
+  .md-content .image-placeholder
+    margin-bottom: 1rem
 .back-btn
   margin-top: 3em
   position: absolute
@@ -113,7 +117,12 @@ export default {
   .content-row
     margin-top: 2em
 // @media only screen and (min-width: 600px)
-// @media only screen and (min-width: 768px)
+@media only screen and (min-width: 768px)
+  .article-content /deep/
+    .md-content p, h1, h2, h3, ul, li, table
+      max-width: 768px
+      width: 768px
+      margin-left: calc((100% - 768px) / 2)
 // @media only screen and (min-width: 992px)
 // @media only screen and (min-width: 1200px)
 </style>

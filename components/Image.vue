@@ -6,6 +6,7 @@
       :height="height"
       :class="classes"
       :alt="alt")
+    span.caption(v-if='caption') {{caption}}
     
 </template>
 
@@ -17,6 +18,10 @@ export default {
       default: null
     },
     alt: {
+      type: String,
+      default: null
+    },
+    caption: {
       type: String,
       default: null
     },
@@ -60,9 +65,12 @@ export default {
     border-radius: 100%
 .image
   width: 100%
-  // height: 100%
   object-fit: cover
-
+  // height: 100%
+span.caption
+  line-height: 2rem
+  font-size: 0.9rem
+  opacity: 0.75
 img
   transition: all ease 0.5s
   opacity: 0

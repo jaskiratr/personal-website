@@ -18,7 +18,7 @@ export default {
   overflow-x: hidden
 html, body
   color: $color-text
-  font-family: 'IBM Plex Sans', sans-serif
+  font-family: 'Inter', sans-serif
   font-weight: normal
   margin: 0px
   width: 100%
@@ -39,12 +39,14 @@ body
 .footer-container.dark
   background-color: $color-bg-dark-2
 h1, h2, h3, h4, h5, h6
+  margin-top: 1rem
+  margin-bottom: 0.5rem
   // font-family: 'IBM Plex Serif', serif
-  margin: 20px 0px
 h1
-  font-weight: 600
+  font-weight: 700
 h2, h3, h4
-  font-weight: 300
+  line-height: 2rem
+  font-weight: 700
 h5, h6
   font-weight: 100
 hr
@@ -52,22 +54,29 @@ hr
   margin-bottom: 20px
   border: 0
   border-top: 1px solid #eee
-
 blockquote
-  padding: 10px 20px
-  margin: 0 0 20px
-  border-left: 2px solid #eee
-
-p
-  margin-bottom: 1em
-  code
-    background-color: #F0F0F0
-    color: #f41111
-    padding: 2px 3px
-    border-radius: 3px
+  padding: 1rem 0
+  margin-bottom: 2rem
+p, ul
+  padding: 0
+  margin-top: 0
+  margin-bottom: 2rem
+p, ul, li
+  font-family: 'Inter', sans-serif
+  letter-spacing: 0px
+  font-weight: 400
+  font-size: 1.2rem
+  line-height: 2.2rem
+  -webkit-font-smoothing: antialiased
+// li
+//   line-height: 1.8rem
+p code
+  background-color: #F0F0F0
+  color: #f41111
+  padding: 2px 3px
+  border-radius: 3px
 code
   font-family: 'IBM Plex Mono', monospace
-
 dt
   font-weight: bold
 table
@@ -78,21 +87,19 @@ table
   margin-bottom: 20px
 th
   text-align: left
+  padding-bottom: 10px
   vertical-align: bottom
-  border-bottom: 2px solid #ddd
+  border-bottom: 1px solid #dddddd
 td
   padding: 8px
   vertical-align: top
-  border-top: 1px solid #ddd
+  border-top: 1px solid #dddddd
 tbody > tr:nth-child(odd)
-  background-color: #f9f9f9
+  background-color: $color-bg-2
 ul
   list-style-type: none
   padding-left: 1.2em
   margin-top: 0.5em
-
-li
-  padding-bottom: 5px
 
 ul li:before
   content: '•'
@@ -115,9 +122,10 @@ a, a:visited, a:hover, a:active
   // a, span
     // text-decoration: none
     // color: $color-text
-
+.project-name
+  margin-top: 1em
 .project-role
-  font-family: 'IBM Plex Sans', sans-serif
+  font-family: 'Inter', sans-serif
   text-transform: uppercase
   margin-bottom: 1em
   color: $color-highlight
@@ -130,7 +138,7 @@ a, a:visited, a:hover, a:active
 //     color: $color-text-dark
 
 .project-excerpt
-  padding: 2em 0em
+  padding: 0em 0em 2em
 .project-date
   margin-top: -0.25em
 .pad-v
@@ -164,7 +172,7 @@ a, a:visited, a:hover, a:active
   letter-spacing: -0.02em
 
 .section-name
-  font-family: 'IBM Plex Sans', sans-serif
+  font-family: 'Inter', sans-serif
   text-transform: uppercase
   margin-bottom: 1em
   color: $color-highlight
@@ -195,7 +203,7 @@ a, a:visited, a:hover, a:active
 .embed-container
   position: relative
   padding-bottom: 56.25%
-  margin: 2em 0em
+  margin: 2rem 0rem
   border-radius: 5px
   height: 0
   overflow: hidden
@@ -252,7 +260,7 @@ a, a:visited, a:hover, a:active
   -moz-box-shadow: 8px 8px 15px 2px rgba(4, 95, 245, 0.1)
   box-shadow: 8px 8px 15px 2px rgba(4, 95, 245, 0.1)
   color: $color-highlight
-  background-color: $color-bg-2
+  background-color: $color-bg
 
 body::-webkit-scrollbar-track
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.25)
@@ -275,9 +283,8 @@ body::-webkit-scrollbar-thumb
     background-color: $color-highlight-dark
     border-radius: 3px
 
-  a
-    color: $color-highlight-dark
-
+  tbody > tr:nth-child(odd)
+    background-color: $color-bg-dark-2
   .section-name
     color: $color-text-dark
 
@@ -293,7 +300,7 @@ body::-webkit-scrollbar-thumb
     color: $color-highlight-dark
 
   .v-button:hover
-    background-color: $color-bg-dark-2
+    background-color: $color-bg-dark
 
 @media only screen and (max-width: 600px)
   .section-container

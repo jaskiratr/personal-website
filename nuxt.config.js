@@ -18,6 +18,26 @@ md.use(require('markdown-it-emoji'))
   .use(require('markdown-it-abbr'))
   .use(require('markdown-it-prism'))
   .use(require('markdown-it-attrs'))
+// Remember old renderer, if overridden, or proxy to default renderer
+const defaultRender =
+  md.renderer.rules.link_open ||
+  function(tokens, idx, options, env, self) {
+    return self.renderToken(tokens, idx, options)
+  }
+
+md.renderer.rules.link_open = function(tokens, idx, options, env, self) {
+  // If you are sure other plugins can't add `target` - drop check below
+  const aIndex = tokens[idx].attrIndex('target')
+
+  if (aIndex < 0) {
+    tokens[idx].attrPush(['target', '_blank']) // add new attribute
+  } else {
+    tokens[idx].attrs[aIndex][1] = '_blank' // replace value of existing attr
+  }
+
+  // pass token to default renderer.
+  return defaultRender(tokens, idx, options, env, self)
+}
 
 export default {
   mode: 'universal',
@@ -51,6 +71,10 @@ export default {
         rel: 'stylesheet',
         href:
           'https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,600|IBM+Plex+Sans:400,500,600,700|IBM+Plex+Serif:200,300,400,500'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap'
       },
       {
         rel: 'stylesheet',
@@ -90,6 +114,7 @@ export default {
         loader: 'frontmatter-markdown-loader',
         options: {
           mode: [FMMode.VUE_COMPONENT],
+          vue: { root: 'md-content' },
           markdown(body) {
             return md.render(body)
           }

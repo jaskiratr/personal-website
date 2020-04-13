@@ -1,7 +1,7 @@
 <template lang="pug">
 .container(:class='{ dark: darkMode }')
   el-row.row-banner.center-flex(:class='{ dark: darkMode }')
-    el-col.heading-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
+    el-col.heading-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:8, offset:8}')
       div.heading(v-html='heading')
 
   .animation
@@ -9,10 +9,10 @@
       LandingAnimation
   
   el-row.row-content.center-flex(:class='{ dark: darkMode }')
-    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
+    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:8, offset:8}')
       h5.section-name {{name}}
       h1.section-heading
-        Content      
+        Content
       a(v-if='resumeLink', :href='resumeLink', target='_blank')
         el-button.cta-link.v-button Résumé
       
@@ -80,10 +80,10 @@ export default {
   z-index: 10
 
 .heading
-  font-family: 'IBM Plex Sans', serif
+  font-family: 'inter', serif
   color: $color-highlight
-  font-size: 4em
-  font-weight: 500
+  font-size: 4rem
+  font-weight: 700
   line-height: 0.9em
   margin-left: -10px
   -webkit-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
@@ -91,7 +91,11 @@ export default {
   -ms-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
   -o-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
   animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-
+.section-heading /deep/
+  p
+    font-size: 3.33rem
+    line-height: 3.33rem
+    font-weight: 700
 .animation
   width: 100%
   height: 100%
