@@ -93,6 +93,7 @@ export default {
     '@/plugins/event-bus',
     '@/plugins/lazyload',
     '@/plugins/image-responsive',
+    '@/plugins/observe-visibility',
     { src: '@/plugins/video-responsive', mode: 'client' }
   ],
   buildModules: ['@nuxtjs/eslint-module'],

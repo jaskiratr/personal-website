@@ -1,7 +1,7 @@
 <template lang="pug">
 .container
   #canvas-container
-  canvas#bgAnimation
+  canvas#bgAnimation(v-observe-visibility="visibilityChanged")
 </template>
 <script>
 /* eslint-disable unicorn/number-literal-case */
@@ -13,6 +13,7 @@ const THREE = require('three')
 export default {
   data() {
     return {
+      isVisible: true,
       minHeight: 1000,
       planes: [],
       spheres: [],
@@ -94,10 +95,13 @@ export default {
     }
 
     this.scene.add(this.directLight)
-    if (this.animating) this.render()
+    if (this.isVisible & this.animating) this.render()
     window.addEventListener('resize', this.onWindowResize, false)
   },
   methods: {
+    visibilityChanged(isVisible, entry) {
+      this.isVisible = isVisible
+    },
     onWindowResize() {
       const container = document.getElementById('canvas-container')
       const canvasWidth = container.offsetWidth

@@ -4,9 +4,9 @@
     el-col.heading-container(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:8, offset:8}')
       div.heading(v-html='heading')
 
-  .animation
+  .animation-container
     client-only
-      LandingAnimation
+      LandingAnimation.animation
   
   el-row.row-content.center-flex(:class='{ dark: darkMode }')
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:8, offset:8}')
@@ -97,7 +97,7 @@ export default {
     line-height: 3.33rem
     font-weight: 700
     margin-bottom: 0em
-.animation
+.animation-container
   width: 100%
   height: 100%
   position: absolute
@@ -133,21 +133,21 @@ export default {
       font-size: 2rem
       line-height: 2rem
       font-weight: 700
-  // .animation
+  // .animation-container
   //   right: -120%
 
 // @media only screen and (min-width: 600px)
-//   .animation
+//   .animation-container
 //     right: -75%
 
 // @media only screen and (min-width: 768px)
-//   .animation
+//   .animation-container
 //     right: -50%
 
 // @media only screen and (min-width: 992px)
-//   .animation
+//   .animation-container
 //     right: -25%
 // @media only screen and (min-width: 1200px)
-//   .animation
+//   .animation-container
 //     right: 0%
 </style>
