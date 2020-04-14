@@ -1,77 +1,58 @@
-<template lang='pug'>
-.container(v-if='content')
+<template lang="pug">
+.container
   el-row
-    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:14, offset:5}')
-      
+    el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
       el-row
         el-col(:xs='24', :sm='14', :lg='7')
-          h5.section-title {{content.sectionTitle}}
-          h1.section-headline {{content.headline}}
-          p.section-subheading {{content.subheading}}
+          h5.section-name {{name}}
+          h1.section-heading(:class='{ dark: darkMode }') {{heading}}
+          p.section-caption {{caption}}
       
       el-row.section-content
         el-col(:span='24')
           el-row.project-row(:gutter='60' v-for='row in Math.ceil(projects.length / 3)' :key='row')
             el-col.project(:xs='24', :sm='24', :lg='8' v-for='(project, col) in projects.slice((row - 1) * 3, row * 3)' :key='col' )
-              p.project-index.mono-font(@click='openProject(project.id)', :class='{ dark: darkMode }') {{padInt(project.order)}}
-                i.el-icon-arrow-right
-              p.project-name(@click='openProject(project.id)', :class='{ dark: darkMode }') {{project.name}}     
-              p.project-summary {{project.summary}}
-  
-  //- Project Detail Modal
-  ProjectDetails
+              nuxt-link.wrapper.project-link(:to='"/article?name=projects/" + project.data.attributes.name' :class='{ dark: darkMode }')
+                h2.project-num.mono {{padInt(col - 2 + row * 3)}}|
+                  //- nuxt-link(:to='"/article?name=projects/" + project.data.attributes.name')
+                  //- span {{project.data.attributes.title}}
+                h5.project-role {{project.data.attributes.role}}
+                h5.project-date {{project.data.attributes.date}}
+                h2.project-name {{project.data.attributes.title}}
+                p.project-summary {{project.data.attributes.excerpt}}
 
 </template>
 
 <script>
-/**
- * @module Component-SectionProjects
- * @desc Section for project showcase
- * @vue-prop {Object} [content=null] - Section Content
- * @vue-prop {Array} [projects=[]] - Projects
- * @vue-data {Object} [activeProject=null] - Active project loaded in modal dialog.
- * @vue-computed {Boolean} darkMode - Dark mode state in store
- */
-import ProjectDetails from '~/components/ProjectDetails'
 import { mapGetters } from 'vuex'
+import fm from '~/content/SectionProjects.md'
 
 export default {
-  /**
-   * - ProjectDetails
-   */
-  components: { ProjectDetails },
-  props: {
-    content: {
-      type: Object,
-      default: function() {
-        return null
-      }
-    },
-    projects: {
-      type: Array,
-      default: function() {
-        return []
-      }
+  transition: 'page',
+  components: {
+    Content: {
+      extends: fm.vue.component
     }
   },
   data() {
     return {
-      activeProject: null
+      name: fm.attributes.name,
+      heading: fm.attributes.heading,
+      caption: fm.attributes.caption,
+      projects: []
     }
   },
   computed: { ...mapGetters(['darkMode']) },
+  mounted() {
+    this.importAll(require.context('../../content/projects/', true, /\.md$/))
+  },
   methods: {
-    /**
-     * Adds numeric padding up to 2 digits
-     * @param {int} num Number to add padding to
-     */
+    importAll(r) {
+      r.keys().forEach((key) => this.projects.push({ data: r(key), path: key }))
+    },
     padInt(num) {
       return num.toString().padStart(2, '0')
     },
-    /**
-     * Emits `openProject` event
-     * @param {string} id Firestore ID of the project
-     */
     openProject(id) {
       this.$bus.$emit('openProject', id)
     }
@@ -79,35 +60,64 @@ export default {
 }
 </script>
 
-<style lang='sass' scoped>
-.project-index, .project-name
+<style lang="sass" scoped>
+.project-link
+  color: $color-text
+.project-link.dark
+  color: $color-text-dark
+.project-num
   font-weight: 700
-  margin-bottom: 0.5em
-  color: $color-highlight
-  cursor: pointer
+.project-card-head
+  border-radius: 0px 0px 5px 5px
+.project-row
+  display: flex
+.project-summary
+  margin-bottom: 1em
+.project
+  flex: 1
+  display: flex
+  .wrapper
+    // box-shadow: 5px 5px 5px 0px rgba(0,0,0,.01), 0px 7px 5px 0 rgba(0,0,0, 0.02)
+    width: 100%
+    padding: 0.5em 2em 1.5em
+    border-radius: 5px
+    background: $color-bg-2
+    .project-name, .project-role
+      color: $color-highlight
+  .wrapper.dark
+    background: $color-bg-dark-2
+    .project-name, .project-role
+      color: $color-highlight-dark
+a
+  text-decoration: none
+.image-container
+  // height: 100%
+  width: 100%
+  margin: 0em 0em
+  box-shadow: 0px 5px 12px 0 rgba(0,0,0,.1), 0px 7px 15px 0 rgba(155, 149, 139, 0.08)
 
-.project-index.dark, .project-name.dark
-  color: $color-highlight-dark
+.project-row.dark
+  border-bottom: 1px solid $color-highlight-dark
 
 .el-icon-arrow-right
   padding-left: 0.5em
 
-/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px)
   .project-row
     margin-bottom: 0
+    display: block
   .project
     padding: 1em 0em
 
-/* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px)
   .project-row
     margin-bottom: 0
+    display: block
   .project
     padding: 1em 0em
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px)
   .project-row
-    margin-bottom: 5em
+    margin-bottom: 2em
+    display: flex
 </style>

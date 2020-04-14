@@ -1,89 +1,59 @@
-<template lang='pug'>
+<template lang="pug">
 .container(:class='darkMode ? "dark" : "light" ')
   SwitchDarkMode
   .landing-container.full-height
-    SectionLanding(:content='content.sectionLanding')
+    SectionLanding
   div.el-main(:class='{ dark: darkMode }')
     .sections
       .section-container
-        SectionBio(:content='content.sectionBio')
+        SectionBio
       .section-container
-        SectionExperience(:content='content.sectionExperience')
+        SectionCaseStudies
       .section-container
-        SectionRecognition(:content='content.sectionRecognition')
+        SectionExperience
       .section-container
-        SectionProjects(:content='content.sectionProjects', :projects='projects')
+        SectionProjects
+      .section-container
+        SectionRecognition
   .footer-container(:class='{ dark: darkMode }')
-    SectionFooter(:content='content.sectionFooter')
+    SectionFooter
 </template>
-
 <script>
-/**
- * @module Page-index
- * @desc Home page of website
- *
- * **Note**: Before loading the page, uses `fetch` to:
- * - Dispatch `setContent` and then `setProjects`
- * - That populates the vuex store with website content.
- * - On `created()` it again dispatches `setContent` and `setProjects` for re-binding the data in Vuex store with Firestore
- * @vue-computed {Object} contents - All website content, except projects
- * @vue-computed {Object} projects - All projects
- * @vue-computed {Boolean} darkMode - Dark mode state
- */
+import { mapGetters } from 'vuex'
 import SectionLanding from '~/components/sections/SectionLanding'
 import SectionBio from '~/components/sections/SectionBio'
+import SectionProjects from '~/components/sections/SectionProjects'
+import SectionCaseStudies from '~/components/sections/SectionCaseStudies'
 import SectionExperience from '~/components/sections/SectionExperience'
 import SectionRecognition from '~/components/sections/SectionRecognition'
-import SectionProjects from '~/components/sections/SectionProjects'
 import SectionFooter from '~/components/sections/SectionFooter'
 import SwitchDarkMode from '~/components/SwitchDarkMode'
-import { mapGetters } from 'vuex'
-
 export default {
-  async fetch({ store, params }) {
-    await store.dispatch('setContent').then(() => {
-      return store.dispatch('setProjects')
-    })
+  head() {
+    return {
+      title: 'Portfolio',
+      bodyAttrs: { class: this.darkMode ? 'dark' : 'light' },
+      htmlAttrs: { class: this.darkMode ? 'dark' : 'light' }
+    }
   },
-  /**
-   * - SectionLanding
-   * - SectionBio
-   * - SectionExperience
-   * - SectionRecognition
-   * - SectionProjects
-   */
+  transition: 'page',
   components: {
     SectionLanding,
     SectionBio,
+    SectionProjects,
+    SectionCaseStudies,
     SectionExperience,
     SectionRecognition,
-    SectionProjects,
     SectionFooter,
     SwitchDarkMode
   },
-
   computed: {
-    ...mapGetters(['darkMode', 'content', 'projects'])
+    ...mapGetters(['darkMode'])
   },
-  created() {
-    // Workaroud for re-binding
-    this.$store.dispatch('setContent')
-    this.$store.dispatch('setProjects')
-  }
+  mounted() {}
 }
 </script>
-
-<style lang='sass'>
-body
-  .light
-    transition: background-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 0s
-    background-color: $color-bg
-  .dark
-    transition: background-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 0s
-    color: $color-text-dark
-    background-color: $color-bg-dark
-
-.footer-container.dark
-  background-color: $color-bg-dark-2
-
+<style lang="sass" scoped>
+.container
+  overflow-x: hidden
 </style>
