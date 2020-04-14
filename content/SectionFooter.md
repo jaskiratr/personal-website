@@ -9,4 +9,4 @@ New York, NY
 [Linkedin](https://www.linkedin.com/in/jaskiratr/)
 
 Source: [Github Repository](https://github.com/jaskiratr/personal-website)  
-© Jaskirat 2019
+© Jaskirat 2020

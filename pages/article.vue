@@ -118,11 +118,13 @@ export default {
     margin-top: 2em
 // @media only screen and (min-width: 600px)
 @media only screen and (min-width: 768px)
+  .hero-content
+    padding: 2em 1em 0em 1em
+@media only screen and (min-width: 992px)
   .article-content /deep/
     .md-content p, h1, h2, h3, ul, li, table
       max-width: 768px
       width: 768px
       margin-left: calc((100% - 768px) / 2)
-// @media only screen and (min-width: 992px)
 // @media only screen and (min-width: 1200px)
 </style>

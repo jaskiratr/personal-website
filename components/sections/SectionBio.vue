@@ -2,14 +2,15 @@
 .container
   el-row
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
-      el-row
-        el-col(:xs='24', :sm='14', :lg='7' style='padding-bottom: 4em')
-          h5.section-name {{name}}
-          h1.section-heading {{heading}}
-          p.section-caption {{caption}}
-          a(v-if='resumeLink', :href='resumeLink', target='_blank')
-            el-button.v-button Résumé
-        el-col.col-description(:xs='24', :sm='18' :md='18' :lg='18')
+      el-row(:gutter='40')
+        el-col(:xs='24' :sm='12' :md='12' :lg='6')
+          .section-info
+            h5.section-name {{name}}
+            h1.section-heading {{heading}}
+            p.section-caption {{caption}}
+            a.resume-link(v-if='resumeLink', :href='resumeLink', target='_blank')
+              el-button.v-button Résumé
+        el-col(:xs='24' :sm='24' :md='24' :lg='18')
           Content
 </template>
 
@@ -33,7 +34,4 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-.col-description
-  margin-top: 3em
-</style>
+<style lang="sass" scoped></style>

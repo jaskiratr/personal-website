@@ -4,13 +4,12 @@
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
       el-row
         el-col(:xs='24', :sm='14', :lg='7')
-          h5.section-name {{name}}
-          h1.section-heading(:class='{ dark: darkMode }') {{heading}}
-          p.section-caption {{caption}}
-      
+          .section-info
+            h5.section-name {{name}}
+            h1.section-heading(:class='{ dark: darkMode }') {{heading}}
+            p.section-caption {{caption}}
       el-row.section-content
         el-col(:span='24')
-          //- p projects {{projects}}
           el-row.project-row(v-for='(project, id) in projects' :key='id' type='flex' align='middle')
             .wrapper(:class='isOddEven(id)')
               el-col.project-content(:sm='{span:24, offset:0}', :md='{span:12, offset:0}', :lg='{span:10, offset:0}', :xl='{span:8, offset:0}' :class='{ dark: darkMode }')
@@ -111,6 +110,7 @@ a
 @media only screen and (max-width: 600px)
   .project-row
     margin-bottom: 0
+    padding: 0em 0em 2em
     .project-content
       min-height: inherit
     .project-num

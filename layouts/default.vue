@@ -38,15 +38,14 @@ body
     // background-color: $color-bg-dark
 .footer-container.dark
   background-color: $color-bg-dark-2
-h1, h2, h3, h4, h5, h6
-  margin-top: 1rem
-  margin-bottom: 0.5rem
+// h1, h2, h3, h4, h5, h6
+//   margin-top: 1em
+//   margin-bottom: 0.5em
   // font-family: 'IBM Plex Serif', serif
-h1
+h1,h2, h3, h4
   font-weight: 700
-h2, h3, h4
-  line-height: 2rem
-  font-weight: 700
+  line-height: 1.5em
+  // font-weight: 700
 h5, h6
   font-weight: 100
 hr
@@ -55,21 +54,20 @@ hr
   border: 0
   border-top: 1px solid #eee
 blockquote
-  padding: 1rem 0
-  margin-bottom: 2rem
+  padding: 1em 0
+  margin: 0em 0em 2em
 p, ul
   padding: 0
   margin-top: 0
-  margin-bottom: 2rem
-p, ul, li
+  margin-bottom: 2em
+p, li
   font-family: 'Inter', sans-serif
   letter-spacing: 0px
   font-weight: 400
-  font-size: 1.2rem
-  line-height: 2.2rem
-  -webkit-font-smoothing: antialiased
+  font-size: 1.2em
+  line-height: 2.1em
 // li
-//   line-height: 1.8rem
+//   line-height: 1.8em
 p code
   background-color: #F0F0F0
   color: #f41111
@@ -167,12 +165,14 @@ a, a:visited, a:hover, a:active
 
 .section-info
   padding: 0em
+  .resume-link button
+    margin-bottom: 3em
 
 .section-heading
   font-size: 3em
   line-height: 1.1em
-  margin-bottom: 1em
   letter-spacing: -0.02em
+  // margin-bottom: 1em
 
 .section-name
   font-family: 'Inter', sans-serif
@@ -182,6 +182,9 @@ a, a:visited, a:hover, a:active
   transition: color 0.5s ease 0s
 
 .section-caption
+  font-size: 1em
+  line-height: 1.5em
+  opacity: 0.65
   padding-bottom: 3em
   border-bottom: 2px solid $color-highlight
   transition: color 0.5s ease 0s
@@ -206,7 +209,7 @@ a, a:visited, a:hover, a:active
 .embed-container
   position: relative
   padding-bottom: 56.25%
-  margin: 2rem 0rem
+  margin: 2em 0em
   border-radius: 5px
   height: 0
   overflow: hidden
@@ -307,20 +310,21 @@ body::-webkit-scrollbar-thumb
     background-color: $color-bg-dark
 
 @media only screen and (max-width: 600px)
-  .section-info
-    padding: 1em
+  p, li
+    font-size: 1.1em
+    line-height: 1.75em
   .section-container
-    padding: 4em 0em
-    border-bottom: 2px solid $color-highlight
+    padding: 4em 1em
+    border-bottom: 1px solid $color-highlight
 
   .footer-container
-    padding: 6em 0em
+    padding: 3em 1em
 
   .section-heading
-    font-size: 1.5em
+    font-size: 2em
 
   .section-caption
-    padding-bottom: 1em
+    padding-bottom: 0em
     border-bottom: none
 
   .dark
@@ -332,10 +336,10 @@ body::-webkit-scrollbar-thumb
 
 @media only screen and (min-width: 600px)
   .section-container
-    padding: 6em 0em
+    padding: 3em 0em
 
   .footer-container
-    padding: 6em 0em
+    padding: 5em 0em
 
 @media only screen and (min-width: 992px)
   .section-container

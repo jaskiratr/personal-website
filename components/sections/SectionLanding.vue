@@ -13,7 +13,7 @@
       h5.section-name {{name}}
       h1.section-heading
         Content
-      a(v-if='resumeLink', :href='resumeLink', target='_blank')
+      a.resume-link(v-if='resumeLink', :href='resumeLink', target='_blank')
         el-button.cta-link.v-button Résumé
       
 </template>
@@ -96,6 +96,7 @@ export default {
     font-size: 3.33rem
     line-height: 3.33rem
     font-weight: 700
+    margin-bottom: 0em
 .animation
   width: 100%
   height: 100%
@@ -106,14 +107,13 @@ export default {
 .cta-link
   margin-top: 2em
 @media only screen and (max-width: 600px)
-  .row-banner
-    padding: 20px
-    height: 60vh
-
   .row-content
     padding: 20px
-    height: 40vh
-    // background: $color-bg
+    height: 70vh
+
+  .row-banner
+    padding: 20px
+    height: 30vh
 
   .row-content.dark
     background: none
@@ -123,15 +123,15 @@ export default {
 
   .heading
     margin-left: 0px
-    font-size: 3rem
+    font-size: 2rem
 
   .center-flex
     min-height: inherit
 
   .section-heading /deep/
     p
-      font-size: 2.33rem
-      line-height: 2.33rem
+      font-size: 2rem
+      line-height: 2rem
       font-weight: 700
   // .animation
   //   right: -120%

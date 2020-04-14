@@ -12,7 +12,7 @@ hero: projects/terra/cover.jpg
 
 Terra is a terrain mapping service that uses drones to 3D scan for constructing and inspecting power lines. Using PowerGrid India as an exemplary client, we are focusing to provide a service for engineers working on the construction & maintenance of transmission power lines.
 
-> Currently, 125 miles a day for line data can be collected by using helicopters. The cost of that is roughly $300.00 USD per mile. 
+> ### Currently, 125 miles a day for line data can be collected by using helicopters. The cost of that is roughly $300.00 USD per mile. 
 
 Our user interviews suggested that the daily cost of using helicopters for transmission line maintenence is estimated to be around $37,500 USD. For a fraction of that cost, drones can be deployed in certain scenarios for local inspection within 5 mile radius per flight. It can greatly assist in providing accurate latest data in support of remote sensing technologies. 
 
