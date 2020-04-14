@@ -1,29 +1,43 @@
 ---
 name: Product & Technical
 heading: Expertise
-caption: A short list of professional skills acquired through while working in various technical  and management domains.
+caption: A hybrid skillset acquired through various roles I've held as described in the case-studies above.
 resumeLink: https://drive.google.com/file/d/1JHIXeiyJsJifBoxrfhoirHlD7jFsjiMP/view?usp=sharing
 ---
 
-**Product Development**
+<el-col :xs="24" :sm="24" :md="24" :lg="12">
 
-- Strategic planning, prioritization and implementation
-- Presenting concepts and narratives for creative business decisions
-- Evaluating project feasibility for budget and operations approvals
-- Leading reporting of product KPIs through to completion
-- Driving business adoption of Agile product development methodologies
-- Cross-team collaboration for goal-setting, and impact assessment
-- Fluent in English and Hindi languages
+**PRODUCT STRATEGY**
 
-**Technical Abilities**
+Starting with strategic planning driven by market and user research. Identifying critical problems to solve. Sizing and prioritizing effort for development. Crafting product vision for aligning business decisions among multiple working groups. Evaluating project feasibility for budget and operations approvals. Draft reporting requirements for impact assessment.
 
-- Full-Stack Development: Node.js, Vue.js, Mongodb and Firebase
-- Streaming pipelines with Apache Spark
+**PRODUCT DESIGN**  
+
+Conducting ideation workshops with design and engineering teams. Rapid prototype concepts with an aim towards an agreeable solution. Partner with ethnographic experts and data scientists to gather for insights for the existing state. Documenting technical specs along with example scenarios for handing-off to development teams.
+
+**PRODUCT DEVELOPMENT**
+
+Planning and leading the product roadmap. Collaborating with stakeholders and subject matter experts to set goals, expectations, and uncover any hidden impacts or risks. Analyze and prioritize work in agile sprints.
+
+**PRODUCT LAUNCH**
+
+Creating and managing release plans. Reporting product KPIs through the lifecycle of the product. Communicating release notes to support, analytics, marketing, and leadership teams. Evaluating analytical insights and user feedback to inform the next set of product initiatives.
+
+</el-col>
+
+<el-col :xs="24" :sm="24" :md="24" :lg="12">
+
+**TECHNICAL ABILITIES**  
+
+- Full-Stack Development: Node.js, Vue.js, Mongodb, Redis and Firebase
+- Extract, transform and load (ETL) pipelines with Apache Spark
 - GIS data processing and visualizations
-- Technical prototyping, and proof-of-concepts
 - Application containerization with Docker & Kubernetes
 - Cloud computing on Amazon Web Services
+- JAM Stack website design and development
+- Technical prototyping, and proof-of-concepts
 - Git based source control and development
-- Hands-on familiarity with machine learning processes
-- Website design and development
+- Hands-on familiarity with machine learning algorithms
 - Hands-on experience with Hadoop ecosystem
+ 
+</el-col>

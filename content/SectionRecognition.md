@@ -1,6 +1,6 @@
 ---
 name: A few notables
-heading: Recognition
+heading: Works
 caption: Series of engagements at multiple international forums.
 ---
 

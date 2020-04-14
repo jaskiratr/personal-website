@@ -1,5 +1,5 @@
 ---
 name: 2015 - 2020
-heading: Recent Work
-caption: A few case studies focusing on work undertaken professionally over last few years.
+heading: Projects
+caption: A glance at the design & technology projects I worked on professionally and academically.
 ---
