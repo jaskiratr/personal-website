@@ -4,9 +4,10 @@
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
       el-row
         el-col(:xs='24', :sm='14', :lg='7')
-          h5.section-name {{name}}
-          h1.section-heading(:class='{ dark: darkMode }') {{heading}}
-          p.section-caption {{caption}}
+          .section-info
+            h5.section-name {{name}}
+            h1.section-heading(:class='{ dark: darkMode }') {{heading}}
+            p.section-caption {{caption}}
       
       el-row.section-content
         el-col(:span='24')

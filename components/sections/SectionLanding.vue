@@ -123,11 +123,16 @@ export default {
 
   .heading
     margin-left: 0px
-    font-size: 3em
+    font-size: 3rem
 
   .center-flex
     min-height: inherit
 
+  .section-heading /deep/
+    p
+      font-size: 2.33rem
+      line-height: 2.33rem
+      font-weight: 700
   // .animation
   //   right: -120%
 

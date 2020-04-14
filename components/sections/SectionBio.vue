@@ -3,13 +3,13 @@
   el-row
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:12, offset:6}')
       el-row
-        el-col(:span='7' style='padding-bottom: 1em')
+        el-col(:xs='24', :sm='14', :lg='7' style='padding-bottom: 4em')
           h5.section-name {{name}}
           h1.section-heading {{heading}}
           p.section-caption {{caption}}
           a(v-if='resumeLink', :href='resumeLink', target='_blank')
             el-button.v-button Résumé
-        el-col.col-description(:span='15' :offset='2')
+        el-col.col-description(:xs='24', :sm='18' :md='18' :lg='18')
           Content
 </template>
 

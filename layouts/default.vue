@@ -165,6 +165,9 @@ a, a:visited, a:hover, a:active
   opacity: 1
   transform: translate3d(0, 0, 0)
 
+.section-info
+  padding: 0em
+
 .section-heading
   font-size: 3em
   line-height: 1.1em
@@ -285,6 +288,7 @@ body::-webkit-scrollbar-thumb
 
   tbody > tr:nth-child(odd)
     background-color: $color-bg-dark-2
+
   .section-name
     color: $color-text-dark
 
@@ -303,6 +307,8 @@ body::-webkit-scrollbar-thumb
     background-color: $color-bg-dark
 
 @media only screen and (max-width: 600px)
+  .section-info
+    padding: 1em
   .section-container
     padding: 4em 0em
     border-bottom: 2px solid $color-highlight

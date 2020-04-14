@@ -90,7 +90,6 @@ a
     background: $color-bg-2
     padding: 3em 2em
     min-height: 600px
-    max-height: 90vh
     display: flex
     flex-flow: column-reverse
     border-radius: 10px
@@ -166,7 +165,6 @@ a
     margin-bottom: 2em
     .project-content
       min-height: 600px
-      max-height: 90vh
       display: flex
     .image-container
       margin-top: -50px
