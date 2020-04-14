@@ -31,21 +31,16 @@ body.dark, html.dark
 body
   .light
     transition: color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 0s
-    // background-color: $color-bg
   .dark
     transition: color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) 0s
     color: $color-text-dark
-    // background-color: $color-bg-dark
+
 .footer-container.dark
   background-color: $color-bg-dark-2
-// h1, h2, h3, h4, h5, h6
-//   margin-top: 1em
-//   margin-bottom: 0.5em
-  // font-family: 'IBM Plex Serif', serif
+
 h1,h2, h3, h4
   font-weight: 700
   line-height: 1.5em
-  // font-weight: 700
 h5, h6
   font-weight: 100
 hr
@@ -58,16 +53,15 @@ blockquote
   margin: 0em 0em 2em
 p, ul
   padding: 0
-  margin-top: 0
-  margin-bottom: 2em
+  margin-top: 1em
+  margin-bottom: 1em
 p, li
   font-family: 'Inter', sans-serif
   letter-spacing: 0px
   font-weight: 400
-  font-size: 1.2em
-  line-height: 2.1em
-// li
-//   line-height: 1.8em
+  font-size: 1.2rem
+  line-height: 2.2rem
+
 p code
   background-color: #F0F0F0
   color: #f41111
@@ -184,7 +178,7 @@ a, a:visited, a:hover, a:active
 .section-caption
   font-size: 1em
   line-height: 1.5em
-  opacity: 0.65
+  opacity: 0.5
   padding-bottom: 3em
   border-bottom: 2px solid $color-highlight
   transition: color 0.5s ease 0s
@@ -311,8 +305,8 @@ body::-webkit-scrollbar-thumb
 
 @media only screen and (max-width: 600px)
   p, li
-    font-size: 1.1em
-    line-height: 1.75em
+    font-size: 1.1rem
+    line-height: 1.75rem
   .section-container
     padding: 4em 1em
     border-bottom: 1px solid $color-highlight

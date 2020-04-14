@@ -25,7 +25,7 @@ Creating and managing release plans. Reporting product KPIs through the lifecycl
 
 </el-col>
 
-<el-col :xs="24" :sm="24" :md="24" :lg="12">
+<el-col :xs="24" :sm="24" :md="24" :lg='{span:11, offset:1}'>
 
 **TECHNICAL ABILITIES**  
 

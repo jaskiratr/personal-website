@@ -10,7 +10,7 @@
             p.section-caption {{caption}}
             a.resume-link(v-if='resumeLink', :href='resumeLink', target='_blank')
               el-button.v-button Résumé
-        el-col(:xs='24' :sm='24' :md='24' :lg='18')
+        el-col(:xs='24' :sm='24' :md='24' :lg='{span:17, offset:1}')
           Content
 </template>
 

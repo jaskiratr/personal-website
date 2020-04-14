@@ -32,7 +32,7 @@ Chat experiences across different channels should appear consistent, agnostic of
 If we ever neglect even 1% of our users, offering them an inferior experience, that itself would result in thousands of frustrated loyal users. Hence at a scale this big, it is very critical to have an air-tight project plan that thoroughly covers all aspects of the use-case, including edge cases. Consult subject matter experts wherever necessary.
 
 ### Key Benefits to Business
-Instead of dealing with the agony of 1-800 numbers, chatbots let customers connect with a business asynchronously. Following are some of the key benefits that chatbots provide: ^[Please note that the actual figures cannot be disclosed.]
+Instead of dealing with the agony of 1-800 numbers, chatbots let customers connect with a business asynchronously. Following are some of the key benefits that chatbots provide:
 - Improved automation rate for queries by customers.
 - An overall reduction in call-volumes.
 - Reduced chat-handle-time for chat agents.

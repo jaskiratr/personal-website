@@ -99,23 +99,19 @@ export default {
   },
   methods: {
     onWindowResize() {
-      // const canvas = document.getElementById('bgAnimation')
       const container = document.getElementById('canvas-container')
       const canvasWidth = container.offsetWidth
       let canvasHeight = container.offsetHeight
-      // const canvasHeight = container.offsetHeight
+
       if (canvasHeight < this.minHeight) canvasHeight = this.minHeight
       this.aspect = canvasWidth / canvasHeight
-
-      // var aspect = window.innerWidth / window.innerHeight
 
       this.camera.left = -this.D * this.aspect
       this.camera.right = this.D * this.aspect
       this.camera.top = this.D
       this.camera.bottom = -this.D
-      // -this.D * this.aspect, this.D * this.aspect, this.D, -this.D, 1, 1000)
+
       this.camera.updateProjectionMatrix()
-      console.log(canvasWidth, canvasHeight)
       this.renderer.setSize(canvasWidth, canvasHeight)
     },
     generateTexture() {
@@ -169,34 +165,6 @@ export default {
           .start()
       }
       this.scene.add(boxMesh)
-      // const geometry = new THREE.BoxGeometry(w, 0.15, h)
-      // // material texture
-      // const texture = new THREE.Texture(this.generateTexture())
-      // texture.needsUpdate = true // important!
-      // // material
-      // const material = new THREE.MeshPhongMaterial({
-      //   map: texture,
-      //   transparent: true
-      // })
-      // const mesh = new THREE.Mesh(geometry, material)
-      // mesh.position.x = x + Math.random() * 5
-      // mesh.position.y = y
-      // mesh.position.z = z + Math.random() * 5
-      // mesh.castShadow = true // default is false
-      // mesh.receiveShadow = true // default
-      // this.planes.push(mesh)
-      // if (Math.random() > 0.5) {
-      //   new TWEEN.Tween(mesh.position)
-      //     .to({ z: z }, Math.random() * (25000 - 5000) + 5000)
-      //     .easing(TWEEN.Easing.Sinusoidal.InOut)
-      //     .start()
-      // } else {
-      //   new TWEEN.Tween(mesh.position)
-      //     .to({ x: x }, Math.random() * (50000 - 5000) + 5000)
-      //     .easing(TWEEN.Easing.Sinusoidal.InOut)
-      //     .start()
-      // }
-      // this.scene.add(mesh)
     },
     sphere(x, y, z) {
       const sphereGeometry = new THREE.SphereGeometry(0.15, 2, 2)
@@ -232,33 +200,6 @@ export default {
       }
       this.spheres.push(sphereMesh)
       this.scene.add(sphereMesh)
-      // const geometry = new THREE.SphereGeometry(0.1, 8, 8)
-      // const texture = new THREE.Texture(this.generateTexture())
-      // texture.needsUpdate = true // important!
-      // const material = new THREE.MeshPhongMaterial({
-      //   map: texture,
-      //   transparent: true
-      // })
-      // const mesh = new THREE.Mesh(geometry, material)
-      // mesh.position.x = x
-      // mesh.position.y = y + Math.random() * 3
-      // mesh.position.z = z
-      // mesh.castShadow = true // default is false
-      // mesh.receiveShadow = true // default
-      // // new TWEEN.Tween(mesh.position).to({ y: y }, Math.random() * (50000 - 20000) + 20000).easing(TWEEN.Easing.Bounce.InOut).start()
-      // if (Math.random() > 0.5) {
-      //   new TWEEN.Tween(mesh.position)
-      //     .to({ y: y }, Math.random() * (50000 - 5000) + 5000)
-      //     .easing(TWEEN.Easing.Back.InOut)
-      //     .start()
-      // } else {
-      //   new TWEEN.Tween(mesh.position)
-      //     .to({ y: y + 2 }, Math.random() * (50000 - 5000) + 5000)
-      //     .easing(TWEEN.Easing.Back.InOut)
-      //     .start()
-      // }
-      // this.spheres.push(mesh)
-      // this.scene.add(mesh)
     },
     planeDark(w, h, x, y, z) {
       const boxGeometry = new THREE.BoxGeometry(w, 0.3, h)

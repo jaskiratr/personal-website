@@ -82,6 +82,7 @@ a
     top: 0em
     left: 0em
     padding: 1em
+    margin-top: 0
     font-size: 2em
   .project-content
     z-index: 10
@@ -113,6 +114,7 @@ a
     padding: 0em 0em 2em
     .project-content
       min-height: inherit
+      padding: 2em 1em
     .project-num
       position: relative
       padding: inherit
@@ -139,6 +141,7 @@ a
     margin-bottom: 0
     .project-content
       min-height: inherit
+      padding: 2em 2em
     .project-num
       position: relative
       padding: inherit
@@ -164,6 +167,7 @@ a
   .project-row
     margin-bottom: 2em
     .project-content
+      padding: 2em 2em
       min-height: 600px
       display: flex
     .image-container

@@ -11,12 +11,10 @@
       
       el-row.section-content
         el-col(:span='24')
-          el-row.project-row(:gutter='60' v-for='row in Math.ceil(projects.length / 3)' :key='row')
-            el-col.project(:xs='24', :sm='24', :lg='8' v-for='(project, col) in projects.slice((row - 1) * 3, row * 3)' :key='col' )
+          el-row.project-row(:gutter='40' v-for='row in Math.ceil(projects.length / 3)' :key='row')
+            el-col.project(v-for='(project, col) in projects.slice((row - 1) * 3, row * 3)' :key='col' )
               nuxt-link.wrapper.project-link(:to='"/article?name=projects/" + project.data.attributes.name' :class='{ dark: darkMode }')
                 h2.project-num.mono {{padInt(col - 2 + row * 3)}}|
-                  //- nuxt-link(:to='"/article?name=projects/" + project.data.attributes.name')
-                  //- span {{project.data.attributes.title}}
                 h5.project-role {{project.data.attributes.role}}
                 h5.project-date {{project.data.attributes.date}}
                 h2.project-name {{project.data.attributes.title}}
@@ -78,9 +76,7 @@ export default {
   flex: 1
   display: flex
   .wrapper
-    // box-shadow: 5px 5px 5px 0px rgba(0,0,0,.01), 0px 7px 5px 0 rgba(0,0,0, 0.02)
     width: 100%
-    padding: 0.5em 2em 1.5em
     border-radius: 5px
     background: $color-bg-2
     .project-name, .project-role
@@ -92,7 +88,6 @@ export default {
 a
   text-decoration: none
 .image-container
-  // height: 100%
   width: 100%
   margin: 0em 0em
   box-shadow: 0px 5px 12px 0 rgba(0,0,0,.1), 0px 7px 15px 0 rgba(155, 149, 139, 0.08)
@@ -109,6 +104,8 @@ a
     display: block
   .project
     padding: 1em 0em
+    .wrapper
+      padding: 0.5em 1em 1.5em
 
 @media only screen and (min-width: 768px)
   .project-row
@@ -116,9 +113,14 @@ a
     display: block
   .project
     padding: 1em 0em
+    .wrapper
+      padding: 0.5em 1.5em 1.5em
 
 @media only screen and (min-width: 1200px)
   .project-row
     margin-bottom: 2em
     display: flex
+  .project
+    .wrapper
+      padding: 0.5em 2em 1.5em
 </style>
