@@ -15,7 +15,7 @@ This project explores large-scale Programmable Carbon Fiber produced on a 4'x2' 
 
 The large-format multi-material FMD was custom developed with Shopbot as a modular and easily customizable printer for large-format 2D and 3D printed structures.
 
-<image-responsive imageURL='projects/programmable-carbon-fiber/img-2.png' class='pad-v'/>
+<image-responsive imageURL='projects/programmable-carbon-fiber/img-2.png' />
 
 Exhibited at the BSA Space, Boston MA June 2015:  
 [Bigger than a Breadbox, Smaller than a Building](https://www.architects.org/bsaspace/exhibitions/bigger-breadbox-smaller-building)

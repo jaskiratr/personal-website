@@ -3,7 +3,7 @@ name: 03-Urban-Systems-Lab
 title: Urban Systems Lab
 role: Data-Visualization Lead
 date: 2016 - 2019
-excerpt: Data-Visualization portal and GIS large data processing pipelines.
+excerpt: Data-Visualization projects and big geospatial data processing pipelines.
 hero: case-studies/urban-systems-lab/cover.jpg
 ---
 

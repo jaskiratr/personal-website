@@ -3,7 +3,7 @@ name: 01-Verizon
 title: Verizon
 role: Lead Experience Manager
 date: 2016 - 2020
-excerpt: My notes on working as a Product Manager with distributed enterprise teams. I ensure that we provide care for support seeking customers, with effortless communication no matter where they are and how they choose to reach out to us.
+excerpt: Notes on product management within a large enterprise to deliver conversational experiences to customers.
 hero: case-studies/verizon/cover.jpg
 ---
 **Note:** *To comply with the employer's non-disclosure policy, I have omitted and obfuscated confidential information in this case study. The information in this case study is my own. It does not necessarily reflect the views of my employer for the described work.*

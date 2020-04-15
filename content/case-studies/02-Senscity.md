@@ -3,7 +3,7 @@ name: 02-Senscity
 title: Senscity
 role: Co-founder/Full-Stack Developer
 date: 2018 - 2020
-excerpt: Platform designed for monitoring real-time environmental conditions and the effectiveness of climate adaptation efforts for policy, future developments, and planning assessments.
+excerpt: Monitoring real-time environmental conditions and the effectiveness of climate adaptation efforts for policy, future developments, and planning assessments.
 hero: case-studies/senscity/cover.jpg
 ---
 

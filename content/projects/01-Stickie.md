@@ -3,7 +3,7 @@ name: 01-Stickie
 title: Stickie
 role: MFA Design & Technology Thesis
 date: May, 2016
-excerpt: Augmented collaboration with virtual sticky notes. Thesis research on interactive design for real-time mobile collaboration, using smartphones and large screen displays.
+excerpt: Thesis research on interactive design for real-time mobile collaboration, using smartphones and large screen displays.
 hero: projects/stickie/cover.jpg
 ---
 <div class='embed-container'><iframe src='https://player.vimeo.com/video/167916496' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
@@ -19,7 +19,7 @@ The research outlines the significance of collaborations over the internet throu
 
 This research constructs a novel technique for sticky note brainstorming across the Internet. A personal smartphone acts as an interface between the tangible and digital space. Users can leave notes from their phones onto a TV screen by placing the phone itself on any ordinary non-touchscreen display. The interactions demonstrates a non-invasive system for collaborations by transforming ordinary commercial technologies into networked spatially interactive systems. Therefore, it provides the flexibility to use non-specific hardware, enabling immediate access to content in various workspace setups. As an open-source application, it opens up opportunities for novel implementation methods for various demographics.
 
-<image-responsive imageURL='projects/stickie/img-1.gif' class='pad-v'/>
+<image-responsive imageURL='projects/stickie/img-1.gif' />
 
 **Presented at:** 
 - Parsons Thesis Exhibition, MFA DT Thesis Show 2016, New York

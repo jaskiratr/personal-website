@@ -14,9 +14,9 @@ The “Shape Changing Materials” workshop brought together smart materials wit
 
 Along with hands-on prototyping, starter-code was provided for participants and workshop guests to generate a digitally simulated materials. The final outcome was be prototypes of shape changing materials to discover garment behavior. Participants used user-centered methods to contextualize the use cases of an interactive garment solution.
 
-<image-responsive imageURL='projects/wearshops/img-1.jpg' class='pad-v'/>
+<image-responsive imageURL='projects/wearshops/img-1.jpg' />
 
-<image-responsive imageURL='projects/wearshops/img-2.jpg' class='pad-v'/>
+<image-responsive imageURL='projects/wearshops/img-2.jpg' />
 
 
 **Instructors:**  

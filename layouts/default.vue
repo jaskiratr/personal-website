@@ -138,16 +138,11 @@ a, a:visited, a:hover, a:active
 
 .footnote-item p
   margin-bottom: 0px
-.markdown-content
+.md-content
   img
-    max-width: 300px
-  p.fade-up
-    -webkit-animation: fade-up 1s cubic-bezier(0.22, 0.61, 0.36, 1)
-    -moz-animation: fade-up 1s cubic-bezier(0.22, 0.61, 0.36, 1)
-    -ms-animation: fade-up 1s cubic-bezier(0.22, 0.61, 0.36, 1)
-    -o-animation: fade-up 1s cubic-bezier(0.22, 0.61, 0.36, 1)
-    animation: fade-up 1s cubic-bezier(0.22, 0.61, 0.36, 1)
-
+    margin: 2em 0em
+  .embed-container
+    margin: 3em 0em
 .v-lazy-image
   opacity: 0
   transform: translate3d(20px, 0, 0)
