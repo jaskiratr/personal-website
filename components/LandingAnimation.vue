@@ -298,6 +298,7 @@ export default {
       while (this.scene.children.length > 0) {
         this.scene.remove(this.scene.children[0])
       }
+      this.renderer.dispose()
       this.planes = []
       this.spheres = []
     },
@@ -322,7 +323,6 @@ export default {
       }
       this.scene.add(this.ambientLight)
       this.scene.add(this.directLight)
-      this.render()
     }
   }
 }
