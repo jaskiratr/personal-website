@@ -32,7 +32,11 @@ export default {
   computed: { ...mapGetters(['darkMode']) },
   mounted() {
     this.$bus.$on('toggleDarkMode', (payload) => {
-      this.updateTheme()
+      if (this.isVisible) this.updateTheme()
+    })
+
+    this.$bus.$on('stopLandingAnimation', () => {
+      this.isVisible = false
     })
     const canvas = document.getElementById('bgAnimation')
     const container = document.getElementById('canvas-container')
@@ -276,15 +280,19 @@ export default {
       this.scene.add(sphereMesh)
     },
     render() {
-      if (this.animating) requestAnimationFrame(this.render)
-      setTimeout(() => {
-        this.animating = false
-      }, this.animationDuration)
-      this.renderer.render(this.scene, this.camera)
-      for (let i = 0; i < this.spheres.length; i++) {
-        this.spheres[i].position.y += Math.sin(Date.now() / i / 1000) / 500
+      if (this.isVisible) {
+        if (this.animating) requestAnimationFrame(this.render)
+
+        setTimeout(() => {
+          this.animating = false
+        }, this.animationDuration)
+
+        this.renderer.render(this.scene, this.camera)
+        for (let i = 0; i < this.spheres.length; i++) {
+          this.spheres[i].position.y += Math.sin(Date.now() / i / 1000) / 500
+        }
+        TWEEN.update()
       }
-      TWEEN.update()
     },
     clearScene() {
       while (this.scene.children.length > 0) {

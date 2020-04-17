@@ -36,7 +36,12 @@ export default {
       htmlAttrs: { class: this.darkMode ? 'dark' : 'light' }
     }
   },
-  transition: 'page',
+  transition: {
+    name: 'page',
+    afterLeave(el) {
+      this.$bus.$emit('stopLandingAnimation')
+    }
+  },
   components: {
     SectionLanding,
     SectionBio,
