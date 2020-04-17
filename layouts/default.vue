@@ -60,7 +60,7 @@ p, li
   letter-spacing: 0px
   font-weight: 400
   font-size: 1.2rem
-  line-height: 2.2rem
+  line-height: 2.1rem
 
 p code
   background-color: #F0F0F0
@@ -158,7 +158,6 @@ a, a:visited, a:hover, a:active
     margin-bottom: 3em
 
 .section-heading
-  font-size: 3em
   line-height: 1.1em
   letter-spacing: -0.02em
   // margin-bottom: 1em
@@ -171,9 +170,9 @@ a, a:visited, a:hover, a:active
   transition: color 0.5s ease 0s
 
 .section-caption
-  font-size: 1em
-  line-height: 1.5em
-  opacity: 0.5
+  // font-size: 1em
+  // line-height: 1.5em
+  opacity: 0.85
   padding-bottom: 3em
   border-bottom: 2px solid $color-highlight
   transition: color 0.5s ease 0s
@@ -343,4 +342,7 @@ body::-webkit-scrollbar-thumb
 
   .footer-container
     padding: 8em 0em
+@media only screen and (min-width: 1920px)
+  .section-heading
+    font-size: 3em
 </style>

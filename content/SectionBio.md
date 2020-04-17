@@ -1,7 +1,8 @@
 ---
 name: Product Development
 heading: In a nutshell
-caption: Most recent engagements in product & strategy development.
+caption: Recent engagements in product & strategy development.
+resumeLink: https://drive.google.com/file/d/1JHIXeiyJsJifBoxrfhoirHlD7jFsjiMP/view?usp=sharing
 ---
 My work spans across various disciplines, supporting organizations to build category-defining products and prototypes. I am passionate about technical product development and enjoy performing multi-faceted roles. I love pursing challenging business problems, applying design thinking to explore new creative avenues worthy of investigation.
 

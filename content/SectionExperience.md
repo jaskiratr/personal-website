@@ -1,6 +1,6 @@
 ---
 name: Product & Technical
-heading: Expertise
+heading: Practice
 caption: A hybrid skillset acquired through various roles I've held as described in the case-studies above.
 resumeLink: https://drive.google.com/file/d/1JHIXeiyJsJifBoxrfhoirHlD7jFsjiMP/view?usp=sharing
 ---

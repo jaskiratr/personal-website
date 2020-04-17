@@ -17,7 +17,7 @@
                   h1.project-num.mono {{padInt(id+1)}}|
                   h5.project-role {{project.data.attributes.role}}
                   h5.project-date {{project.data.attributes.date}}
-                  h1.project-name(:class='{ dark: darkMode }') 
+                  h1.project-name.section-heading(:class='{ dark: darkMode }') 
                     nuxt-link(:to='"/article?name=case-studies/" + project.data.attributes.name')
                       span {{project.data.attributes.title}}
                   p.project-excerpt {{project.data.attributes.excerpt}}
@@ -94,11 +94,11 @@ a
     flex-flow: column-reverse
     border-radius: 10px
     box-shadow: 5px 5px 10px 3px rgba(0,0,0,.01), 0px 7px 15px 0 rgba(0,0,0, 0.02)
-    .project-name, .project-role
+    .section-heading, .project-role
       color: $color-highlight
   .project-content.dark
     background: $color-bg-dark-2
-    .project-name, .project-role
+    .section-heading, .project-role
       color: $color-highlight-dark
   .image-container
     z-index: 1
