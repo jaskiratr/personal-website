@@ -99,7 +99,7 @@ export default {
     }
 
     this.scene.add(this.directLight)
-    if (this.isVisible & this.animating) this.render()
+    if (this.isVisible && this.animating) this.render()
     window.addEventListener('resize', this.onWindowResize, false)
   },
   methods: {
@@ -324,6 +324,7 @@ export default {
       this.scene.add(this.ambientLight)
       this.scene.add(this.directLight)
       requestAnimationFrame(this.render)
+      this.renderer.render(this.scene, this.camera)
     }
   }
 }
