@@ -32,7 +32,7 @@ export default {
   computed: { ...mapGetters(['darkMode']) },
   mounted() {
     this.$bus.$on('toggleDarkMode', (payload) => {
-      if (this.isVisible) this.updateTheme()
+      this.updateTheme()
     })
 
     this.$bus.$on('stopLandingAnimation', () => {
@@ -323,6 +323,7 @@ export default {
       }
       this.scene.add(this.ambientLight)
       this.scene.add(this.directLight)
+      requestAnimationFrame(this.render)
     }
   }
 }
