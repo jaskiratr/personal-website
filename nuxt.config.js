@@ -96,7 +96,10 @@ export default {
     '@/plugins/observe-visibility',
     { src: '@/plugins/video-responsive', mode: 'client' }
   ],
-  buildModules: ['@nuxtjs/eslint-module'],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/google-analytics'],
+  googleAnalytics: {
+    id: 'UA-53098803-4'
+  },
   build: {
     transpile: [/^element-ui/],
     extend(config, ctx) {
