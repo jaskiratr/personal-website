@@ -1,6 +1,6 @@
-# my-blog
+# Personal Website
 
-> My stupendous Nuxt.js project
+> Static website developed using Nuxt.js. The content is rendered from Markdown files
 
 ## Build Setup
 
@@ -17,6 +17,7 @@ $ npm run start
 
 # generate static project
 $ npm run generate
-```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+# Deploy to Github Pages
+$ npm run deploy
+```
