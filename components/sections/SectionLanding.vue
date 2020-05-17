@@ -82,9 +82,9 @@ export default {
 .heading
   font-family: 'inter', serif
   color: $color-highlight
-  font-size: 4rem
+  font-size: 3rem
   font-weight: 700
-  line-height: 0.9em
+  line-height: 1em
   margin-left: -10px
   -webkit-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
   -moz-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)

@@ -1,7 +1,7 @@
 ---
-heading: make<br><s>break</s><br>create
-name: Jaskirat Randhawa is a -
+heading: Jaskirat <br> Randhawa
+name: Hello, I am - 
 caption: 
 ---
 
-Digital product developer working with organizations to steward meaningful impact at scale.
+A Digital product developer working with organizations to steward meaningful impact at scale.
