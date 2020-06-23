@@ -65,12 +65,12 @@ export default {
   width: 100%
   z-index: 100
   position: fixed
-  top: 0em
-  left: 0em
+  bottom: 0em
+  right: 0em
 
 .theme-switcher
   position: relative
-  float: left
+  float: right
   background: none
 
 .theme-switcher.light /deep/
