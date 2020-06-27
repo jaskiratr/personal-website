@@ -29,7 +29,7 @@ Creating and managing release plans. Reporting product KPIs through the lifecycl
 
 **TECHNICAL ABILITIES**  
 
-- Full-Stack Development: Node.js, Vue.js, Mongodb, Redis and Firebase
+- Full-Stack Development: Node.js, Vue.js, Mongodb, Redis, and Firebase
 - Extract, transform and load (ETL) pipelines with Apache Spark
 - GIS data processing and visualizations
 - Application containerization with Docker & Kubernetes
@@ -37,7 +37,6 @@ Creating and managing release plans. Reporting product KPIs through the lifecycl
 - JAM Stack website design and development
 - Technical prototyping, and proof-of-concepts
 - Git based source control and development
-- Hands-on familiarity with machine learning algorithms
-- Hands-on experience with Hadoop ecosystem
+- Hands-on familiarity with machine learning algorithms and Hadoop ecosystem
  
 </el-col>
