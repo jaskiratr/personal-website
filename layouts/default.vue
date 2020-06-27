@@ -42,7 +42,7 @@ h1,h2, h3, h4
   font-weight: 700
   line-height: 1.5em
 h5, h6
-  font-weight: 100
+  font-weight: 400
 hr
   margin-top: 20px
   margin-bottom: 20px
