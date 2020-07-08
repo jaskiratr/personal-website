@@ -7,6 +7,8 @@ resumeLink: https://drive.google.com/file/d/1JHIXeiyJsJifBoxrfhoirHlD7jFsjiMP/vi
 
 <el-col :xs="24" :sm="24" :md="24" :lg="12">
 
+Scrum Certified: *Professional Scrum Product Owner I (PSPO I)*
+
 **PRODUCT STRATEGY**
 
 Starting with strategic planning driven by market and user research. Identifying critical problems to solve. Sizing and prioritizing effort for development. Crafting product vision for aligning business decisions among multiple working groups. Evaluating project feasibility for budget and operations approvals. Draft reporting requirements for impact assessment.
