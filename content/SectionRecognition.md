@@ -1,10 +1,35 @@
 ---
-name: A few notables
-heading: Works
-caption: Series of engagements at multiple international forums.
+name: Recognition
+heading: Achievements
+caption:
 ---
 
-**Exhibitions, Workshops, and Publications**
+**Certifications**
+- Professional Scrum Product Owner I (PSPO I), Scrum.org, 2020
+- Getting Started with Apache Spark SQL, Databricks Academy, 2019
+- Getting Started with Apache Spark DataFrames, Databricks Academy, 2019
+- The Ultimate Hand-on Hadoop, Udemy, 2019
+- Kubernetes Microservices, Udemy, 2019
+- Computer Vision Nanodegree, Udacity, 2018
+- Docker Mastery, Udemy, 2018
+- Scaling up Docker, Udemy, 2018
+- Machine Learning A-Z, Udemy, 2017
+
+**Patents**
+- Systems and Methods for Recommending Linear TV ContentSystems and Methods for Recommending Linear TV Content.  
+[US 10986408](https://uspto.report/patent/grant/10,986,408) · Issued Apr 20, 2021
+- System and Method of Retrieving and Conveying Sensitive Information When Using Voice Command Devices.  
+[US 10733278](https://uspto.report/patent/grant/10,733,278) · Issued Aug 4, 2020
+- Methods and Systems for Virtualizing a Target Object Within a Mixed Reality Presentation.  
+[US 10380803](https://uspto.report/patent/grant/10,380,803) · Issued Aug 13, 2019
+
+**Publications**
+- Publication: Co-authored “Visualizing Urban Social-Ecological–Technological Systems” in the book - Resilient Urban Futures, 2021
+- Publication: "[Solving Problems with Puzzles](https://miscmagazine.com/solving-problems-puzzles/)" MISC Magazine, 2017
+- Publication: "Shape Changing Materials: Exploring Applications of Smart Memory Alloy with Fabric and 3D Visualizations", Research Gate, 2016 [DOI:10.13140/RG.2.1.2900.5209](http://dx.doi.org/10.13140/RG.2.1.2900.5209)
+- Publication: "[Stickie: Mobile Device Supported Spatial Collaborations](https://dl.acm.org/doi/10.1145/2983310.2989192)" to the proceedings and ACM Digital Library, 2016. [DOI: 10.1145/2983310.2989192](https://doi.org/10.1145/2983310.2989192)
+
+**Exhibitions and Workshops**
 
 - Hosted Data-Visualization Workshop at Modelling Complex Urban Environments, WICI, Ontario, Canada, 2018
 - Panelist at Conference on The State of Green Roofs in New York City, 2018
@@ -13,8 +38,6 @@ caption: Series of engagements at multiple international forums.
 - Publication: “Solving Problems with Puzzles”, MISC Magazine, 2017
 - Speaker for Data-Visualization Seminar at “Resilient Cities, Livable Futures,” Data-Visualization Session. Urban Resilience to Weather-related Extremes Sustainability Research Network, The New School, New York, 2017
 - Publication: “Shape Changing Materials: Exploring Applications of Smart Memory Alloy with Fabric and 3D Visualizations”, Research Gate, 2016
-- Co-author for symposium at Urban Climate Resilience at Ecological Society of America, 2018
-- Publication: "Stickie: Mobile Device Supported Spatial Collaborations" to the proceedings and ACM Digital Library, 2016
 - Exhibited work at ACM, User Interface Software Technology Conference, Tokyo, 2016
 - Exhibited work at ACM, Spatial User Interfaces Conference, Tokyo, 2016
 - Exhibited work at FabCafe/Loftwork for YouFab Awards, Tokyo, 2016 
@@ -29,7 +52,7 @@ caption: Series of engagements at multiple international forums.
 **Awards and Honors**
 
 - Verizon Spotlight Award for performance excellence, 2019
-- Multiple Verizon Patent Awards for innovative digital experiences, 2018
+- Three Verizon Patent Awards for innovative digital experiences, 2018 - 2022
 - Finalist at YouFab Global Creative Awards. 2016, Tokyo
 - Verizon Connected Futures Grant 2015-16, New York
 - Departmental Honors, AMT, Parsons, New York, 2016

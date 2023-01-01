@@ -2,11 +2,8 @@
 heading: Say Hello
 ---
 
-jaskiratr@gmail.com  
-New York, NY
-
+[Linkedin](https://www.linkedin.com/in/jaskiratr/)  
 [Github](https://github.com/jaskiratr)  
-[Linkedin](https://www.linkedin.com/in/jaskiratr/)
 
 Source: [Github Repository](https://github.com/jaskiratr/personal-website)  
-© Jaskirat 2020
+© Jaskirat 2023

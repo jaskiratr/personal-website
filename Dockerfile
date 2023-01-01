@@ -2,7 +2,7 @@ FROM node:10.7
 
 # Install utilities
 RUN apt-get update
-RUN apt-get install bash nginx nano curl -y
+# RUN apt-get install bash nginx nano curl --force-yes
 
 # Create app directory
 RUN mkdir -p /usr/src/app

@@ -1,5 +1,5 @@
 ---
-name: 01-Stickie
+name: 09-Stickie
 title: Stickie
 role: MFA Design & Technology Thesis
 date: May, 2016

@@ -1,8 +1,8 @@
 ---
-name: 01-Verizon
+name: 10-Verizon
 title: Verizon
-role: Lead Experience Manager
-date: 2016 - 2020
+role: Product Manager
+date: 2016 - 2022
 excerpt: Notes on product management within a large enterprise to deliver conversational experiences to customers.
 hero: case-studies/verizon/cover.jpg
 ---

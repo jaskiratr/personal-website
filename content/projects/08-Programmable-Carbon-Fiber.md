@@ -1,5 +1,5 @@
 ---
-name: 02-Programmable-Carbon-Fiber
+name: 08-Programmable-Carbon-Fiber
 title: Programmable Carbon Fiber
 role: Visting Researcher
 date: Dec, 2017

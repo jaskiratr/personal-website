@@ -1,11 +1,11 @@
 ---
 name: Product Development
 heading: In a nutshell
-caption: Recent engagements in product & strategy development.
+caption: Driving product & strategy
 resumeLink: https://drive.google.com/file/d/1JHIXeiyJsJifBoxrfhoirHlD7jFsjiMP/view?usp=sharing
 ---
-My work spans across various disciplines, supporting organizations to build category-defining products and prototypes. I am passionate about technical product development and enjoy performing multi-faceted roles. I love pursing challenging business problems, applying design thinking to explore new creative avenues worthy of investigation.
+My work spans various disciplines, supporting organizations to build category-defining products and services. I am passionate about technical product development and enjoy performing multi-faceted roles.
 
-I'm currently a Lead Experience Manager at Verizon's Omni Customer Experience team, managing chatbot conversational experiences. These are embedded in numerous branded mobile and web experiences, infused with real-time insights to provide rich user experiences. 
+I'm currently a Senior Product Manager at [Fastly](https://www.fastly.com/products/edge-compute), managing languages and ecosystems for the [serverless computing platform](https://www.fastly.com/products/edge-compute).
 
-I also work on product development, and strategy at Senscity, a climate intelligence company, co-founded in 2018. I lead the work on system architecture, product design, analytics to support business goals.
+In the past, I co-founded a [climate intelligence company](https://climasens.com/) for understanding climate risk; managed chatbots and [conversational experiences](/article?name=projects%2F10-Verizon); developed [geospatial data processing](/article?name=projects%2F11-Urban-Systems-Lab) pipelines; designed physical-digital [augmented collaboration](/article?name=projects%2F09-Stickie) tool; and constructed an extremely hot CNC machine for [3D printing glass](/article?name=projects%2F07-Quartz)🔥

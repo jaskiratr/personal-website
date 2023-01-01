@@ -1,16 +1,16 @@
 <template lang="pug">
-.container(:class='darkMode ? "dark" : "light" ')
+.container(:class='darkMode ? "dark" : "light"')
   SwitchDarkMode
   .landing-container.full-height
     SectionLanding
-  div.el-main(:class='{ dark: darkMode }')
+  .el-main(:class='{ dark: darkMode }')
     .sections
       .section-container
         SectionBio
-      .section-container
-        SectionCaseStudies
-      .section-container
-        SectionExperience
+      //- .section-container
+      //-   SectionCaseStudies
+      //- .section-container
+      //-   SectionExperience
       .section-container
         SectionProjects
       .section-container

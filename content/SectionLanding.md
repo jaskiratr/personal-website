@@ -4,4 +4,4 @@ name: Hello, I am -
 caption: 
 ---
 
-A Digital product developer working with organizations to steward meaningful impact at scale.
+A digital product manager working with organizations to steward meaningful impact at scale.

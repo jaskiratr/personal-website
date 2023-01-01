@@ -1,5 +1,5 @@
 ---
-name: 07-Wearshops
+name: 04-Wearshops
 title: Wearshops
 role: Co-teacher
 date: Apr, 2016

@@ -1,5 +1,5 @@
 ---
-name: 06-Technkisi
+name: 05-Technkisi
 title: Technkisi
 role: Visiting Artist
 date: Nov, 2014

@@ -44,6 +44,7 @@ export default {
   computed: { ...mapGetters(['darkMode']) },
   mounted() {
     this.importAll(require.context('../../content/projects/', true, /\.md$/))
+    this.projects.reverse()
   },
   methods: {
     importAll(r) {
