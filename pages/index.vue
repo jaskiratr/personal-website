@@ -7,10 +7,6 @@
     .sections
       .section-container
         SectionBio
-      //- .section-container
-      //-   SectionCaseStudies
-      //- .section-container
-      //-   SectionExperience
       .section-container
         SectionProjects
       .section-container
@@ -23,8 +19,6 @@ import { mapGetters } from 'vuex'
 import SectionLanding from '~/components/sections/SectionLanding'
 import SectionBio from '~/components/sections/SectionBio'
 import SectionProjects from '~/components/sections/SectionProjects'
-import SectionCaseStudies from '~/components/sections/SectionCaseStudies'
-import SectionExperience from '~/components/sections/SectionExperience'
 import SectionRecognition from '~/components/sections/SectionRecognition'
 import SectionFooter from '~/components/sections/SectionFooter'
 import SwitchDarkMode from '~/components/SwitchDarkMode'
@@ -46,8 +40,6 @@ export default {
     SectionLanding,
     SectionBio,
     SectionProjects,
-    SectionCaseStudies,
-    SectionExperience,
     SectionRecognition,
     SectionFooter,
     SwitchDarkMode

@@ -1,5 +1,5 @@
 ---
-name: 05-Terra
+name: 06-Terra
 title: Terra
 role: Design & Technology
 date: Dec, 2015
