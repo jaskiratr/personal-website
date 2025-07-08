@@ -6,7 +6,7 @@
         el-col.message(:xs='24' :sm='12' :md='12' :lg='12')
           h1 {{heading}}
         el-col(:xs='24' :sm='12' :md='12' :lg='12')
-          Content
+          SectionContent
 </template>
 
 <script>
@@ -21,7 +21,7 @@ import fm from '~/content/SectionFooter.md'
 
 export default {
   components: {
-    Content: {
+    SectionContent: {
       extends: fm.vue.component
     }
   },

@@ -6,7 +6,7 @@
 <script>
 /* eslint-disable unicorn/number-literal-case */
 import { mapGetters } from 'vuex'
-import TWEEN from '@tweenjs/tween.js'
+import { Tween, Easing, update } from '@tweenjs/tween.js'
 
 const THREE = require('three')
 
@@ -162,14 +162,14 @@ export default {
       boxMesh.receiveShadow = true // default
       this.planes.push(boxMesh)
       if (Math.random() > 0.5) {
-        new TWEEN.Tween(boxMesh.position)
+        new Tween(boxMesh.position)
           .to({ z: z }, Math.random() * (25000 - 5000) + 5000)
-          .easing(TWEEN.Easing.Sinusoidal.InOut)
+          .easing(Easing.Sinusoidal.InOut)
           .start()
       } else {
-        new TWEEN.Tween(boxMesh.position)
+        new Tween(boxMesh.position)
           .to({ x: x }, Math.random() * (50000 - 5000) + 5000)
-          .easing(TWEEN.Easing.Sinusoidal.InOut)
+          .easing(Easing.Sinusoidal.InOut)
           .start()
       }
       this.scene.add(boxMesh)
@@ -196,14 +196,14 @@ export default {
       sphereMesh.castShadow = true // default is false
       sphereMesh.receiveShadow = true // default
       if (Math.random() > 0.5) {
-        new TWEEN.Tween(sphereMesh.position)
+        new Tween(sphereMesh.position)
           .to({ y: y }, Math.random() * (50000 - 5000) + 5000)
-          .easing(TWEEN.Easing.Back.InOut)
+          .easing(Easing.Back.InOut)
           .start()
       } else {
-        new TWEEN.Tween(sphereMesh.position)
+        new Tween(sphereMesh.position)
           .to({ y: y + 1 }, Math.random() * (50000 - 5000) + 5000)
-          .easing(TWEEN.Easing.Back.InOut)
+          .easing(Easing.Back.InOut)
           .start()
       }
       this.spheres.push(sphereMesh)
@@ -232,14 +232,14 @@ export default {
       boxMesh.receiveShadow = true // default
       this.planes.push(boxMesh)
       if (Math.random() > 0.5) {
-        new TWEEN.Tween(boxMesh.position)
+        new Tween(boxMesh.position)
           .to({ z: z }, Math.random() * (25000 - 5000) + 5000)
-          .easing(TWEEN.Easing.Sinusoidal.InOut)
+          .easing(Easing.Sinusoidal.InOut)
           .start()
       } else {
-        new TWEEN.Tween(boxMesh.position)
+        new Tween(boxMesh.position)
           .to({ x: x }, Math.random() * (50000 - 5000) + 5000)
-          .easing(TWEEN.Easing.Sinusoidal.InOut)
+          .easing(Easing.Sinusoidal.InOut)
           .start()
       }
       this.scene.add(boxMesh)
@@ -266,14 +266,14 @@ export default {
       sphereMesh.castShadow = true // default is false
       sphereMesh.receiveShadow = true // default
       if (Math.random() > 0.5) {
-        new TWEEN.Tween(sphereMesh.position)
+        new Tween(sphereMesh.position)
           .to({ y: y }, Math.random() * (50000 - 5000) + 5000)
-          .easing(TWEEN.Easing.Back.InOut)
+          .easing(Easing.Back.InOut)
           .start()
       } else {
-        new TWEEN.Tween(sphereMesh.position)
+        new Tween(sphereMesh.position)
           .to({ y: y + 1 }, Math.random() * (50000 - 5000) + 5000)
-          .easing(TWEEN.Easing.Back.InOut)
+          .easing(Easing.Back.InOut)
           .start()
       }
       this.spheres.push(sphereMesh)
@@ -291,7 +291,7 @@ export default {
         for (let i = 0; i < this.spheres.length; i++) {
           this.spheres[i].position.y += Math.sin(Date.now() / i / 1000) / 500
         }
-        TWEEN.update()
+        update()
       }
     },
     clearScene() {

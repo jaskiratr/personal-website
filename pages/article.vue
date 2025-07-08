@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template lang="pug">
 .container(v-if='showPage' :class='darkMode ? "dark" : "light" ')
   SwitchDarkMode
@@ -29,20 +30,20 @@ import SwitchDarkMode from '~/components/SwitchDarkMode'
 import SectionFooter from '~/components/sections/SectionFooter'
 
 export default {
-  head() {
-    return {
-      title: this.attributes.title,
-      bodyAttrs: { class: this.darkMode ? 'dark' : 'light' },
-      htmlAttrs: { class: this.darkMode ? 'dark' : 'light' }
-    }
-  },
-  transition: 'page',
   components: { SwitchDarkMode, SectionFooter },
+  transition: 'page',
   data() {
     return {
       showPage: false,
       attributes: {},
       selectedArticle: null
+    }
+  },
+  head() {
+    return {
+      title: this.attributes.title,
+      bodyAttrs: { class: this.darkMode ? 'dark' : 'light' },
+      htmlAttrs: { class: this.darkMode ? 'dark' : 'light' }
     }
   },
   computed: {
@@ -118,7 +119,7 @@ p.project-excerpt
 .content-row
   margin: 5em 0em
   padding: 20px
-.article-content /deep/
+.article-content ::v-deep
   .md-content .image-placeholder
     margin-bottom: 1rem
 .dark
@@ -147,13 +148,13 @@ p.project-excerpt
     margin-top: 2em
   .hero-content
     padding: 2em 1em 0em 1em
-  .article-content /deep/
+  .article-content ::v-deep
     .md-content p, h1, h2, h3, ul, li, table
       max-width: 600px
       width: 600px
       margin-left: calc((100% - 600px) / 2)
 @media only screen and (min-width: 992px)
-  .article-content /deep/
+  .article-content ::v-deep
     .md-content p, h1, h2, h3, ul, li, table
       max-width: 650px
       width: 650px

@@ -11,7 +11,7 @@
             a.resume-link(v-if='resumeLink', :href='resumeLink', target='_blank')
               el-button.v-button Résumé
         el-col(:xs='24' :sm='24' :md='24' :lg='18')
-          Content
+          SectionContent
 </template>
 
 <script>
@@ -19,7 +19,7 @@ import fm from '~/content/SectionBio.md'
 
 export default {
   components: {
-    Content: {
+    SectionContent: {
       extends: fm.vue.component
     }
   },

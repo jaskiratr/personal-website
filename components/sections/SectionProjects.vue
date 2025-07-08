@@ -27,12 +27,12 @@ import { mapGetters } from 'vuex'
 import fm from '~/content/SectionProjects.md'
 
 export default {
-  transition: 'page',
   components: {
-    Content: {
+    SectionContent: {
       extends: fm.vue.component
     }
   },
+  transition: 'page',
   data() {
     return {
       name: fm.attributes.name,

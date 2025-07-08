@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template lang="pug">
 .container(:class='darkMode ? "dark" : "light"')
   SwitchDarkMode
@@ -23,19 +24,6 @@ import SectionRecognition from '~/components/sections/SectionRecognition'
 import SectionFooter from '~/components/sections/SectionFooter'
 import SwitchDarkMode from '~/components/SwitchDarkMode'
 export default {
-  head() {
-    return {
-      title: 'Portfolio',
-      bodyAttrs: { class: this.darkMode ? 'dark' : 'light' },
-      htmlAttrs: { class: this.darkMode ? 'dark' : 'light' }
-    }
-  },
-  transition: {
-    name: 'page',
-    afterLeave(el) {
-      this.$bus.$emit('stopLandingAnimation')
-    }
-  },
   components: {
     SectionLanding,
     SectionBio,
@@ -43,6 +31,19 @@ export default {
     SectionRecognition,
     SectionFooter,
     SwitchDarkMode
+  },
+  transition: {
+    name: 'page',
+    afterLeave(el) {
+      this.$bus.$emit('stopLandingAnimation')
+    }
+  },
+  head() {
+    return {
+      title: 'Portfolio',
+      bodyAttrs: { class: this.darkMode ? 'dark' : 'light' },
+      htmlAttrs: { class: this.darkMode ? 'dark' : 'light' }
+    }
   },
   computed: {
     ...mapGetters(['darkMode'])

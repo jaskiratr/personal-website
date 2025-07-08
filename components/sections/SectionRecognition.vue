@@ -10,14 +10,14 @@
             p.section-caption {{caption}}
       el-row.section-content   
         el-col(:span='24')
-          Content
+          SectionContent
 </template>
 <script>
 import fm from '~/content/SectionRecognition.md'
 
 export default {
   components: {
-    Content: {
+    SectionContent: {
       extends: fm.vue.component
     }
   },

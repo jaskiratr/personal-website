@@ -1,17 +1,20 @@
-FROM node:10.7
+# Use a modern, lightweight Node.js image
+FROM node:18-alpine
 
-# Install utilities
-RUN apt-get update
-# RUN apt-get install bash nginx nano curl --force-yes
-
-# Create app directory
-RUN mkdir -p /usr/src/app
+# Set the working directory
 WORKDIR /usr/src/app
-COPY . /usr/src/app/
 
-# Rebuild node-sass
+# Copy package.json and package-lock.json to leverage Docker cache
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
-RUN npm rebuild node-sass
 
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port the app runs on
 EXPOSE 3000
-CMD npm run dev
+
+# Start the app
+CMD ["npm", "run", "dev"]

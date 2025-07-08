@@ -73,11 +73,11 @@ export default {
   float: right
   background: none
 
-.theme-switcher.light /deep/
+.theme-switcher.light::v-deep
   i
     color: $color-text
 
-.theme-switcher.dark /deep/
+.theme-switcher.dark::v-deep
   i
     color: $color-text-dark
 @media only screen and (max-width: 600px)

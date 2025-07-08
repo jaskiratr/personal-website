@@ -12,7 +12,7 @@
     el-col(:sm='{span:22, offset:1}', :md='{span:16, offset:4}', :lg='{span:16, offset:4}', :xl='{span:8, offset:8}')
       h5.section-name {{name}}
       h1.section-heading
-        Content
+        SectionContent
       a.resume-link(v-if='resumeLink', :href='resumeLink', target='_blank')
         el-button.cta-link.v-button Résumé
       
@@ -31,7 +31,7 @@ import LandingAnimation from '~/components/LandingAnimation'
 export default {
   components: {
     LandingAnimation,
-    Content: {
+    SectionContent: {
       extends: fm.vue.component
     }
   },
@@ -91,7 +91,7 @@ export default {
   -ms-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
   -o-animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
   animation: fade-up 3s cubic-bezier(0.22, 0.61, 0.36, 1)
-.section-heading /deep/
+.section-heading ::v-deep
   p
     font-size: 3.33rem
     line-height: 3.33rem
@@ -128,7 +128,7 @@ export default {
   .center-flex
     min-height: inherit
 
-  .section-heading /deep/
+  .section-heading ::v-deep
     p
       font-size: 2rem
       line-height: 2rem

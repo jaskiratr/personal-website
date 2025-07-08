@@ -40,7 +40,6 @@ md.renderer.rules.link_open = function(tokens, idx, options, env, self) {
 }
 
 export default {
-  mode: 'universal',
   router: {
     base: process.env.BASE_URL || '/'
   },
@@ -102,6 +101,13 @@ export default {
   },
   build: {
     transpile: [/^element-ui/],
+    loaders: {
+      sass: {
+        sassOptions: {
+          silenceDeprecations: ['legacy-js-api']
+        }
+      }
+    },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
