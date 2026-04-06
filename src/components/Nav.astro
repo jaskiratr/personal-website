@@ -5,10 +5,16 @@ import DarkModeToggle from './DarkModeToggle.astro';
 <nav class="nav">
   <a href="/" class="nav-site">
     <svg class="nav-logo" viewBox="27 27 74 68" width="32" height="32" aria-hidden="true">
+      <defs>
+        <clipPath id="nav-cube">
+          <polygon points="64,29 96.9,48 96.9,66 64,85 31.1,66 31.1,48"/>
+        </clipPath>
+      </defs>
       <polygon points="64,65 96.9,79 64,93 31.1,79" fill="rgb(15,45,120)"/>
       <polygon points="31.1,48 64,67 64,85 31.1,66" fill="rgb(30,80,180)"/>
       <polygon points="64,67 96.9,48 96.9,66 64,85" fill="rgb(59,130,246)"/>
-      <polygon class="logo-top" points="64,29 96.9,48 64,67 31.1,48" stroke="rgb(59,130,246)" stroke-width="2"/>
+      <polygon class="logo-top" points="64,29 96.9,48 64,67 31.1,48"/>
+      <polygon points="64,29 96.9,48 64,67 31.1,48" fill="none" stroke="rgb(59,130,246)" stroke-width="2" stroke-linejoin="miter" clip-path="url(#nav-cube)"/>
     </svg>
     jaskirat.org
   </a>

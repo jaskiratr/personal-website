@@ -6,8 +6,16 @@
 <style>
   canvas {
     display: block;
-    width: 100%;
+    width: calc(100% + 48px);
+    margin-left: -24px;
     pointer-events: none;
+  }
+
+  @media (max-width: 640px) {
+    canvas {
+      width: calc(100% + 32px);
+      margin-left: -16px;
+    }
   }
 </style>
 
@@ -273,7 +281,7 @@
       if (dt > 0.1) dt = 0.016;
 
       var originX = cw * 0.5;
-      var margin = 30;
+      var margin = 0;
 
       // --- Update block positions ---
       var visibleBlocks = [];
