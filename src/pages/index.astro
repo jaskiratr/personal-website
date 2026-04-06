@@ -27,11 +27,12 @@ import GridAnimation from '../components/GridAnimation.astro';
     <GridAnimation />
     <p class="landing-greeting">Hi, I'm Jaskirat —</p>
     <h1 class="landing-headline">
-      I manage developer platforms at <span class="accent">Fastly</span>. Before that,
-      I trained as an electrical engineer, studied design and technology, built a
-      <span class="accent">glass 3D printer</span>, and co-founded a
-      <span class="accent">climate tech</span> startup. <br> 
-      I love rock climbing big walls.
+      I'm building developer platforms at <a href="https://www.fastly.com/blog/author/jaskirat-singh-randhawa" class="accent" target="_blank" rel="noopener noreferrer">Fastly</a>.
+      Past lives include making <a href="/#projects" class="accent">art</a>,
+      engineering <a href="/projects/jamming-bodies" class="accent">electronics</a>,
+      3D-printing <a href="/projects/quartz" class="accent">glass</a>,
+      and co-founding a <a href="/blog/climasens" class="accent">climate tech</a> startup.
+      Off the clock, I <a href="https://www.mountainproject.com/user/200445387/jaskirat-r" class="accent" target="_blank" rel="noopener noreferrer">climb</a> big walls.
     </h1>
     <div class="landing-links">
       <a href="https://www.linkedin.com/in/jaskiratr/" target="_blank" rel="noopener">LinkedIn</a>
@@ -133,6 +134,15 @@ import GridAnimation from '../components/GridAnimation.astro';
 
   .accent {
     color: var(--accent);
+  }
+
+  .landing-headline a[target="_blank"]::after {
+    content: '↗';
+    font-size: 0.5em;
+    padding-left: 2px;
+    vertical-align: super;
+    text-decoration: none;
+    display: inline-block;
   }
 
   .landing-links {
