@@ -11,14 +11,15 @@ order: 7
 Quartz is a material research project that unites state of the art computer-aided rapid prototyping technology with silica glass—one of the most versatile material compounds used for millennia. Using open source CNC hardware and software, this extrusion process aims for a novel computer-aided design approach to form two- and three-dimensional glass artifacts that benefit from the material's toughness, optical quality, and thermal stability.
 
 **Team:** [Daniel Sauter](http://danielsauter.com/), [Jaskirat Randhawa](http://jaskirat.org)
-**Website**: [jaskiratr.github.io/quartz/](http://jaskiratr.github.io/quartz/)
+
+**Website**: [jaskiratr.github.io/quartz/](https://jaskiratr.github.io/quartz/)
 
 ![](/images/projects/quartz/img-1.gif)
 
 ![](/images/projects/quartz/img-2.jpg)
 
-The photo on the top shows the modified CNC Machine in its current stage. It can extrude simple geometries with consistent thickness and high fidelity based on a CAD drawing. The project documentation is available [here](http://quartzdesign.io).
+The photo on the top shows the modified CNC Machine in its current stage. It can extrude simple geometries with consistent thickness and high fidelity based on a CAD drawing. The project documentation is available [here](https://jaskiratr.github.io/quartz/).
 
 **Related Links:**
-- [How-to-build guide](http://jaskiratr.github.io/quartz/)
+- [How-to-build guide](https://jaskiratr.github.io/quartz/)
 - [Experiment videos](https://vimeo.com/album/4021301)
