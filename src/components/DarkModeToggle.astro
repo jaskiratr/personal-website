@@ -1,0 +1,46 @@
+---
+---
+
+<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+  <span class="icon-light">☀︎</span>
+  <span class="icon-dark">☾</span>
+</button>
+
+<style>
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-muted);
+    padding: 4px;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  button:hover {
+    opacity: 1;
+  }
+</style>
+
+<style is:global>
+  :root:not([data-theme='dark']) .icon-dark {
+    display: none;
+  }
+
+  [data-theme='dark'] .icon-light {
+    display: none;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('theme-toggle')!;
+
+  toggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+</script>

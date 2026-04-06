@@ -1,0 +1,73 @@
+---
+import DarkModeToggle from './DarkModeToggle.astro';
+---
+
+<nav class="nav">
+  <a href="/" class="nav-site">
+    <svg class="nav-logo" viewBox="27 27 74 68" width="32" height="32" aria-hidden="true">
+      <polygon points="64,65 96.9,79 64,93 31.1,79" fill="rgb(15,45,120)"/>
+      <polygon points="31.1,48 64,67 64,85 31.1,66" fill="rgb(30,80,180)"/>
+      <polygon points="64,67 96.9,48 96.9,66 64,85" fill="rgb(59,130,246)"/>
+      <polygon class="logo-top" points="64,29 96.9,48 64,67 31.1,48" stroke="rgb(59,130,246)" stroke-width="2"/>
+    </svg>
+    jaskirat.org
+  </a>
+  <div class="nav-links">
+    <a href="/blog">Blog</a>
+    <a href="/#projects">Projects</a>
+    <DarkModeToggle />
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    margin: 0 -40px;
+    font-size: 14px;
+    background: var(--bg);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-site {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo {
+    padding-top: 5px;
+    display: block;
+  }
+
+  .nav-logo .logo-top {
+    fill: var(--bg);
+    transition: fill 0.2s;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+  }
+</style>

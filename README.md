@@ -1,45 +1,45 @@
-# Jaskirat Randhawa's Personal Website
+# jaskirat.org
 
-This repository contains the source code for my personal website. The website is built with Nuxt.js and features content rendered from Markdown files, allowing for easy updates and maintenance.
+Personal portfolio and blog for Jaskirat, built with [Astro](https://astro.build).
 
-## Tech Stack
+## Stack
 
-- **Framework**: [Nuxt.js](https://nuxtjs.org/)
-- **Styling**: [Sass](https://sass-lang.com/)
-- **Content**: [Markdown](https://www.markdownguide.org/)
-- **Deployment**: [GitHub Pages](https://pages.github.com/)
+- **Framework:** Astro 6 (static output)
+- **Styling:** Global CSS with dark mode support
+- **Content:** Markdown collections for blog posts and projects
+- **Feeds:** RSS (`/rss.xml`), sitemap, `llms.txt`
+- **Deployment:** Static build to GitHub Pages
 
-## Build Setup
+## Getting Started
 
-```bash
-# install dependencies
-$ npm install
+Requires Node >= 22.12.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-
-# Deploy to Github Pages
-$ npm run deploy
+```sh
+npm install
+npm run dev       # http://localhost:4321
 ```
 
-## Docker Setup
+## Commands
 
-To run this project with Docker, use the following commands:
+| Command             | Description                          |
+| :------------------ | :----------------------------------- |
+| `npm run dev`       | Start dev server                     |
+| `npm run build`     | Build static site to `./dist/`       |
+| `npm run preview`   | Preview production build locally     |
 
-```bash
-# Build and run the container
-$ docker-compose up --build
+## Project Structure
 
-# Run in detached mode
-$ docker-compose up -d
-
-# Stop the container
-$ docker-compose down
+```text
+src/
+  components/   # Astro components (Nav, Footer, DarkModeToggle, etc.)
+  content/      # Markdown collections (blog/, projects/)
+  layouts/      # Page layouts
+  pages/        # File-based routing
+    blog/       # Blog listing and post pages
+    projects/   # Project detail pages
+    rss.xml.ts  # RSS feed
+    llms.txt.ts # LLM-readable site summary
+  styles/       # Global stylesheets
+  utils/        # Shared helpers
+public/         # Static assets (fonts, images, CNAME)
 ```

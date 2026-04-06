@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+  excerpt: string;
+  slug: string;
+  isLast?: boolean;
+}
+
+const { title, excerpt, slug, isLast = false } = Astro.props;
+---
+
+<a href={`/projects/${slug}`} class:list={['project-item', { last: isLast }]}>
+  <span class="project-title">{title}</span>
+  <span class="project-excerpt">{excerpt}</span>
+</a>
+
+<style>
+  .project-item {
+    display: block;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-light);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-item.last {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .project-item:hover .project-title {
+    color: var(--accent);
+  }
+
+  .project-title {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    transition: color 0.15s;
+  }
+
+  .project-excerpt {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+</style>

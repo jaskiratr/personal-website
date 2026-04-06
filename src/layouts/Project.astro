@@ -1,0 +1,77 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  role: string;
+  date: string;
+  hero: string;
+}
+
+const { title, role, date, hero } = Astro.props;
+---
+
+<Base title={`${title} — Jaskirat Randhawa`} description={`${title} — ${role}`} ogType="article">
+  <article class="project">
+    <header class="project-header fade-in">
+      <h1 class="project-title">{title}</h1>
+      <div class="project-meta">
+        <span>{role}</span>
+        <span class="sep">&middot;</span>
+        <span>{date}</span>
+      </div>
+    </header>
+    <img src={hero} alt={title} class="project-hero" />
+    <div class="prose">
+      <slot />
+    </div>
+    <nav class="back-link">
+      <a href="/#projects">&larr; All projects</a>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .project {
+    padding: 48px 0;
+  }
+
+  .project-header {
+    margin-bottom: 32px;
+  }
+
+  .project-title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+
+  .project-meta {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .sep {
+    margin: 0 6px;
+  }
+
+  .project-hero {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 32px;
+  }
+
+  .back-link {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  @media (max-width: 640px) {
+    .project-title {
+      font-size: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,201 @@
+---
+import Base from '../layouts/Base.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import ProjectListItem from '../components/ProjectListItem.astro';
+import { getCollection } from 'astro:content';
+import { getReadingTime } from '../utils/reading-time';
+
+// Get recent blog posts (up to 3)
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+// Get projects sorted by order
+const projects = (await getCollection('projects'))
+  .sort((a, b) => b.data.order - a.data.order);
+
+// Load mentions markdown
+import { Content as MentionsContent } from '../content/mentions.md';
+import GridAnimation from '../components/GridAnimation.astro';
+
+---
+
+<Base title="Jaskirat Randhawa">
+  <!-- Landing -->
+  <section class="landing fade-in">
+    <GridAnimation />
+    <p class="landing-greeting">Hi, I'm Jaskirat —</p>
+    <h1 class="landing-headline">
+      I manage developer platforms at <span class="accent">Fastly</span>. Before that,
+      I trained as an electrical engineer, studied design and technology, built a
+      <span class="accent">glass 3D printer</span>, and co-founded a
+      <span class="accent">climate tech</span> startup. <br> 
+      I love rock climbing big walls.
+    </h1>
+    <div class="landing-links">
+      <a href="https://www.linkedin.com/in/jaskiratr/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jaskiratr" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <!-- Recent Writing -->
+  {recentPosts.length > 0 && (
+    <section class="section">
+      <div class="section-label">
+        <div class="section-dot"></div>
+        <span class="section-title">Recent Writing</span>
+      </div>
+      {recentPosts.map((post, i) => {
+        const showYear = i === 0 || post.data.date.getFullYear() !== recentPosts[i - 1].data.date.getFullYear();
+        return (
+          <BlogPostCard
+            title={post.data.title}
+            date={post.data.date}
+            slug={post.id}
+            readingTime={getReadingTime(post.body ?? '')}
+            showYear={showYear}
+          />
+        );
+      })}
+      <a href="/blog" class="see-all">All posts &rarr;</a>
+    </section>
+  )}
+
+  <!-- Selected Work -->
+  <section class="section" id="projects">
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span class="section-title">I used to be a design student</span>
+    </div>
+    {projects.map((project, i) => (
+      <ProjectListItem
+        title={project.data.title}
+        excerpt={project.data.excerpt}
+        slug={project.id}
+        isLast={i === projects.length - 1}
+      />
+    ))}
+  </section>
+
+  <!-- Notes & Mentions -->
+  <section class="section">
+    <div class="section-label">
+      <div class="section-dot"></div>
+      <span class="section-title">Notes & Mentions</span>
+    </div>
+    <div class="mentions">
+      <MentionsContent />
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jaskirat Randhawa",
+    "jobTitle": "Senior Product Manager",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Fastly"
+    },
+    "url": "https://jaskirat.org",
+    "sameAs": [
+      "https://www.linkedin.com/in/jaskiratr/",
+      "https://github.com/jaskiratr"
+    ]
+  })} />
+</Base>
+
+<style>
+  .landing {
+    position: relative;
+    overflow: visible;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .landing-greeting {
+    position: relative;
+    font-size: 15px;
+    color: var(--text-faint);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .landing-headline {
+    position: relative;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    line-height: 1.35;
+    max-width: 600px;
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .landing-links {
+    position: relative;
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  .see-all {
+    display: inline-block;
+    margin-top: 24px;
+    padding-left: 64px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .mentions {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-secondary);
+  }
+
+  .mentions :global(ul) {
+    list-style: none;
+    padding: 0;
+  }
+
+  .mentions :global(li) {
+    margin-bottom: 4px;
+    padding-left: 1em;
+    text-indent: -1em;
+  }
+
+  .mentions :global(li)::before {
+    content: '↳\00a0';
+  }
+
+  .mentions :global(p) {
+    margin-top: 24px;
+  }
+
+  .mentions :global(p:first-child) {
+    margin-top: 0;
+  }
+
+  .mentions :global(strong) {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .landing {
+      padding: 48px 0 40px;
+    }
+
+    .landing-headline {
+      font-size: 22px;
+    }
+
+    .see-all {
+      padding-left: 0;
+    }
+  }
+</style>

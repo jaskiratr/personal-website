@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Ground shadow -->
+  <polygon points="64,65 96.9,79 64,93 31.1,79" fill="rgb(15,45,120)"/>
+  <!-- Left face -->
+  <polygon points="31.1,48 64,67 64,85 31.1,66" fill="rgb(30,80,180)"/>
+  <!-- Right face -->
+  <polygon points="64,67 96.9,48 96.9,66 64,85" fill="rgb(59,130,246)"/>
+  <!-- Top face -->
+  <polygon points="64,29 96.9,48 64,67 31.1,48" fill="currentColor" stroke="rgb(59,130,246)" stroke-width="2"/>
+</svg>

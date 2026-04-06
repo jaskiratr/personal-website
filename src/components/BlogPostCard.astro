@@ -1,0 +1,61 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  slug: string;
+  readingTime: number;
+  showYear?: boolean;
+}
+
+const { title, date, slug, readingTime, showYear = false } = Astro.props;
+const year = date.getFullYear();
+---
+
+<a href={`/blog/${slug}`} class="post-row">
+  <span class="post-year">{showYear ? year : ''}</span>
+  <span class="post-content">
+    <span class="post-title">{title}</span>
+    <span class="post-meta">{readingTime} min read</span>
+  </span>
+</a>
+
+<style>
+  .post-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 18px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-row:hover .post-title {
+    color: var(--accent);
+  }
+
+  .post-year {
+    width: 64px;
+    flex-shrink: 0;
+    font-size: 13px;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+
+  .post-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    margin-bottom: 3px;
+    transition: color 0.15s;
+  }
+
+  .post-meta {
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+---
+
+<footer class="footer">
+  <span>&copy; {new Date().getFullYear()} Jaskirat Randhawa</span>
+  <div class="footer-links">
+    <a href="/rss.xml">RSS</a>
+    <a href="https://github.com/jaskiratr" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/jaskiratr/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 32px 0;
+    font-size: 13px;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .footer-links a {
+    color: var(--text-faint);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--text);
+  }
+
+  @media (max-width: 640px) {
+    .footer {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+</style>

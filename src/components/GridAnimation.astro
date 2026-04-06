@@ -1,0 +1,568 @@
+---
+---
+
+<canvas id="iso-canvas" aria-hidden="true" height="500"></canvas>
+
+<style>
+  canvas {
+    display: block;
+    width: 100%;
+    pointer-events: none;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var canvas = document.getElementById('iso-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+
+    // --- Isometric projection ---
+    function project(x, y, z) {
+      return {
+        px: x * 0.866 - y * 0.866,
+        py: -x * 0.5 - y * 0.5 - z,
+      };
+    }
+
+    // --- Theme-aware colors (cached, refreshed on theme change) ---
+    function parseHex(hex) {
+      return {
+        r: parseInt(hex.slice(1, 3), 16),
+        g: parseInt(hex.slice(3, 5), 16),
+        b: parseInt(hex.slice(5, 7), 16),
+      };
+    }
+    function readTheme() {
+      var style = getComputedStyle(document.documentElement);
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      return {
+        accent: parseHex(style.getPropertyValue('--accent').trim()),
+        isDark: isDark,
+      };
+    }
+    var themeCache = readTheme();
+    new MutationObserver(function () {
+      themeCache = readTheme();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class'] });
+
+    // --- Noise texture (pre-generated, reused) ---
+    var noiseCanvas = document.createElement('canvas');
+    noiseCanvas.width = 128;
+    noiseCanvas.height = 128;
+    var noiseCtx = noiseCanvas.getContext('2d');
+    var noiseData = noiseCtx.createImageData(128, 128);
+    for (var i = 0; i < noiseData.data.length; i += 4) {
+      var v = Math.random() * 255;
+      noiseData.data[i] = v;
+      noiseData.data[i + 1] = v;
+      noiseData.data[i + 2] = v;
+      noiseData.data[i + 3] = 18;
+    }
+    noiseCtx.putImageData(noiseData, 0, 0);
+
+    // --- Block type definitions ---
+    var blockTypes = [
+      { wRange: [18, 25], hRange: [18, 25], dRange: [40, 80] },
+      { wRange: [75, 100], hRange: [45, 60], dRange: [6, 14] },
+      { wRange: [30, 35], hRange: [30, 35], dRange: [20, 35] },
+      { wRange: [60, 70], hRange: [23, 30], dRange: [10, 20] },
+      { wRange: [23, 30], hRange: [30, 40], dRange: [50, 90] },
+      { wRange: [12, 15], hRange: [60, 70], dRange: [25, 50] },
+    ];
+
+    function rand(a, b) {
+      return a + Math.random() * (b - a);
+    }
+
+    // --- Generate blocks ---
+    var H = 500;
+    var blocks = [];
+    for (var i = 0; i < 24; i++) {
+      var type = blockTypes[Math.floor(Math.random() * blockTypes.length)];
+      blocks.push({
+        w: rand(type.wRange[0], type.wRange[1]),
+        h: rand(type.hRange[0], type.hRange[1]),
+        d: rand(type.dRange[0], type.dRange[1]),
+        x: rand(-175, 175),
+        y: rand(-105, 105),
+        fallOffset: rand(0, H + 200),
+        fallSpeed: rand(0.245, 0.42),
+        shade: rand(0.3, 0.7),
+        orient: Math.floor(Math.random() * 2),
+      });
+    }
+
+    // --- Climber state ---
+    var climberX = 0;
+    var climberY = 0;
+    var climberTargetX = 0;
+    var climberTargetY = 0;
+    var climberCurrentBlock = null;
+    var climberMoving = false;
+    var climberMantling = false;
+    var climberMantleTargetX = 0;
+    var climberMantleTargetY = 0;
+    var climberMantleStartX = 0;
+    var climberMantleStartY = 0;
+    var climberMantleProgress = 0;
+    var climberMantleDuration = 0;
+    var climberTimer = 0;
+    var climberPause = 1.5;
+    var trail = [];
+    var illumination = 0;
+    var lastIllumBlock = null;
+    var lastSec = 0;
+    var animId;
+    var startTime = performance.now();
+
+    // --- Draw a single block face ---
+    function drawBlockFace(corners, baseShade, faceType, distFromClimber) {
+      var minX = Math.min(corners[0].x, corners[1].x, corners[2].x, corners[3].x);
+      var maxX = Math.max(corners[0].x, corners[1].x, corners[2].x, corners[3].x);
+      var minY = Math.min(corners[0].y, corners[1].y, corners[2].y, corners[3].y);
+      var maxY = Math.max(corners[0].y, corners[1].y, corners[2].y, corners[3].y);
+
+      var bloomDist = Math.max(0, 1 - distFromClimber / 200);
+      var accent = themeCache.accent;
+
+      ctx.beginPath();
+      ctx.moveTo(corners[0].x, corners[0].y);
+      ctx.lineTo(corners[1].x, corners[1].y);
+      ctx.lineTo(corners[2].x, corners[2].y);
+      ctx.lineTo(corners[3].x, corners[3].y);
+      ctx.closePath();
+
+      if (themeCache.isDark) {
+        var lightMul = faceType === 'top' ? 1.3 : faceType === 'right' ? 0.8 : 0.6;
+        lightMul += bloomDist * 0.4;
+        var r = Math.floor(40 * baseShade * lightMul);
+        var g = Math.floor(36 * baseShade * lightMul);
+        var b = Math.floor(32 * baseShade * lightMul);
+        var r2 = Math.floor(28 * baseShade * lightMul);
+        var g2 = Math.floor(24 * baseShade * lightMul);
+        var b2 = Math.floor(20 * baseShade * lightMul);
+        var grad = ctx.createLinearGradient(minX, minY, maxX, maxY);
+        grad.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',0.85)');
+        grad.addColorStop(1, 'rgba(' + r2 + ',' + g2 + ',' + b2 + ',0.85)');
+        ctx.fillStyle = grad;
+        ctx.fill();
+        if (faceType === 'top') {
+          ctx.strokeStyle = 'rgba(' + Math.min(255, r + 60) + ',' + Math.min(255, g + 55) + ',' + Math.min(255, b + 50) + ',' + (0.25 + bloomDist * 0.3) + ')';
+          ctx.lineWidth = 1.2;
+        } else {
+          ctx.strokeStyle = 'rgba(90,80,70,' + (0.15 + bloomDist * 0.15) + ')';
+          ctx.lineWidth = 0.5;
+        }
+      } else {
+        // Light theme: white fill, blue stroke
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        ctx.fill();
+        var strokeAlpha = faceType === 'top' ? 0.3 + bloomDist * 0.3 : 0.15 + bloomDist * 0.15;
+        ctx.strokeStyle = 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + strokeAlpha + ')';
+        ctx.lineWidth = faceType === 'top' ? 1.2 : 0.8;
+      }
+      ctx.stroke();
+
+      // Noise overlay
+      ctx.save();
+      ctx.globalAlpha = 0.06;
+      ctx.globalCompositeOperation = 'overlay';
+      ctx.beginPath();
+      ctx.moveTo(corners[0].x, corners[0].y);
+      ctx.lineTo(corners[1].x, corners[1].y);
+      ctx.lineTo(corners[2].x, corners[2].y);
+      ctx.lineTo(corners[3].x, corners[3].y);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(noiseCanvas, minX, minY, maxX - minX, maxY - minY);
+      ctx.restore();
+    }
+
+    // --- Illuminate active face ---
+    function illuminateFace(corners, cx, cy, accent, intensity) {
+      if (intensity <= 0.01) return;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(corners[0].x, corners[0].y);
+      ctx.lineTo(corners[1].x, corners[1].y);
+      ctx.lineTo(corners[2].x, corners[2].y);
+      ctx.lineTo(corners[3].x, corners[3].y);
+      ctx.closePath();
+      ctx.clip();
+
+      var glowGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 50);
+      glowGrad.addColorStop(0, 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + (0.25 * intensity) + ')');
+      glowGrad.addColorStop(0.5, 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + (0.08 * intensity) + ')');
+      glowGrad.addColorStop(1, 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',0)');
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(cx - 60, cy - 60, 120, 120);
+      ctx.restore();
+    }
+
+    // --- Draw a full isometric block ---
+    function drawBlock(ox, oy, w, h, d, shade, distFromClimber, alpha, activeBlock, climberPos, accent, illum) {
+      var c = [
+        project(0, 0, 0), project(w, 0, 0), project(w, h, 0), project(0, h, 0),
+        project(0, 0, d), project(w, 0, d), project(w, h, d), project(0, h, d),
+      ];
+      for (var i = 0; i < 8; i++) {
+        c[i] = { x: c[i].px + ox, y: c[i].py + oy };
+      }
+
+      ctx.globalAlpha = alpha;
+
+      var leftCorners = [c[0], c[3], c[7], c[4]];
+      var rightCorners = [c[0], c[1], c[5], c[4]];
+      var topCorners = [c[4], c[5], c[6], c[7]];
+
+      drawBlockFace(leftCorners, shade, 'left', distFromClimber);
+      drawBlockFace(rightCorners, shade, 'right', distFromClimber);
+      drawBlockFace(topCorners, shade, 'top', distFromClimber);
+
+      if (activeBlock && climberPos && illum > 0.01) {
+        var topCenter = { x: (c[4].x + c[6].x) / 2, y: (c[4].y + c[6].y) / 2 };
+        var leftCenter = { x: (c[0].x + c[7].x) / 2, y: (c[0].y + c[7].y) / 2 };
+        var rightCenter = { x: (c[0].x + c[5].x) / 2, y: (c[0].y + c[5].y) / 2 };
+        var dTop = Math.hypot(climberPos.x - topCenter.x, climberPos.y - topCenter.y);
+        var dLeft = Math.hypot(climberPos.x - leftCenter.x, climberPos.y - leftCenter.y);
+        var dRight = Math.hypot(climberPos.x - rightCenter.x, climberPos.y - rightCenter.y);
+        var edgeThreshold = 25;
+        var minD = Math.min(dTop, dLeft, dRight);
+        var faces = [
+          { corners: topCorners, d: dTop },
+          { corners: leftCorners, d: dLeft },
+          { corners: rightCorners, d: dRight },
+        ];
+        for (var fi = 0; fi < faces.length; fi++) {
+          var f = faces[fi];
+          if (f.d <= minD + edgeThreshold) {
+            var faceIllum = illum * Math.max(0, 1 - (f.d - minD) / edgeThreshold);
+            illuminateFace(f.corners, climberPos.x, climberPos.y, accent, faceIllum);
+          }
+        }
+      }
+
+      ctx.globalAlpha = 1;
+    }
+
+    // --- Easing ---
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    // --- Resize ---
+    function resize() {
+      var dpr = window.devicePixelRatio || 1;
+      var rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    // --- Main render loop ---
+    function render() {
+      var cw = canvas.getBoundingClientRect().width;
+      ctx.clearRect(0, 0, cw, H);
+
+      var accent = themeCache.accent;
+      var sec = (performance.now() - startTime) / 1000;
+      var dt = sec - lastSec;
+      lastSec = sec;
+      // Clamp dt to avoid jumps after tab switch
+      if (dt > 0.1) dt = 0.016;
+
+      var originX = cw * 0.5;
+      var margin = 30;
+
+      // --- Update block positions ---
+      var visibleBlocks = [];
+      for (var i = 0; i < blocks.length; i++) {
+        var block = blocks[i];
+        var fallY = (block.fallOffset + sec * block.fallSpeed * 60) % (H + 300) - 150;
+
+        var bw = block.orient ? block.h : block.w;
+        var bh = block.orient ? block.w : block.h;
+
+        var projected = project(block.x, block.y, 0);
+        var sx = originX + projected.px;
+        var sy = fallY + projected.py * 0.3;
+
+        var blockTop = sy - bw * 0.5 - block.d;
+        var fadeZone = 120;
+        var alpha = 1;
+        if (blockTop < fadeZone) alpha = Math.max(0, blockTop / fadeZone);
+        if (sy > H - fadeZone) alpha = Math.max(0, (H - sy) / fadeZone);
+
+
+
+        var isoDepth = block.x + block.y;
+        visibleBlocks.push({
+          sx: sx, sy: sy, w: bw, h: bh, d: block.d,
+          shade: block.shade, alpha: alpha, fallY: fallY,
+          isoDepth: isoDepth, block: block,
+        });
+      }
+
+      // Depth sort
+      visibleBlocks.sort(function (a, b) {
+        var depthDiff = a.isoDepth - b.isoDepth;
+        if (Math.abs(depthDiff) > 5) return depthDiff;
+        return a.sy - b.sy;
+      });
+
+      // --- Climber logic ---
+      if (climberMoving) {
+        var moveSpeed = 0.049;
+        climberX += (climberTargetX - climberX) * moveSpeed;
+        climberY += (climberTargetY - climberY) * moveSpeed;
+
+        var arrived = Math.hypot(climberX - climberTargetX, climberY - climberTargetY) < 3;
+        if (arrived) {
+          climberMoving = false;
+          climberCurrentBlock = null;
+          var closestDist = Infinity;
+          var landedVb = null;
+          for (var i = 0; i < visibleBlocks.length; i++) {
+            var vb = visibleBlocks[i];
+            var dist = Math.hypot(vb.sx - climberX, vb.sy - climberY);
+            if (dist < 30 && dist < closestDist) {
+              closestDist = dist;
+              climberCurrentBlock = vb.block;
+              landedVb = vb;
+            }
+          }
+          if (landedVb && Math.random() < 0.4 && landedVb.d > 25) {
+            climberMantling = true;
+            var traverseDir = Math.random() < 0.5 ? -1 : 1;
+            var horizFrac = 0.4;
+            var vertFrac = 0.6;
+            if (traverseDir > 0) {
+              climberMantleTargetX = climberX + landedVb.w * 0.866 * horizFrac;
+              climberMantleTargetY = climberY - landedVb.d * vertFrac - landedVb.w * 0.5 * horizFrac;
+            } else {
+              climberMantleTargetX = climberX - landedVb.h * 0.866 * horizFrac;
+              climberMantleTargetY = climberY - landedVb.d * vertFrac - landedVb.h * 0.5 * horizFrac;
+            }
+            climberMantleStartX = climberX;
+            climberMantleStartY = climberY;
+            climberMantleProgress = 0;
+            climberMantleDuration = Math.hypot(climberMantleTargetX - climberX, climberMantleTargetY - climberY) / 12;
+          } else {
+            climberPause = rand(0.5, 1.5);
+            climberTimer = climberPause;
+          }
+        }
+      } else if (climberMantling) {
+        if (climberCurrentBlock) {
+          var fallRate = climberCurrentBlock.fallSpeed * 60 * dt;
+          climberY += fallRate;
+          climberMantleTargetY += fallRate;
+          climberMantleStartY += fallRate;
+        }
+        climberMantleProgress += dt / climberMantleDuration;
+        if (climberMantleProgress >= 1) {
+          climberX = climberMantleTargetX;
+          climberY = climberMantleTargetY;
+          climberMantling = false;
+          climberPause = rand(0.3, 1.0);
+          climberTimer = climberPause;
+        } else {
+          var t = climberMantleProgress;
+          var eased = easeInOutCubic(t);
+          climberX = climberMantleStartX + (climberMantleTargetX - climberMantleStartX) * eased;
+          climberY = climberMantleStartY + (climberMantleTargetY - climberMantleStartY) * eased;
+          var shakeIntensity = Math.sin(t * Math.PI) * .75;
+          var shakeFreq = sec * 23.4;
+          climberX += Math.sin(shakeFreq) * shakeIntensity;
+          climberY += Math.cos(shakeFreq * 1.3) * shakeIntensity * 0.4;
+        }
+      } else {
+        if (climberCurrentBlock) {
+          var fallRate = climberCurrentBlock.fallSpeed * 60 * dt;
+          climberY += fallRate;
+          climberTargetY = climberY;
+        }
+        climberTimer -= dt;
+        if (climberTimer <= 0) {
+          var best = null;
+          var bestDist = Infinity;
+          for (var i = 0; i < visibleBlocks.length; i++) {
+            var vb = visibleBlocks[i];
+            if (vb.sy < climberY - 20 && vb.sy > margin && vb.sx > margin && vb.sx < cw - margin && vb.alpha > 0.5) {
+              var dist = Math.hypot(vb.sx - climberX, vb.sy - climberY);
+              if (dist < bestDist && dist < 200) {
+                bestDist = dist;
+                best = vb;
+              }
+            }
+          }
+          if (best) {
+            var leavingDepth = climberCurrentBlock ? climberCurrentBlock.x + climberCurrentBlock.y : 0;
+            trail.push({ x: climberX, y: climberY, t: sec, block: climberCurrentBlock, isoDepth: leavingDepth });
+            if (trail.length > 4) trail.shift();
+            climberTargetX = best.sx;
+            climberTargetY = best.sy;
+            climberCurrentBlock = best.block;
+            climberMoving = true;
+          } else {
+            climberTimer = 0.5;
+          }
+        }
+      }
+
+      // Reset if fallen below canvas
+      if (climberY > H - margin) {
+        var midBlocks = [];
+        for (var i = 0; i < visibleBlocks.length; i++) {
+          var vb = visibleBlocks[i];
+          if (vb.sy > H * 0.3 && vb.sy < H * 0.6 && vb.sx > margin && vb.sx < cw - margin && vb.alpha > 0.5) {
+            midBlocks.push(vb);
+          }
+        }
+        if (midBlocks.length > 0) {
+          var pick = midBlocks[Math.floor(Math.random() * midBlocks.length)];
+          climberX = pick.sx;
+          climberY = pick.sy;
+          climberCurrentBlock = pick.block;
+          climberMoving = false;
+          climberTimer = 1.0;
+          trail = [];
+        }
+      }
+
+      climberX = Math.max(margin, Math.min(cw - margin, climberX));
+      climberY = Math.max(margin, Math.min(H - margin, climberY));
+
+      // --- Depth position for climber ---
+      var climberIsoDepth = Infinity;
+      var climberSy = climberY;
+      if (climberCurrentBlock) {
+        for (var i = 0; i < visibleBlocks.length; i++) {
+          if (visibleBlocks[i].block === climberCurrentBlock) {
+            climberIsoDepth = visibleBlocks[i].isoDepth;
+            climberSy = visibleBlocks[i].sy;
+            break;
+          }
+        }
+      }
+
+      // --- Illumination fade ---
+      var onBlock = !climberMoving && climberCurrentBlock;
+      if (onBlock && climberCurrentBlock === lastIllumBlock) {
+        illumination = Math.min(1, illumination + dt * 3);
+      } else if (onBlock) {
+        lastIllumBlock = climberCurrentBlock;
+        illumination = 0;
+      } else {
+        illumination = Math.max(0, illumination - dt * 3);
+        if (illumination <= 0) lastIllumBlock = null;
+      }
+
+      // --- Update trail positions ---
+      for (var i = trail.length - 1; i >= 0; i--) {
+        var tr = trail[i];
+        if (tr.block) tr.y += tr.block.fallSpeed * 60 * dt;
+        if (sec - tr.t > 5 || tr.y > H) trail.splice(i, 1);
+      }
+
+      // --- Draw trail dot ---
+      function drawTrailDot(tr) {
+        var age = sec - tr.t;
+        var a = Math.max(0, 0.3 - age * 0.06);
+        if (a <= 0) return;
+        ctx.beginPath();
+        ctx.arc(tr.x, tr.y, 3 + (1 - a / 0.3) * 2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + a + ')';
+        ctx.fill();
+      }
+
+      // --- Draw climber ---
+      var climberDrawn = false;
+      function drawClimber() {
+        var pulse = 0.85 + 0.15 * Math.sin(sec * 2);
+        var dark = themeCache.isDark;
+
+        // Outer bloom
+        var bloomRadius = dark ? 45 : 30;
+        var bloomA1 = dark ? 0.12 * pulse : 0.06 * pulse;
+        var bloomA2 = dark ? 0.04 * pulse : 0.02 * pulse;
+        var bloomGrad = ctx.createRadialGradient(climberX, climberY, 0, climberX, climberY, bloomRadius);
+        bloomGrad.addColorStop(0, 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + bloomA1 + ')');
+        bloomGrad.addColorStop(0.5, 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + bloomA2 + ')');
+        bloomGrad.addColorStop(1, 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',0)');
+        ctx.fillStyle = bloomGrad;
+        ctx.fillRect(climberX - 50, climberY - 50, 100, 100);
+
+        // Mid glow
+        ctx.shadowColor = 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + (dark ? 0.6 : 0.3) + ')';
+        ctx.shadowBlur = (dark ? 20 : 10) * pulse;
+        ctx.beginPath();
+        ctx.arc(climberX, climberY, dark ? 5 : 4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + (0.9 * pulse) + ')';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(climberX, climberY, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = dark ? 'rgba(200, 220, 255,' + pulse + ')' : 'rgba(' + accent.r + ',' + accent.g + ',' + accent.b + ',' + pulse + ')';
+        ctx.fill();
+      }
+
+      // --- Interleaved draw ---
+      for (var i = 0; i < visibleBlocks.length; i++) {
+        var vb = visibleBlocks[i];
+        var blockCloser = (vb.isoDepth - climberIsoDepth > 5) || (Math.abs(vb.isoDepth - climberIsoDepth) <= 5 && vb.sy > climberSy);
+        if (!climberDrawn && blockCloser) {
+          drawClimber();
+          climberDrawn = true;
+        }
+        var distFromClimber = Math.hypot(vb.sx - climberX, vb.sy - climberY);
+        var isActive = vb.block === climberCurrentBlock;
+        drawBlock(vb.sx, vb.sy, vb.w, vb.h, vb.d, vb.shade, distFromClimber, vb.alpha, isActive, isActive ? { x: climberX, y: climberY } : null, accent, isActive ? illumination : 0);
+
+        for (var j = 0; j < trail.length; j++) {
+          if (trail[j].block === vb.block) drawTrailDot(trail[j]);
+        }
+      }
+      for (var j = 0; j < trail.length; j++) {
+        var hasBlock = false;
+        for (var k = 0; k < visibleBlocks.length; k++) {
+          if (visibleBlocks[k].block === trail[j].block) { hasBlock = true; break; }
+        }
+        if (!hasBlock) drawTrailDot(trail[j]);
+      }
+      if (!climberDrawn) drawClimber();
+
+      animId = requestAnimationFrame(render);
+    }
+
+    // --- Init ---
+    function init() {
+      resize();
+      startTime = performance.now();
+      lastSec = 0;
+      climberX = canvas.getBoundingClientRect().width * 0.5;
+      climberY = H * 0.7;
+      climberTargetX = climberX;
+      climberTargetY = climberY;
+      animId = requestAnimationFrame(render);
+    }
+
+    window.addEventListener('resize', resize);
+
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!mq.matches) {
+      init();
+    }
+    mq.addEventListener('change', function () {
+      if (mq.matches) {
+        cancelAnimationFrame(animId);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      } else {
+        init();
+      }
+    });
+  })();
+</script>
