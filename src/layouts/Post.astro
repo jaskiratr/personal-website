@@ -72,6 +72,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
   .post-tags {
     margin-top: 12px;
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
   }
 
@@ -81,6 +82,7 @@ const formattedDate = date.toLocaleDateString('en-US', {
     background: color-mix(in srgb, var(--accent) 10%, transparent);
     padding: 2px 10px;
     border-radius: 12px;
+    white-space: nowrap;
   }
 
   .back-link {
