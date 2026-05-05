@@ -31,8 +31,6 @@ Two paths to resolution, one per device class:
 - **iPhone**: AdGuard already runs as my DNS (from Part 1). One wildcard rewrite (`*.home.arpa → <nas-ip>`) covers every service at once. Works at home (LAN to AdGuard), works traveling (Tailscale subnet route to AdGuard), no client-side configuration.
 - **Mac**: a single line in `/etc/hosts`. No DNS daemon, no VPN-vs-DNS interaction. The line works on hotel wifi, home LAN, PIA, Tailscale, in any combination.
 
-That's the whole name-resolution story.
-
 ![One hostname resolves through three different paths (Mac via /etc/hosts, iPhone via AdGuard wildcard, traveling laptop via Tailscale subnet route to AdGuard) and all converge at Caddy on the NAS](/images/posts/homelab/name-resolution-paths.svg)
 
 ## Why AdGuard has its own LAN identity
@@ -61,8 +59,6 @@ plex.home.arpa       { reverse_proxy 127.0.0.1:32400 }
 service.home.arpa    { reverse_proxy 127.0.0.1:8080 }
 ```
 
-That's the configuration.
-
 ## The airport, replayed
 
 It's 11pm. I'm in a hotel. Plex has wedged itself.
@@ -75,6 +71,6 @@ The rest of the experience clicks into place the same way. The page loads with a
 
 Same hostname. Three networks. One mental model.
 
-If you've made it through all three posts: that's the homelab. It is small. It is dependable. It does the things I actually do at home and gets out of the way for the rest. Future me at 2am can fix it without asking present me anything.
+If you've made it through all three posts — here it is. It is small. It is dependable. It does the things I actually do at home and gets out of the way for the rest. Future me at 2am can fix it without asking present me anything.
 
-That was the point.
+And that was enough.

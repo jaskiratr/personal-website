@@ -68,7 +68,7 @@ Four ideas hold this together:
 - [Tailscale](https://tailscale.com/) for off-network access without exposing anything publicly.
 - AdGuard filtering applied to every device in the household, regardless of platform.
 
-That's the architecture. It fits on a Post-it.
+Four ideas. Fits on a Post-it.
 
 ## What's coming
 
