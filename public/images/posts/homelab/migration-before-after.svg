@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 720 444" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .card-bg { fill: #faf7f2; }
+      .bg-box { fill: #ffffff; stroke: #d8d0c5; stroke-width: 1; }
+      .accent-box { fill: #ffffff; stroke: #3d6be0; stroke-width: 1.5; }
+      .step-label { fill: #5a5a5a; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; }
+      .heading { fill: #1a1a1a; font-size: 14px; font-weight: 600; }
+      .label { fill: #1a1a1a; font-size: 13px; font-weight: 500; }
+      .label-accent { fill: #3d6be0; font-size: 13px; font-weight: 600; }
+      .sub { fill: #404040; font-size: 11px; }
+      .muted { fill: #525252; font-size: 10px; }
+      .arrow { stroke: #777; stroke-width: 1.4; fill: none; }
+      .arrow-accent { stroke: #3d6be0; stroke-width: 1.6; fill: none; }
+      .divider { stroke: #d8d0c5; stroke-width: 1; }
+    </style>
+    <marker id="ah" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#777"/>
+    </marker>
+    <marker id="ah-accent" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#3d6be0"/>
+    </marker>
+  </defs>
+
+  <rect class="card-bg" x="0" y="-32" width="720" height="444"/>
+
+  <!-- ===================== BEFORE ===================== -->
+  <text x="32" y="32" class="step-label">BEFORE · FOUR INSTALLATION METHODS</text>
+  <text x="32" y="52" class="heading">Four cadences. Four UIs. Four failure modes.</text>
+
+  <rect class="bg-box" x="32" y="80" width="150" height="64" rx="8"/>
+  <text x="107" y="106" text-anchor="middle" class="label">QPKG</text>
+  <text x="107" y="125" text-anchor="middle" class="sub">Tailscale, out of band</text>
+
+  <rect class="bg-box" x="200" y="80" width="150" height="64" rx="8"/>
+  <text x="275" y="106" text-anchor="middle" class="label">Container Station</text>
+  <text x="275" y="125" text-anchor="middle" class="sub">AdGuard, no volume</text>
+
+  <rect class="bg-box" x="368" y="80" width="150" height="64" rx="8"/>
+  <text x="443" y="106" text-anchor="middle" class="label">App Center</text>
+  <text x="443" y="125" text-anchor="middle" class="sub">Plex, lagging cadence</text>
+
+  <rect class="bg-box" x="536" y="80" width="150" height="64" rx="8"/>
+  <text x="611" y="106" text-anchor="middle" class="label">Compose</text>
+  <text x="611" y="125" text-anchor="middle" class="sub">the few I'd done right</text>
+
+  <!-- Migration arrow -->
+  <line class="arrow-accent" x1="360" y1="172" x2="360" y2="208" marker-end="url(#ah-accent)"/>
+  <text x="378" y="194" class="sub">Migration to one mental model</text>
+
+  <line class="divider" x1="32" y1="228" x2="688" y2="228"/>
+
+  <!-- ===================== AFTER ===================== -->
+  <text x="32" y="256" class="step-label">AFTER · ONE COMPOSE STACK</text>
+  <text x="32" y="276" class="heading">One mental model. Auto-update with a brake.</text>
+
+  <!-- Centered accent compose box -->
+  <rect class="accent-box" x="200" y="304" width="320" height="64" rx="8"/>
+  <text x="360" y="328" text-anchor="middle" class="label-accent">Docker Compose</text>
+  <text x="360" y="348" text-anchor="middle" class="sub">Watchtower auto-update · ntfy push notifications</text>
+</svg>

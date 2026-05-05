@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 720 854" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .card-bg { fill: #faf7f2; }
+      .bg-box { fill: #ffffff; stroke: #d8d0c5; stroke-width: 1; }
+      .accent-box { fill: #ffffff; stroke: #3d6be0; stroke-width: 1.5; }
+      .pill { fill: #efe9e0; stroke: #d8d0c5; stroke-width: 1; }
+      .step-label { fill: #5a5a5a; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; }
+      .heading { fill: #1a1a1a; font-size: 14px; font-weight: 600; }
+      .label { fill: #1a1a1a; font-size: 13px; font-weight: 500; }
+      .label-accent { fill: #3d6be0; font-size: 13px; font-weight: 600; }
+      .sub { fill: #404040; font-size: 11px; }
+      .muted { fill: #525252; font-size: 10px; }
+      .arrow { stroke: #777; stroke-width: 1.4; fill: none; }
+      .arrow-accent { stroke: #3d6be0; stroke-width: 1.6; fill: none; }
+      .arrow-dashed { stroke: #777; stroke-width: 1; fill: none; stroke-dasharray: 3 3; }
+      .divider { stroke: #d8d0c5; stroke-width: 1; }
+    </style>
+    <marker id="ah" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#777"/>
+    </marker>
+    <marker id="ah-dashed" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#777"/>
+    </marker>
+    <marker id="ah-accent" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#3d6be0"/>
+    </marker>
+  </defs>
+
+  <rect class="card-bg" x="0" y="-32" width="720" height="854"/>
+
+  <!-- ===================== STEP 1 · DNS ===================== -->
+  <text x="32" y="32" class="step-label">STEP 1 · DNS RESOLUTION</text>
+  <text x="32" y="52" class="heading">Where is <tspan class="label-accent">immich.home.arpa</tspan>?</text>
+
+  <!-- Mac -->
+  <rect class="bg-box" x="60" y="80" width="240" height="56" rx="8"/>
+  <text x="180" y="103" text-anchor="middle" class="label">Mac</text>
+  <text x="180" y="121" text-anchor="middle" class="sub">/etc/hosts entry pins to the NAS</text>
+
+  <!-- iPhone / iPad -->
+  <rect class="bg-box" x="420" y="80" width="240" height="56" rx="8"/>
+  <text x="540" y="103" text-anchor="middle" class="label">iPhone / iPad</text>
+  <text x="540" y="121" text-anchor="middle" class="sub">DNS profile → AdGuard</text>
+
+  <!-- AdGuard -->
+  <rect class="bg-box" x="270" y="170" width="240" height="56" rx="8"/>
+  <text x="390" y="193" text-anchor="middle" class="label">AdGuard at 192.168.x.100</text>
+  <text x="390" y="211" text-anchor="middle" class="sub">rewrites *.home.arpa → NAS</text>
+
+  <!-- iPhone → AdGuard arrow (solid: actual DNS query) -->
+  <path class="arrow" d="M 540,136 L 540,156 Q 540,170 510,170" marker-end="url(#ah)"/>
+  <!-- Mac → result pill (dashed: no DNS query, local /etc/hosts lookup) -->
+  <path class="arrow-dashed" d="M 180,136 L 180,247" marker-end="url(#ah-dashed)"/>
+  <!-- AdGuard → result pill -->
+  <path class="arrow" d="M 390,226 L 390,247" marker-end="url(#ah)"/>
+
+  <!-- Convergence pill — DNS answer -->
+  <rect class="pill" x="140" y="252" width="460" height="38" rx="19"/>
+  <text x="370" y="276" text-anchor="middle" class="label">Both clients resolve to <tspan class="label-accent">192.168.x.163</tspan></text>
+
+  <line class="divider" x1="32" y1="310" x2="688" y2="310"/>
+
+  <!-- ===================== STEP 2 — REACH NAS ===================== -->
+  <text x="32" y="338" class="step-label">STEP 2 · REACH 192.168.x.163</text>
+  <text x="32" y="358" class="heading">Same destination, different network path by location</text>
+
+  <!-- Home -->
+  <rect class="bg-box" x="60" y="385" width="270" height="98" rx="8"/>
+  <text x="195" y="410" text-anchor="middle" class="label">At home</text>
+  <text x="195" y="431" text-anchor="middle" class="sub">Direct LAN routing</text>
+  <text x="195" y="449" text-anchor="middle" class="muted">NAS is just another device on the LAN</text>
+  <text x="195" y="465" text-anchor="middle" class="muted">Mac picks en0 over Tailscale</text>
+
+  <!-- Away -->
+  <rect class="bg-box" x="390" y="385" width="270" height="98" rx="8"/>
+  <text x="525" y="410" text-anchor="middle" class="label">Off-network (tailnet)</text>
+  <text x="525" y="431" text-anchor="middle" class="sub">Tailscale subnet route</text>
+  <text x="525" y="449" text-anchor="middle" class="muted">192.168.x.0/24 advertised by Tailscale</text>
+  <text x="525" y="465" text-anchor="middle" class="muted">on NAS, traffic flows over the tunnel</text>
+
+  <!-- Y-merge: both paths converge at the same destination -->
+  <path class="arrow" d="M 195,483 V 513 H 360"/>
+  <path class="arrow" d="M 525,483 V 513 H 360"/>
+  <path class="arrow" d="M 360,513 V 538" marker-end="url(#ah)"/>
+  <text x="360" y="555" text-anchor="middle" class="muted">both paths terminate at the NAS host</text>
+
+  <line class="divider" x1="32" y1="565" x2="688" y2="565"/>
+
+  <!-- ===================== STEP 3 — CADDY → BACKENDS ===================== -->
+  <text x="32" y="593" class="step-label">STEP 3 · REVERSE-PROXY BY HOSTNAME</text>
+  <text x="32" y="613" class="heading">Caddy chooses the backend from the request's Host header</text>
+
+  <!-- Caddy box (consistent with other bg-boxes) -->
+  <rect class="bg-box" x="180" y="641" width="360" height="76" rx="8"/>
+  <text x="360" y="666" text-anchor="middle" class="label">Caddy at the NAS</text>
+  <text x="360" y="687" text-anchor="middle" class="sub">terminates TLS with local CA · binds :80 / :443</text>
+  <text x="360" y="705" text-anchor="middle" class="muted">routes immich.home.arpa → 127.0.0.1:2283, etc.</text>
+
+  <!-- Down arrow to backends -->
+  <line class="arrow" x1="360" y1="717" x2="360" y2="738" marker-end="url(#ah)"/>
+
+  <!-- Backends row -->
+  <g>
+    <rect class="bg-box" x="32" y="743" width="98" height="40" rx="6"/>
+    <text x="81" y="768" text-anchor="middle" class="sub">Plex</text>
+
+    <rect class="bg-box" x="142" y="743" width="98" height="40" rx="6"/>
+    <text x="191" y="768" text-anchor="middle" class="sub">Immich</text>
+
+    <rect class="bg-box" x="252" y="743" width="98" height="40" rx="6"/>
+    <text x="301" y="768" text-anchor="middle" class="sub">Portainer</text>
+
+    <rect class="bg-box" x="362" y="743" width="98" height="40" rx="6"/>
+    <text x="411" y="768" text-anchor="middle" class="sub">TRMNL</text>
+
+    <rect class="bg-box" x="472" y="743" width="98" height="40" rx="6"/>
+    <text x="521" y="768" text-anchor="middle" class="sub">ntfy</text>
+
+    <rect class="bg-box" x="582" y="743" width="106" height="40" rx="6"/>
+    <text x="635" y="768" text-anchor="middle" class="sub">QTS · WebDAV</text>
+  </g>
+</svg>

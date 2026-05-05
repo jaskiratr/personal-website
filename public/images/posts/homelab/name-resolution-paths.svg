@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -32 720 424" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .card-bg { fill: #faf7f2; }
+      .bg-box { fill: #ffffff; stroke: #d8d0c5; stroke-width: 1; }
+      .accent-box { fill: #ffffff; stroke: #3d6be0; stroke-width: 1.5; }
+      .pill { fill: #efe9e0; stroke: #d8d0c5; stroke-width: 1; }
+      .step-label { fill: #5a5a5a; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; }
+      .heading { fill: #1a1a1a; font-size: 14px; font-weight: 600; }
+      .label { fill: #1a1a1a; font-size: 13px; font-weight: 500; }
+      .label-accent { fill: #3d6be0; font-size: 13px; font-weight: 600; }
+      .sub { fill: #404040; font-size: 11px; }
+      .muted { fill: #525252; font-size: 10px; }
+      .arrow { stroke: #777; stroke-width: 1.4; fill: none; }
+      .arrow-accent { stroke: #3d6be0; stroke-width: 1.6; fill: none; }
+    </style>
+    <marker id="ah" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#777"/>
+    </marker>
+    <marker id="ah-accent" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#3d6be0"/>
+    </marker>
+  </defs>
+
+  <rect class="card-bg" x="0" y="-32" width="720" height="424"/>
+
+  <text x="32" y="32" class="step-label">SAME HOSTNAME, THREE NETWORKS</text>
+  <text x="32" y="52" class="heading">One hostname. Three resolution paths. One destination.</text>
+
+  <!-- Row 1: Mac at home -->
+  <rect class="bg-box" x="32" y="88" width="200" height="56" rx="8"/>
+  <text x="132" y="111" text-anchor="middle" class="label">Mac</text>
+  <text x="132" y="129" text-anchor="middle" class="sub">on LAN or Tailscale</text>
+
+  <rect class="pill" x="276" y="88" width="200" height="56" rx="8"/>
+  <text x="376" y="111" text-anchor="middle" class="label">/etc/hosts</text>
+  <text x="376" y="129" text-anchor="middle" class="sub">no DNS, no VPN dance</text>
+
+  <line class="arrow" x1="232" y1="116" x2="276" y2="116" marker-end="url(#ah)"/>
+
+  <!-- Row 2: iPhone at home -->
+  <rect class="bg-box" x="32" y="172" width="200" height="56" rx="8"/>
+  <text x="132" y="195" text-anchor="middle" class="label">iPhone</text>
+  <text x="132" y="213" text-anchor="middle" class="sub">on LAN, AdGuard as DNS</text>
+
+  <rect class="pill" x="276" y="172" width="200" height="56" rx="8"/>
+  <text x="376" y="195" text-anchor="middle" class="label">AdGuard wildcard</text>
+  <text x="376" y="213" text-anchor="middle" class="sub">*.home.arpa → NAS</text>
+
+  <line class="arrow" x1="232" y1="200" x2="276" y2="200" marker-end="url(#ah)"/>
+
+  <!-- Row 3: Laptop on tailnet -->
+  <rect class="bg-box" x="32" y="256" width="200" height="56" rx="8"/>
+  <text x="132" y="279" text-anchor="middle" class="label">Laptop, traveling</text>
+  <text x="132" y="297" text-anchor="middle" class="sub">via Tailscale subnet route</text>
+
+  <rect class="pill" x="276" y="256" width="200" height="56" rx="8"/>
+  <text x="376" y="279" text-anchor="middle" class="label">AdGuard via tailnet</text>
+  <text x="376" y="297" text-anchor="middle" class="sub">subnet route reaches AdGuard</text>
+
+  <line class="arrow" x1="232" y1="284" x2="276" y2="284" marker-end="url(#ah)"/>
+
+  <!-- Convergence: 3 lines funnel to a single point, then one arrow into Caddy -->
+  <path class="arrow-accent" d="M 476,116 H 510 V 200"/>
+  <path class="arrow-accent" d="M 476,200 H 510"/>
+  <path class="arrow-accent" d="M 476,284 H 510 V 200"/>
+  <line class="arrow-accent" x1="510" y1="200" x2="540" y2="200" marker-end="url(#ah-accent)"/>
+
+  <!-- Caddy box (accent) -->
+  <rect class="accent-box" x="540" y="172" width="148" height="56" rx="8"/>
+  <text x="614" y="195" text-anchor="middle" class="label-accent">Caddy at NAS</text>
+  <text x="614" y="213" text-anchor="middle" class="sub">terminates TLS, proxies</text>
+</svg>
