@@ -8,10 +8,10 @@ draft: false
 
 Four things led me to put a NAS on a windowsill, in this order.
 
-1. I hate manual backups. My Mac has plenty of space, but my phone doesn't have a 1TB drive, and I was reliably not plugging in the external HDD on any schedule that could be called a schedule. Cloud backup would have solved it, except paying a subscription to compensate for my own laziness felt like admitting defeat.
+1. Manual backups and I have an unhappy history. My Mac has plenty of space, but my phone doesn't have a 1TB drive, and I was reliably not plugging in the external HDD on any schedule that could be called a schedule. Cloud backup would have solved it, except paying a subscription to compensate for my own laziness felt like admitting defeat.
 2. I'm a Spotify premium user and I don't love it. (Don't @ me.) I want the iTunes-era folder-and-artist compact view, not whatever Spotify's interface is doing now. Plex serving my own library scratches that itch in a way Spotify never has.
-3. I hate ads. I wanted them blocked on my iPhone, which sent me to Pi-hole, which made me realize I could host a lot more than that if I had something to host it on.
-4. I love my password manager. I hate it when it won't autofill because the saved URL is a raw IP address I never typed the same way twice.
+3. Ads on my phone had become personal. Blocking them sent me to Pi-hole, which made me realize I could host a lot more than that if I had something to host it on.
+4. I love my password manager — right up until it refuses to autofill because the saved URL is a raw IP address I never typed the same way twice.
 5. The amateur engineer in me was clamoring for an excuse. You know the feeling. *Custom builds.*
 
 So I bought a small fanless NAS (a QNAP TS-410E, if you want the specifics), populated it with SSDs, perched it on a windowsill behind a curtain, and started a journey that has since taught me more about Docker, DNS, TLS, and route tables than I expected.
