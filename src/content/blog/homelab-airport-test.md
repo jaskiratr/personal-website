@@ -65,8 +65,6 @@ It's 11pm. I'm in a hotel. Plex has wedged itself.
 
 I open [Termius](https://termius.com/) on my phone and SSH into `nas.home.arpa`. Tailscale is already up, so the hostname resolves and the tunnel routes me there. I run `dcr plex` (a shell alias for `docker compose restart plex`) and the service comes back. Less than a minute, start to finish.
 
-That's the test. That's what this whole project was for.
-
 The rest of the experience clicks into place the same way. The page loads with a real green padlock (because the CA is installed on my devices, and Caddy issued the cert from it). My password manager autofills the login form because the URL matches the entry I saved at home. The same hostname resolves through three different paths depending on which combination of LAN, hotel wifi, Tailscale, or PIA I'm on, and they all converge at Caddy on the NAS.
 
 Same hostname. Three networks. One mental model.

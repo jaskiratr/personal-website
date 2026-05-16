@@ -51,7 +51,7 @@ So I migrated everything to Docker Compose. Not for cleverness. For *one mental 
 
 This was not a clean weekend. Each service had its own flavor of "where exactly is the state, and what happens when I move it?" Plex's metadata library, Immich's Postgres directory, Tailscale's tailnet identity. Each one needed a careful copy from old-home to new-home, then a careful restart, then a careful verification.
 
-The result is one mental model. I'd choose that again.
+The result is one mental model across every service, and the migration cost was worth paying for that.
 
 ## Auto-pilot, with a brake
 
@@ -69,9 +69,7 @@ The result: updates happen without me, and a notification arrives only if someth
 
 Here's something I didn't plan for. Once everything was in Compose with clean network boundaries, sharing Immich albums publicly (so family could view photos without joining my tailnet) became *trivially safe*. I spun up a stateless [public proxy for Immich](https://github.com/alangrainger/immich-public-proxy) in its own container, attached to a dedicated Tailscale Funnel sidecar, with the public blast radius scoped to exactly that one container. Immich itself stays fully private. The shared proxy gets a real Let's Encrypt cert via Funnel's `*.ts.net` hostname.
 
-That kind of pattern is awkward to do safely in a patchwork setup. In a clean Compose setup, it's a stanza in a yaml file.
-
-Clean architecture pays you back in places you didn't ask for.
+That kind of pattern is awkward to do safely in a patchwork setup. In a clean Compose setup, it's a stanza in a yaml file, and the unexpected payoff is the kind of thing you only notice in hindsight.
 
 ## What's coming
 

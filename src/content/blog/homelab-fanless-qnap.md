@@ -20,9 +20,7 @@ So I bought a small fanless NAS (a QNAP TS-410E, if you want the specifics), pop
 
 ## The box
 
-A Celeron N5095 with no fans. SSD-only. The whole thing is silent enough that I forget it's there until something pings me. It sits behind a curtain, in the corner of a room I don't otherwise spend time in. You wouldn't notice it.
-
-This is a feature.
+A Celeron N5095 with no fans. SSD-only. The whole thing is silent enough that I forget it's there until something pings me. It sits behind a curtain, in the corner of a room I don't otherwise spend time in. You wouldn't notice it, and that quietness is the whole point of the form factor.
 
 A fair number of homelab posts open with a rack diagram and forty-something services in Portainer. That's not what's happening here. My homelab has one user. Me. That constraint shapes everything. I don't need high availability. I don't need clustering. I don't need to learn Proxmox right now (the geek itch is loud, I'm aware). The goal was to use this thing, not maintain it.
 
@@ -47,13 +45,11 @@ If you came here for a screenshot of forty-seven services, wrong blog. The list 
 
 ## The mental model
 
-After a year of running a messier version of this, and learning what hurts, I converged on three rules. They are not impressive. That's the point.
+After a year of running a messier version of this, and learning what hurts, I converged on three rules. They are deliberately unimpressive.
 
 1. **Every service is `docker compose`.** Same up command, same down command, same logs command, same diff in Git. One mental model applied uniformly beats nine clever per-service workflows.
 2. **Every incident lives in `troubleshooting.md`.** When something breaks at 11pm, I want to find the answer fast, not re-derive it.
 3. **Every non-obvious decision lives in `decisions.md`.** Why are we using Caddy's local CA instead of mkcert? Why is AdGuard on its own LAN IP? Why didn't we just port-forward Immich? Future me has a habit of relitigating these questions, so I write the answer down once and link to it.
-
-Boring is the goal.
 
 ## The whole shape
 
